@@ -45,7 +45,7 @@
          <td align="center">
             <a href="https://github.com/LucasMF1">
                 <img style="border-radius: 50%;" src="https://avatars.githubusercontent.com/u/141961882?v=4" width="150px;"/>
-                <h5 class="text-center">Lucas</h5>
+                <h5 class="text-center">Lucas Monteiro</h5>
             </a>
         </td>
         
