@@ -14,22 +14,30 @@ Aqui iremos descrever com mais detalhes os assuntos discutidos durante a reuniã
 
 - **Assunto 1**:
 
-  - **Descrição:**
+  - Descrição:
 
 - **Assunto 2**:
 
-  - **Descrição:**
+  - Descrição:
 
 - **Assunto 3**:
-  - **Descrição:**
+  - Descrição:
 
 ## Encaminhamento
 
 Aqui iremos colocar o que foi decidido de tarefas para cada membro.
 
--Responsável - Encaminhamento
--Responsável - Encaminhamento
--Responsável - Encaminhamento
+- **Responsável**:
+
+  - Encaminhamento
+
+- **Responsável**:
+
+  - Encaminhamento
+
+- **Responsável**:
+
+  - Encaminhamento
 
 **Observações:**
 

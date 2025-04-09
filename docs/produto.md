@@ -2,7 +2,7 @@
 
 ## Introdução
 
-**AdvogaAI** é uma solução inovadora para escritórios de advocacia unipessoais, focada em automação de processos e gestão eficiente de documentos, prazos e pagamentos. A plataforma foi desenvolvida para otimizar o atendimento ao cliente, aumentar a escalabilidade dos escritórios e melhorar a organização interna, permitindo que advogados como Hermínia possam expandir seus negócios sem perder qualidade nos serviços prestados.
+**AdvogaAI** é uma solução inovadora para escritórios de advocacia unipessoais, focada em automação de processos e gestão eficiente de documentos, prazos e pagamentos. A plataforma foi desenvolvida para otimizar o atendimento ao cliente, aumentar a escalabilidade dos escritórios e melhorar a organização interna, permitindo que advogados possam expandir seus negócios sem perder qualidade nos serviços prestados.
 
 ## Cenário Atual do Cliente e do Negócio
 
