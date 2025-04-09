@@ -1,0 +1,11 @@
+site_name: Squad 04
+theme:
+  #name: dracula
+  name: material
+nav:
+  - Visão de produto: produto.md
+  - Atas:
+      - ata-modelo: Atas/ata-modelo.md
+
+  - Sprints:
+      - Sprint 0: Sprints/sprint0.md
