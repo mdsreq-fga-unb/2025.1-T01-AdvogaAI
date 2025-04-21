@@ -8,6 +8,7 @@ nav:
       -  Cenário Atual do Cliente e do Negócio: produto.md
       - Solução Proposta: solucao.md
       - Estratégias de Engenharia de Software: estrategia.md
+      - Cronograma: cronograma.md
   - Atas:
       - ata-modelo: Atas/ata-modelo.md
 
