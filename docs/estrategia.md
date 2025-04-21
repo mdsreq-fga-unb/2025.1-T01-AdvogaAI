@@ -36,93 +36,73 @@ O quadro a seguir apresenta características comparativas entre os processos: **
 
 ### 3.3 Apoio na Escolha: Análise com Base no Framework de Gupta (2008)
 
-Segundo **Gupta (2008)**, a escolha do processo ideal de desenvolvimento de software deve considerar critérios como:
+###  REQUISITOS
 
-- características dos requisitos,
-- perfil da equipe de desenvolvimento,
-- envolvimento do usuário,
-- tipo de projeto,
-- riscos envolvidos.
+| Pergunta                                                                 | CASCATA | ESPIRAL | RAD  | PROCESSO UNIFICADO | SCRUM / XP | OPEN UP | SAFE | PROJETO |
+|--------------------------------------------------------------------------|---------|---------|------|---------------------|-------------|---------|------|---------|
+| Os requisitos são fáceis de entender e definir?                         | SIM     | NÃO     | NÃO  | NÃO                 | NÃO         | NÃO     | SIM  | NÃO      |
+| Nos iremos mudar os requisitos com bastante frequência?                 | NÃO     | SIM     | SIM  | SIM                 | SIM         | SIM     | NÃO  | SIM       |
+| Podemos definir os requisitos no início de cada ciclo?                    | NÃO     | SIM     | SIM  | SIM                 | SIM         | NÃO     | NÃO  | SIM       |
+| Os requisitos estão indicando um sistema complexo para se construir?    | SIM     | NÃO     | NÃO  | NÃO                 | NÃO         | NÃO     | SIM  | NÃO       |
 
-Com base nesses critérios, foi construído o seguinte quadro para avaliar os modelos tradicionais em relação às necessidades do projeto AdvogaAI:
+---
 
-#### Características dos Requisitos
+###  EQUIPE DE DESENVOLVIMENTO
 
-| Requisitos                                                           | Cascata | Prototipação | Iterativo e Incremental | Evolutivo | Spiral | RAD  |
-|----------------------------------------------------------------------|---------|--------------|--------------------------|-----------|--------|------|
-| Os requisitos são facilmente compreensíveis e definidos? (**Não**)   | ❌      | ✅           | ✅                       | ✅        | ✅     | ❌   |
-| Mudamos os requisitos com bastante frequência? (**Sim**)             | ✅      | ❌           | ✅                       | ✅        | ❌     | ✅   |
-| Podemos mudar os requisitos no início do ciclo? (**Sim**)            | ✅      | ❌           | ✅                       | ✅        | ❌     | ✅   |
-| Os requisitos indicam um sistema complexo a ser construído? (**Não**) | ❌      | ✅           | ✅                       | ✅        | ✅     | ❌   |
+| Pergunta                                                                 | CASCATA | ESPIRAL | RAD  | PROCESSO UNIFICADO | SCRUM / XP | OPEN UP | SAFE | PROJETO |
+|--------------------------------------------------------------------------|---------|---------|------|---------------------|-------------|---------|------|---------|
+| Pouca experiência em projetos similares?                                 | SIM     | NÃO     | SIM  | NÃO                 | NÃO         | NÃO     | NÃO  | NÃO       |
+| Pouco conhecimento de domínio (novato na tecnologia)?                    | SIM     | SIM     | SIM  | NÃO                 | NÃO         | NÃO     | NÃO  | NÃO       |
+| Pouca experiência com as ferramentas utilizadas?                         | SIM     | SIM     | SIM  | NÃO                 | NÃO         | NÃO     | NÃO  | NÃO       |
+| Disponibilidade para treinamento, se necessário?                         | NÃO     | NÃO     | SIM  | SIM                 | SIM         | SIM     | SIM  | SIM       |
 
+---
 
-#### Status da Equipe de Desenvolvimento
+###  STAKEHOLDERS
 
-| Requisitos                                                                      | Cascata | Prototipação | Iterativo e Incremental | Evolutivo | Spiral | RAD  |
-|---------------------------------------------------------------------------------|---------|--------------|--------------------------|-----------|--------|------|
-| Menos experiência em projetos similares (**Não**)                               | ✅      | ❌           | ✅                       | ✅        | ❌     | ✅   |
-| Menos conhecimento de domínio (novidade na tecnologia) (**Não**)                | ✅      | ❌           | ✅                       | ✅        | ✅     | ❌   |
-| Menos experiência nas ferramentas a serem utilizadas (**Não**)                  | ✅      | ❌           | ❌                       | ❌        | ✅     | ❌   |
-| Disponibilidade de treinamento, se necessário (**Sim**)                         | ❌      | ❌           | ✅                       | ✅        | ❌     | ✅   |
+| Pergunta                                                                 | CASCATA | ESPIRAL | RAD  | PROCESSO UNIFICADO | SCRUM / XP | OPEN UP | SAFE | PROJETO |
+|--------------------------------------------------------------------------|---------|---------|------|---------------------|-------------|---------|------|---------|
+| Usuário está envolvido em todas as fases?                                | NÃO     | SIM     | NÃO  | SIM                 | SIM         | SIM     | SIM  | SIM       |
+| Participação limitada do usuário?                                        | SIM     | NÃO     | SIM  | NÃO                 | NÃO         | NÃO     | NÃO  | NÃO       |
+| Usuário não tem experiência anterior em projetos semelhantes?            | NÃO     | SIM     | SIM  | SIM                 | SIM         | SIM     | NÃO  | NÃO       |
+| Usuário é especialista no domínio do problema?                           | SIM     | SIM     | NÃO  | SIM                 | SIM         | SIM     | SIM  | SIM       |
 
-#### Envolvimento do Usuário
+---
 
-| Requisitos                                                                 | Cascata | Prototipação | Iterativo e Incremental | Evolutivo | Spiral | RAD  |
-|----------------------------------------------------------------------------|---------|--------------|--------------------------|-----------|--------|------|
-| Envolvimento do usuário em todas as fases (**Sim**)                        | ✅      | ❌           | ✅                       | ✅        | ✅     | ❌   |
-| Participação limitada do usuário (**Não**)                                 | ❌      | ✅           | ❌                       | ❌        | ❌     | ✅   |
-| O usuário não tem experiência prévia em projeto semelhante (**Não**)       | ✅      | ❌           | ❌                       | ❌        | ❌     | ✅   |
-| Os usuários são especialistas no domínio do problema (**Sim**)             | ✅      | ❌           | ✅                       | ✅        | ✅     | ❌   |
+###  TIPO DE PROJETO E RISCO ASSOCIADO
 
+| Pergunta                                                                 | CASCATA | ESPIRAL | RAD  | PROCESSO UNIFICADO | SCRUM / XP | OPEN UP | SAFE | PROJETO |
+|--------------------------------------------------------------------------|---------|---------|------|---------------------|-------------|---------|------|---------|
+| O financiamento estável para o projeto?                                  | SIM     | NÃO     | SIM  | NÃO                 | NÃO         | NÃO     | SIM  | SIM       |
+| Requisitos de alta confiabilidade?                                       | NÃO     | SIM     | NÃO  | SIM                 | SIM         | SIM     | SIM  | SIM       |
+| Cronograma do projeto é apertado?                                        | NÃO     | SIM     | SIM  | SIM                 | SIM         | SIM     | SIM  | SIM       |
+| Os recursos (tempo, dinheiro, pessoas etc.) estão escassos?              | NÃO     | SIM     | NÃO  | NÃO                 | SIM         | SIM     | SIM  | SIM       |
 
-####  Tipo de Projeto e Risco Associado
+---
 
-| Requisitos                                                                    | Cascata | Prototipação | Iterativo e Incremental | Evolutivo | Spiral | RAD  |
-|-------------------------------------------------------------------------------|---------|--------------|--------------------------|-----------|--------|------|
-| O projeto é aprimoramento do sistema existente (**Não**)                      | ❌      | ❌           | ✅                       | ✅        | ❌     | ✅   |
-| O financiamento é estável para o projeto (**Sim**)                            | ✅      | ✅           | ❌                       | ❌        | ❌     | ✅   |
-| Altos requisitos de confiabilidade (**Sim**)                                  | ❌      | ❌           | ✅                       | ✅        | ✅     | ❌   |
-| Cronograma do projeto apertado (**Sim**)                                      | ❌      | ✅           | ✅                       | ✅        | ✅     | ✅   |
-| Uso de componentes reutilizáveis (**Não**)                                    | ❌      | ✅           | ❌                       | ❌        | ✅     | ✅   |
-| Os recursos (tempo, dinheiro, pessoas etc.) são escassos (**Sim**)            | ❌      | ✅           | ❌                       | ❌        | ✅     | ❌   |
+##  MELHORES PROCESSOS — Soma de Pontos
 
+| Processo             | Pontuação |
+|----------------------|-----------|
+| **CASCATA**          | 5         |
+| **ESPIRAL**          | 11        |
+| **RAD**              | 9         |
+| **PROCESSO UNIFICADO** | 11      |
+| **SCRUM / XP**       | **13**    |
+| **OPEN UP**          | 12        |
+| **SAFe**             | 12        |
 
-### 3.4 Justificativa Final
+---
 
-Com base na análise do **framework de Gupta (2008)** e no comparativo entre os processos RAD e ScrumXP, a escolha pelo **ScrumXP** se mostrou mais aderente ao projeto **AdvogaAI**.
+##  Conclusão
 
-#### Equipe Pequena e Multidisciplinar
+Com base na aplicação do **Framework de Gupta (2008)** ao projeto **AdvogaAI**, o processo com maior compatibilidade foi o **Scrum / XP**, com 13 pontos. Essa abordagem oferece:
 
-- A equipe do projeto é reduzida e todos os membros atuam de forma colaborativa em diversas frentes (backend, frontend, design e testes). O ScrumXP valoriza exatamente esse tipo de estrutura horizontal.
-- O RAD funciona melhor em equipes segmentadas por fases (análise, design, prototipagem), o que não se encaixa na dinâmica do projeto.
+- Alta adaptabilidade a mudanças nos requisitos,
+- Valorização da colaboração com o cliente,
+- Práticas de alta qualidade técnica,
+- E ciclos de entrega contínua com foco em valor.
 
-#### Entrega Contínua com Validação Frequente
+Portanto, o **ciclo de vida ágil baseado no ScrumXP** é a escolha mais adequada para o projeto.
 
-- A cliente Hermínia estará disponível frequentemente para validar o progresso. O ScrumXP permite entregas incrementais e testáveis em cada sprint.
-- No RAD, a validação tende a ocorrer após protótipos mais completos, dificultando o feedback contínuo.
-
-#### Crescimento Progressivo
-
-- O objetivo do projeto é crescer funcionalidade por funcionalidade, mantendo sempre uma versão utilizável e funcional.
-- O ScrumXP sustenta esse tipo de crescimento técnico e de produto, enquanto o RAD foca mais em prototipagem rápida.
-
-#### Foco em Valor e Qualidade
-
-- O projeto exige simplicidade, agilidade e foco em valor real para o usuário. O ScrumXP oferece isso com práticas como TDD, integração contínua e feedback constante.
-- O RAD não prioriza escalabilidade e qualidade técnica da mesma forma, o que poderia comprometer o crescimento sustentável do AdvogaAI.
-
-### Conclusão
-
-| Processo                    | Pontuação |
-|-----------------------------|-----------|
-| Cascata                     | 8         |
-| Prototipação                | 10        |
-| Iterativo e Incremental     | **12**    |
-| Evolutivo                   | 11        |
-| Spiral                      | 11        |
-| RAD                         | 9         |
-
-Ao analisar cada um dos critérios no contexto do projeto **AdvogaAI**, a abordagem com maior aderência foi a **Iterativa e Incremental**, totalizando 12 pontos.
-
-Essa abordagem permite o **desenvolvimento progressivo de funcionalidades**, com **validações frequentes do cliente**, **alta qualidade técnica** e **capacidade de adaptação às mudanças**. Além disso, ela está alinhada aos princípios do **ScrumXP**, que foi adotado como processo de engenharia de software para o projeto.
-
+---
