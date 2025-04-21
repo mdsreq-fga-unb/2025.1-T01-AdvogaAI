@@ -6,6 +6,7 @@ nav:
   - Início: inicio.md
   - Visão de Produto e Projeto: 
       -  Cenário Atual do Cliente e do Negócio: produto.md
+      - Solução Proposta: solucao.md
   - Atas:
       - ata-modelo: Atas/ata-modelo.md
 
