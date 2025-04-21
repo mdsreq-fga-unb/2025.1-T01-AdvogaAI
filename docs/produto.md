@@ -1,25 +1,38 @@
-# Visão do Produto - AdvogaAI
+| Data       | Versão | Descrição                          | Autor                    |
+|------------|--------|------------------------------------|--------------------------|
+| 04/04/2025 | **1.0** | Preenchimento da sessão de cliente | Ana Luiza Pfeilsticker   |
+| 07/04/2025 | **1.0** | Preenchimento da sessão de produto | Ana Luiza Pfeilsticker   |
+| 08/04/2025 | **1.0** | Adição do diagrama de Ishikawa     | Vitor Hoffmann           |
+| 17/04/2025 | **1.1** | Melhoria do texto                  | Mateus Magno             |
+| 20/04/2025 | **1.1** | Melhoria do texto                  | Lucas                    |
+| 21/04/2025 | **1.1** | Adição sessão 3                    | Ana Luiza Pfeilsticker   |
 
-## Introdução
 
-**AdvogaAI** é uma solução inovadora para escritórios de advocacia unipessoais, focada em automação de processos e gestão eficiente de documentos, prazos e pagamentos. A plataforma foi desenvolvida para otimizar o atendimento ao cliente, aumentar a escalabilidade dos escritórios e melhorar a organização interna, permitindo que advogados possam expandir seus negócios sem perder qualidade nos serviços prestados.
+# I CENÁRIO ATUAL DO CLIENTE E DO NEGÓCIO
+### 1.1  Introdução ao Negócio e Contexto
 
-## Cenário Atual do Cliente e do Negócio
+Hermínia Oliveira Sociedade Unipessoal de Advocacia é um escritório de advocacia individual, conduzido exclusivamente por Hermínia Pfeilsticker Gonçalves de Oliveira, que oferece serviços jurídicos nas áreas de Direito Administrativo, Direito Trabalhista, Direito Previdenciário, Direito Tributário, Direito Civil, entre outras. Por operar como sociedade unipessoal, o escritório enfrenta limitações de atendimento e expansão.
+Embora a advogada tenha uma vasta experiência adquirida ao longo de sua carreira no Judiciário Federal e Tribunal Superior do Trabalho (TST), o escritório enfrenta sérios desafios relacionados à escalabilidade de suas operações e à gestão dos processos jurídicos. A dependência de uma única profissional para lidar com todas as demandas e processos tem causado atrasos, erros e falta de organização em diversas áreas da gestão do escritório.
 
-Hermínia Oliveira é a única advogada de seu escritório e enfrenta desafios significativos na gestão dos processos e no acompanhamento de prazos. A ausência de uma equipe dedicada faz com que o escritório dependa de processos manuais, o que gera atrasos, erros e dificuldades de organização. Além disso, a comunicação com os clientes é feita predominantemente por **WhatsApp**, o que causa confusão e prejudica a triagem de novos clientes.
+### 1.2 Identificação da Oportunidade ou Problema
+O principal problema enfrentado pelo escritório é a falta de escalabilidade, o que afeta diretamente a eficiência e a qualidade do atendimento. A ausência de uma equipe maior e a dependência de processos manuais resultam em diversos desafios:
 
-**Principais Desafios:**
+ - **Gestão de documentos e prazos**: A coleta de informações, elaboração e assinatura de contratos e procurações são feitas manualmente, levando em média 4 dias para conclusão. A obtenção de assinaturas também demanda tempo extra, dificultando a escalabilidade e gerando atrasos no atendimento.
 
-- **Gestão de documentos e prazos**: Processo manual de coleta de informações e assinatura de documentos.
-- **Comunicação e organização**: Uso do WhatsApp, causando perda de dados importantes e dificuldades na triagem de clientes.
-- **Gestão financeira e de pagamentos**: Controle manual e informal dos pagamentos, o que aumenta o risco de erros.
-- **Acompanhamento de prazos**: Falta de um sistema automatizado de notificações e alertas.
 
-Esses desafios limitam a escalabilidade do escritório e afetam diretamente a qualidade do serviço prestado aos clientes.
+ - **Comunicação e organização**: Toda a comunicação com clientes e gestão de processos é feita exclusivamente pelo WhatsApp, o que gera confusão, perda de informações e atrasos. A falta de uma triagem eficiente compromete a organização e os tempos de resposta.
 
-## Identificação da Oportunidade ou Problema
 
-O **AdvogaAI** surge como uma solução para os problemas de **escalabilidade** e **organização** enfrentados por escritórios de advocacia unipessoais. A plataforma visa automatizar tarefas repetitivas, como a criação de documentos e o acompanhamento de prazos, melhorando a comunicação com os clientes e garantindo a organização do fluxo de trabalho.
+ - **Gestão financeira e de pagamentos**: O controle dos pagamentos, incluindo entradas e percentagens de êxito, é feito de forma manual e informal, o que eleva o risco de erros, como perda de parcelas ou cobranças incorretas..
+
+
+ - **Acompanhamento de prazos**: Não há um sistema de notificações para movimentações processuais. Hermínia precisa verificar manualmente cada processo, o que consome tempo e eleva o risco de erros ou esquecimentos.
+
+
+Esses desafios resultam em atrasos no atendimento ao cliente e comprometem a qualidade do serviço, já que a advogada não consegue se dedicar adequadamente às estratégias jurídicas e ao estudo de doutrinas e jurisprudências. A falta de escalabilidade do modelo atual limita a expansão do escritório e afeta a experiência do cliente.
+
+![Imagem do WhatsApp de 2025-04-08 à(s) 16 50 46_475cb787](https://github.com/user-attachments/assets/0cf26c76-4be3-430b-bbf1-45ba1629ee9e)
+Figura 1: Diagrama de Ishikawa
 
 **Oportunidades Identificadas:**
 
@@ -27,7 +40,7 @@ O **AdvogaAI** surge como uma solução para os problemas de **escalabilidade** 
 - **Gestão de prazos**: Integração com APIs de tribunais para notificações automáticas.
 - **Gestão financeira**: Controle eficiente de pagamentos e honorários.
 
-## Desafios do Projeto
+### 1.3 Desafios do Projeto
 
 O desenvolvimento da plataforma enfrenta três desafios principais:
 
@@ -35,23 +48,33 @@ O desenvolvimento da plataforma enfrenta três desafios principais:
 2. **Escalabilidade futura**: Criar uma solução que cresça à medida que o escritório se expande e que possa ser comercializada para outros escritórios unipessoais.
 3. **Intuitividade da plataforma**: Garantir que a plataforma seja fácil de usar para advogados e clientes, mesmo os com pouca experiência tecnológica.
 
-## Segmentação de Clientes
+### 1.4 Segmentação de Clientes
 
-A solução é direcionada a dois principais grupos:
+O público-alvo da solução proposta é dividido em dois principais grupos:
 
-1. **Advogados Unipessoais**: Profissionais que enfrentam desafios semelhantes aos de Hermínia, com necessidade de automatizar processos, melhorar a organização e escalar o negócio.
-2. **Clientes dos Advogados**: Pessoas entre 35 e 70 anos, principalmente aposentados ou trabalhadores com questões relacionadas ao direito previdenciário ou trabalhista, que precisam de uma plataforma intuitiva e acessível para acompanhar seus processos.
+1. **Advogados Unipessoais**: Formado por advogados com perfil semelhante ao de Hermínia Oliveira — profissionais autônomos ou atuando em sociedades unipessoais, com equipes reduzidas e volume limitado de processos e clientes. Enfrentam desafios como baixa escalabilidade, dificuldade de organização e gestão manual de tarefas. Hermínia será considerada a principal usuária no desenvolvimento da solução, representando as necessidades desse público. 
 
-## Solução Proposta
+2. **Clientes dos Advogados**: Público de clientes dos advogados, especificamente os de Hermínia, que têm entre 35 e 70 anos, e geralmente enfrentam questões como aposentadoria, situações trabalhistas ou outras questões jurídicas relacionadas ao direito previdenciário e direito do trabalho. Este público tem um perfil que inclui pessoas aposentadas ou que estão em processo de aposentadoria, além de trabalhadores que enfrentam desafios no ambiente laboral, como demissões, disputas trabalhistas ou questões relacionadas a direitos de seguridade social. Esses clientes podem ter dificuldade com tecnologias mais avançadas.
 
-**AdvogaAI** oferece uma plataforma com os seguintes objetivos:
 
-- **Agilizar a triagem e o processamento de informações dos clientes**.
-- **Automatizar a elaboração de documentos jurídicos essenciais**.
-- **Ajudar no acompanhamento de prazos processuais com integração com o PJe**.
-- **Gerenciar os pagamentos de honorários de forma eficiente e automatizada**.
+## II SOLUÇÃO PROPOSTA
 
-**Características principais da solução:**
+### 2.1 Objetivos do Produto
+
+A solução proposta tem como objetivos principais:
+
+ - **Agilizar a triagem e o processamento de informações dos clientes**: A plataforma visa otimizar a forma como o advogado lida com as informações e documentos dos clientes, diminuindo o tempo do processo de coleta de dados e organização. Isso inclui a junção de informações essenciais e a integração de documentos, economizando tempo e evitando erros manuais.
+
+
+ - **Reduzir tempo  para elaboração dos documentos iniciais, procurações e contratos**: O produto permitirá que o advogado crie documentos jurídicos essenciais, como contratos, procurações e petições iniciais, de forma automatizada e baseada em modelos registrados, com preenchimento dinâmico das informações, reduzindo o tempo gasto na elaboração manual desses documentos.
+
+
+ - **Evitar atrasos nos de prazos processuais**: A plataforma integrará as movimentações dos processos com as APIs dos tribunais, permitindo que o advogado acompanhe os prazos de seus processos de forma automatizada e receba notificações em tempo real, evitando a necessidade de verificação manual e garantindo que nenhum prazo seja perdido.
+
+
+ - **Automatizar a gestão de pagamentos de honorários**: A solução também facilitará o controle e a gestão dos pagamentos de honorários advocatícios, tanto de entrada quanto de êxito, garantindo que as datas de pagamento sejam registradas e monitoradas automaticamente, evitando que o advogado tenha que cobrar manualmente ou depender da memória para controlar os parcelamentos ou valores a serem recebidos. Relatórios detalhados ajudarão na visualização da situação financeira de cada cliente, proporcionando mais organização e controle.
+
+### 2.2 Características principais da solução
 
 - **Automação de documentos**: Criação automática de documentos como contratos e procurações.
 - **Integração com o PJe**: Acompanhamento de prazos e movimentações processuais.
@@ -59,7 +82,7 @@ A solução é direcionada a dois principais grupos:
 - **Interface intuitiva e acessível**: Foco em usabilidade para advogados e clientes com pouca experiência digital.
 - **Escalabilidade**: Plataforma modular, capaz de crescer junto com o escritório e ser comercializada no futuro.
 
-## Tecnologias Utilizadas
+### 2.3 Tecnologias Utilizadas
 
 A plataforma será desenvolvida com as seguintes tecnologias:
 
@@ -69,7 +92,7 @@ A plataforma será desenvolvida com as seguintes tecnologias:
 - **Gestão de E-mails**: Amazon SES para envio de notificações.
 - **Infraestrutura**: Vercel para deploy do frontend e Heroku para backend, com planos para migração para AWS no futuro.
 
-## Pesquisas de Mercado e Análise Competitiva
+### 2.4 Pesquisas de Mercado e Análise Competitiva
 
 A análise competitiva mostra que soluções como **ProJuris** e **CPJ-3C** já atendem ao mercado jurídico, mas a **AdvogaAI** se diferencia por:
 
@@ -77,10 +100,87 @@ A análise competitiva mostra que soluções como **ProJuris** e **CPJ-3C** já 
 - Capacidade de **personalização de modelos de documentos**.
 - Integração com o **PJe** para acompanhamento automatizado de prazos.
 - Interface **intuitiva e acessível**, garantindo facilidade de uso mesmo para clientes com pouca experiência tecnológica.
-- **Escalabilidade**, permitindo que a solução seja comercializada para outros escritórios no futuro.
 
-## Conclusão
+### 2.5 Análise de Viabilidade
 
-**AdvogaAI** é uma solução poderosa e inovadora para escritórios de advocacia unipessoais, que enfrenta desafios relacionados à escalabilidade e à organização. Com a automação de processos, integração com o PJe, e uma interface acessível, a plataforma promete melhorar a gestão do escritório e a experiência do cliente, permitindo que os advogados se concentrem no que realmente importa: a prática jurídica.
+A viabilidade técnica do projeto é alta, pois a plataforma será construída utilizando tecnologias consolidadas (NEXT, NEST, e PostgreSQL) no mercado e dominadas pela equipe de desenvolvimento.
+Do ponto de vista financeiro também é sólido, pois o desenvolvimento será feito em fases, com um investimento inicial baixo e a possibilidade de monetização da aplicação futuramente. A comercialização futura para outros escritórios unipessoais representará uma fonte adicional de receita.
+Em termos do mercado é favorável, considerando a demanda crescente por soluções de automação e organização para advogados individuais e pequenos escritórios, especialmente no contexto da digitalização do Judiciário e da necessidade de melhoria na gestão de prazos e documentos.
 
-Essa plataforma não só melhora a eficiência e a organização, mas também prepara o escritório para crescer e atender a um número maior de clientes com a mesma qualidade.
+### 2.6 Impacto da Solução
+
+A solução proposta terá um impacto significativo nos processos operacionais do escritório de Hermínia Oliveira Sociedade Unipessoal de Advocacia, promovendo melhorias em várias áreas cruciais:
+
+ - **Facilidade e agilidade na triagem de clientes**: A plataforma permitirá agilizar a triagem de novos clientes, centralizando o processo de coleta e organização de informações essenciais, reduzindo o tempo gasto em tarefas administrativas e permitindo que o advogado se concentre mais na parte estratégica e jurídica do trabalho. O atendimento será mais ágil desde o primeiro contato até o início do acompanhamento processual.
+
+
+ - **Mitigação de erros na cobrança de pagamentos**: Com a gestão automatizada dos honorários e dos parcelamentos, a plataforma eliminará a necessidade de controle manual ou mental dos pagamentos. Isso evitará omissões, duplicidades ou esquecimentos, oferecendo ao escritório um controle financeiro mais confiável e sistemático.
+
+
+ - **Mitigação de perda de prazos processuais**: A integração com as APIs dos tribunais e a geração automática de alertas de prazos ajudarão a mitigar o risco de perda de prazos. O advogado será notificado automaticamente sobre movimentações processuais e prazos importantes, garantindo que nenhuma data crítica seja esquecida. Isso aumenta a segurança jurídica do escritório e melhora a confiança dos clientes no atendimento oferecido.
+
+
+ - **Aprimoramento da experiência do cliente**: A solução proporcionará um atendimento mais rápido, com um processo mais ágil desde a triagem até a entrega dos documentos e o acompanhamento dos prazos. A transparência no controle de pagamentos e prazos também aumentará a confiança dos clientes, que se sentirão mais informados e acompanhados ao longo do andamento de seus processos. A interface simples garantirá que clientes de diferentes perfis, incluindo os mais idosos, possam utilizar a plataforma com facilidade, melhorando a experiência geral.
+
+## III ESTRATÉGIAS DE ENGENHARIA DE SOFTWARE
+
+### 3.1 Estratégia priorizada
+
+**Abordagem**: Ágil
+**Ciclo de vida**: Ágil
+**Processo de engenharia de software**: ScrumXP
+
+### 3.2 Quadro comparativo
+
+O quadro a seguir apresenta características comparativas entre os processos: RAD e ScrumXP, visando auxiliar o entendimento da escolha mais adequada de processo ao caso do AdvogaAI.
+
+| **Características**                  | **RAD (Rapid Application Development)**                                               | **ScrumXP**                                                                 |
+|-------------------------------------|----------------------------------------------------------------------------------------|------------------------------------------------------------------------------|
+| **Abordagem Geral**                 | Focado em desenvolvimento rápido com uso intensivo de prototipação.                   | Ágil com foco em entregas rápidas e feedback contínuo.                      |
+| **Foco em Arquitetura**             | Baixo foco em arquitetura no início, priorizando entregas rápidas com protótipos.     | Evolução da arquitetura ao longo do tempo e conforme a necessidade.        |
+| **Estrutura de Processos**          | Baseado em fases como modelagem, prototipação, testes e iteração rápida.              | Focado em sprints curtos e flexíveis (2-4 semanas) com entregas incrementais. |
+| **Flexibilidade de Requisitos**     | Alta flexibilidade, com requisitos evoluindo conforme os protótipos são testados.     | Alta flexibilidade com adaptação contínua dos requisitos a cada sprint.     |
+| **Colaboração com Cliente**         | Envolvimento frequente durante as fases de prototipação e testes.                     | Envolvimento constante, com feedback ao final de cada sprint.               |
+| **Complexidade do Processo**        | Processo simples e rápido, com pouca formalidade e foco na velocidade.                | Leve e ágil, com foco na entrega funcional e adaptação contínua.            |
+| **Qualidade Técnica**               | Qualidade validada com testes rápidos sobre os protótipos.                            | Alta ênfase em qualidade com TDD, integração contínua e pair programming.   |
+| **Práticas de Desenvolvimento**     | Foco em ciclos rápidos de prototipagem e testes, com menos práticas estruturadas.     | TDD, refatoração contínua, integração contínua e pair programming.          |
+| **Adaptação ao Projeto AdvogaAI**   | Útil para gerar protótipos rápidos da interface e validar ideias com usuários.        | Ideal para evolução contínua da plataforma com qualidade e feedbacks.       |
+| **Documentação**                    | Documentação mínima, focada em protótipos e requisitos emergentes.                    | Documentação reduzida, centrada no essencial e comunicação ágil.            |
+| **Controle de Qualidade**           | Baseado em revisões de protótipos e feedback do cliente.                              | Embutido com testes automatizados e práticas ágeis de qualidade.            |
+| **Escalabilidade**                  | Limitado a projetos de menor escala e com menos complexidade técnica.                 | Escalável, indicado para equipes pequenas e médias com foco em colaboração. |
+| **Suporte a Equipes de Desenvolvimento** | Adequado para equipes pequenas com foco em entrega rápida.                     | Ideal para equipes colaborativas, com papéis flexíveis e alta comunicação.  |
+
+
+### 3.3 Justificativa
+
+O processo ScrumXP foi escolhido como o mais adequado ao desenvolvimento do projeto AdvogaAI por refletir com mais precisão a realidade da equipe e os objetivos da solução. Em comparação ao RAD (Rapid Application Development), o ScrumXP oferece benefícios claros no contexto específico do projeto:
+
+#### Equipe Pequena e Multidisciplinar
+
+ - A equipe do projeto é reduzida e todos os membros atuam de forma colaborativa em diversas frentes (backend, frontend, design e testes). O ScrumXP valoriza exatamente esse tipo de estrutura horizontal, com papeis flexíveis e integração entre os envolvidos.
+
+
+ - O RAD funciona melhor em equipes segmentadas por fases (análise, design, prototipagem), o que não se encaixa bem na dinâmica colaborativa adotada no AdvogaAI.
+
+#### Entrega Contínua de Funcionalidades com Validação Frequente
+
+ - A cliente Hermínia estará disponível com frequência para validar o progresso da aplicação. O ScrumXP permite entregas incrementais e funcionais a cada sprint, possibilitando que ela acompanhe e teste partes reais do sistema desde o início.
+
+
+ - No RAD, a validação tende a acontecer após protótipos mais completos, o que dificulta o envolvimento constante do cliente e reduz a capacidade de ajustar funcionalidades com base no uso real.
+
+#### Crescimento Progressivo do Produto
+
+ - O projeto não será entregue todo de uma vez. O objetivo é desenvolver o sistema funcionalidade por funcionalidade, garantindo que cada parte seja implementada, testada, validada e integrada ao todo, mantendo sempre uma versão utilizável da plataforma.
+
+
+ - O ScrumXP é ideal para esse cenário, pois cada sprint resulta em um incremento funcional. Já o RAD costuma priorizar o desenvolvimento rápido de protótipos completos, o que dificulta a manutenção de uma base de código estável e em constante evolução.
+
+#### Simplicidade, Agilidade e Foco em Valor
+
+O projeto exige uma abordagem ágil, leve e centrada na entrega de valor real. O ScrumXP foca na entrega contínua de partes úteis da aplicação, mantendo a cliente sempre no centro do processo.
+
+
+O RAD, embora ágil, carece de práticas voltadas à evolução estruturada do software e não prioriza qualidade técnica e escalabilidade a longo prazo, pontos essenciais para o sucesso do AdvogaAI.
+
+
