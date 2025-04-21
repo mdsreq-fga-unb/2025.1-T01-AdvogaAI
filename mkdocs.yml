@@ -9,6 +9,7 @@ nav:
       - Solução Proposta: solucao.md
       - Estratégias de Engenharia de Software: estrategia.md
       - Cronograma: cronograma.md
+      - Interação entre Equipe e Cliente: equipecliente.md
   - Atas:
       - ata-modelo: Atas/ata-modelo.md
 
