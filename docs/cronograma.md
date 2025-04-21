@@ -1,3 +1,8 @@
+| Data       | Versão | Descrição                          | Autor                    |
+|------------|--------|------------------------------------|--------------------------|
+| 21/04/2025 | *1.1*  | Adição do cronograma               | Vitor Valerio            |
+
+
 # IIII CRONOGRAMAS
 
 Este cronograma é uma versão preliminar, com estimativas de datas e entregas de alto nível. Serve como guia inicial e poderá ser refinado ao longo do projeto à medida que novas necessidades surgirem.
