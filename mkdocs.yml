@@ -3,6 +3,7 @@ theme:
   #name: dracula
   name: material
 nav:
+  - Início: inicio.md
   - Visão de produto: produto.md
   - Atas:
       - ata-modelo: Atas/ata-modelo.md
