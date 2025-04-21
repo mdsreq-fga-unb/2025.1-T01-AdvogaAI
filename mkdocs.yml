@@ -4,7 +4,8 @@ theme:
   name: material
 nav:
   - Início: inicio.md
-  - Visão de Produto e Projeto: produto.md
+  - Visão de Produto e Projeto: 
+      -  Cenário Atual do Cliente e do Negócio: produto.md
   - Atas:
       - ata-modelo: Atas/ata-modelo.md
 
