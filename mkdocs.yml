@@ -10,8 +10,7 @@ nav:
       - Estratégias de Engenharia de Software: estrategia.md
       - Cronograma: cronograma.md
       - Interação entre Equipe e Cliente: equipecliente.md
-  - Atas:
-      - ata-modelo: Atas/ata-modelo.md
+  - Entregas:
+      - Unidade 1: unidade1.md
 
-  - Sprints:
-      - Sprint 0: Sprints/sprint0.md
+  - Backlog:
