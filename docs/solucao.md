@@ -2,6 +2,7 @@
 |------------|--------|------------------------------------|--------------------------|
 | 07/04/2025 | *1.0* | Preenchimento da sessão de produto | Ana Luiza Pfeilsticker   |
 | 17/04/2025 | *1.1* | Melhoria do texto                  | Mateus Magno             |
+| 29/04/2025 | *1.2* | Melhora na relação entre objetivos de produto e causas do problema | Nathan Batista Santos |
 
 # II SOLUÇÃO PROPOSTA
 
@@ -9,16 +10,18 @@
 
 A solução proposta tem como objetivos principais:
 
- - *Agilizar a triagem e o processamento de informações dos clientes*: A plataforma visa otimizar a forma como o advogado lida com as informações e documentos dos clientes, diminuindo o tempo do processo de coleta de dados e organização. Isso inclui a junção de informações essenciais e a integração de documentos, economizando tempo e evitando erros manuais.
+ - *Agilizar a triagem e o processamento de informações dos clientes*: A coleta e organização manual de dados e documentos dos clientes é um processo que consome tempo e está sujeito a erros. A automação dessa etapa reduz o tempo necessário para reunir as informações essenciais e padroniza o armazenamento de documentos, diminuindo retrabalhos e falhas no registro de dados.
 
 
- - *Reduzir tempo  para elaboração dos documentos iniciais, procurações e contratos*: O produto permitirá que o advogado crie documentos jurídicos essenciais, como contratos, procurações e petições iniciais, de forma automatizada e baseada em modelos registrados, com preenchimento dinâmico das informações, reduzindo o tempo gasto na elaboração manual desses documentos.
+ - *Reduzir tempo  para elaboração dos documentos iniciais, procurações e contratos*: A elaboração manual de documentos jurídicos demanda esforço repetitivo e aumenta o tempo total de atendimento. A geração automatizada de documentos a partir de modelos pré-definidos com preenchimento dinâmico de dados elimina a necessidade de redigir documentos do zero, o que reduz o tempo total do processo e melhora o fluxo de trabalho.
 
 
- - *Evitar atrasos nos de prazos processuais*: A plataforma integrará as movimentações dos processos com as APIs dos tribunais, permitindo que o advogado acompanhe os prazos de seus processos de forma automatizada e receba notificações em tempo real, evitando a necessidade de verificação manual e garantindo que nenhum prazo seja perdido.
+ - *Evitar atrasos nos de prazos processuais*: 
+A verificação manual de movimentações processuais e prazos é uma fonte de risco para o não cumprimento de prazos. A integração com APIs dos tribunais permite o acompanhamento contínuo e automático dos processos, garantindo que os prazos sejam monitorados em tempo real e que o advogado seja alertado sobre atualizações relevantes.
 
 
- - *Automatizar a gestão de pagamentos de honorários*: A solução também facilitará o controle e a gestão dos pagamentos de honorários advocatícios, tanto de entrada quanto de êxito, garantindo que as datas de pagamento sejam registradas e monitoradas automaticamente, evitando que o advogado tenha que cobrar manualmente ou depender da memória para controlar os parcelamentos ou valores a serem recebidos. Relatórios detalhados ajudarão na visualização da situação financeira de cada cliente, proporcionando mais organização e controle.
+ - *Automatizar a gestão de pagamentos de honorários*:     O controle de recebimentos e parcelamentos feito manualmente pode gerar esquecimentos e atrasos na cobrança. A automatização do registro e monitoramento dos pagamentos reduz a necessidade de controle direto por parte do advogado e permite acesso a relatórios financeiros organizados, contribuindo para a gestão financeira dos casos.
+
 
 ### 2.2 Características principais da solução
 
