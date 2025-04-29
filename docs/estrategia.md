@@ -1,14 +1,15 @@
 | Data       | Versão | Descrição                          | Autor                    |
 |------------|--------|------------------------------------|--------------------------|
 | 21/04/2025 | *1.1*  | Adição sessão 3 - Estratégia        | Ana Luiza Pfeilsticker   |
+| 29/04/2025 | *1.2*  | Atualização da estratégia da equipe        | Nathan Batista Santos   |
 
 # III. ESTRATÉGIAS DE ENGENHARIA DE SOFTWARE
 
 ### 3.1 Estratégia priorizada
 
-**Abordagem**: Ágil  
-**Ciclo de vida**: Ágil  
-**Processo de engenharia de software**: ScrumXP
+**Abordagem**: Híbrida    
+**Ciclo de vida**: Adaptativo  
+**Processo de engenharia de software**: RAD e ScrumXP
 
 ---
 
@@ -103,6 +104,8 @@ Com base na aplicação do **Framework de Gupta (2008)** ao projeto **AdvogaAI**
 - Práticas de alta qualidade técnica,
 - E ciclos de entrega contínua com foco em valor.
 
-Portanto, o **ciclo de vida ágil baseado no ScrumXP** é a escolha mais adequada para o projeto.
+Porém, é de muito valor para os desenvolvedores e para a cliente, entregas de protótipos no início do projeto, logo o RAD se tornaria a melhor opção.
+
+Portanto, o **ciclo de vida adaptativo baseado no RAD e ScrumXP** é a escolha mais adequada para o projeto.
 
 ---
