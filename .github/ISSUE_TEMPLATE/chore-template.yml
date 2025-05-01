@@ -1,0 +1,47 @@
+name: Criar Chore
+description: Template para atividades técnicas que não impactam diretamente a experiência do usuário.
+title: "CHXXX - [descrição resumida da tarefa técnica]"
+labels: ["chore"]
+projects: ["mdsreq-fga-unb/46"] # Substitua com o ID real do seu projeto
+
+body:
+  - type: textarea
+    id: descricao
+    attributes:
+      label: Descrição da tarefa técnica
+      description: Explique o que será feito, o objetivo da tarefa e por que ela é necessária.
+      placeholder: |
+        Exemplo: Criar pipeline de verificação automática para PRs, rodando testes e checando build de front e backend.
+    validations:
+      required: true
+
+  - type: textarea
+    id: escopo
+    attributes:
+      label: Escopo da tarefa
+      description: Liste os itens que fazem parte desta entrega técnica.
+      placeholder: |
+        - Configurar GitHub Actions
+        - Rodar testes unitários do backend
+        - Rodar build de frontend e backend
+    validations:
+      required: true
+
+  - type: textarea
+    id: impacto
+    attributes:
+      label: Impacto da tarefa
+      description: Especifique que partes do projeto serão afetadas ou beneficiadas por essa tarefa.
+      placeholder: |
+        - Melhor controle de qualidade
+        - Prevenção de merges com build quebrado
+
+  - type: textarea
+    id: observacoes
+    attributes:
+      label: Observações adicionais (opcional)
+      description: Anote links úteis, dependências ou contexto técnico relevante.
+      placeholder: |
+        - Pode depender de CH001 - Configuração de ambiente do frontend
+        - Baseado em template de projeto anterior
+
