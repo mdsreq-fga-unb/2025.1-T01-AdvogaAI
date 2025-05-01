@@ -2,7 +2,8 @@ name: Criar User Story
 description: Template para descrever uma nova funcionalidade sob a perspectiva do usuário.
 title: "USXXX - [título resumido da funcionalidade]"
 labels: ["user-story"]
-projects: ["mdsreq-fga-unb/57"]
+projects:
+  - "mdsreq-fga-unb/57"
 
 body:
   - type: textarea
@@ -12,7 +13,8 @@ body:
       description: Use o formato clássico: Como [persona], quero [ação], para que [valor ou benefício].
       placeholder: |
         Exemplo:
-        Como advogada, quero cadastrar um novo cliente, para que eu possa iniciar um processo com os dados dele corretamente registrados.
+        Como advogada, quero cadastrar um novo cliente,
+        para que eu possa iniciar um processo com os dados dele corretamente registrados.
     validations:
       required: true
 
