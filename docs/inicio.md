@@ -55,7 +55,7 @@ O AdvogaAI foi projetado para ser escalável, com potencial de uso por outros pr
         <td align="center">
             <a href="https://github.com/yanzin00">
                 <img style="border-radius: 50%;" src="https://avatars.githubusercontent.com/u/118907920?v=4" width="150px;"/>
-                <h5 class="text-center">Yan Lucas</h5>
+                <h5 class="text-center">Yan Guimarães</h5>
             </a>
         </td>
         <td align="center">
