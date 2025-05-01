@@ -9,7 +9,7 @@ body:
     id: historia-usuario
     attributes:
       label: História de usuário
-      description: Use o formato clássico: Como [persona], quero [ação], para que [valor ou benefício].
+      description: "Use o formato clássico: Como [persona], quero [ação], para que [valor ou benefício]."
       placeholder: |
         Exemplo:
         Como advogada, quero cadastrar um novo cliente,
@@ -33,7 +33,7 @@ body:
     id: contexto-tecnico
     attributes:
       label: Notas técnicas (opcional)
-      description: Detalhes técnicos úteis para quem for implementar (ex: integrações, componentes, permissões, regras de negócio).
+      description: "Detalhes técnicos úteis para quem for implementar (ex: integrações, componentes, permissões, regras de negócio)."
       placeholder: |
         - Esta funcionalidade precisa validar CPF antes do envio
         - O botão deve reaproveitar o componente padrão do sistema
