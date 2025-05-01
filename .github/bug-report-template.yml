@@ -1,0 +1,49 @@
+name: Reportar Bug
+description: Template para relatar um defeito ou comportamento inesperado no sistema AdvogaAI.
+title: "BUGXXX - [título breve do bug]"
+labels: ["bug"]
+projects: ["mdsreq-fga-unb/57"]
+body:
+  - type: textarea
+    id: bug-description
+    attributes:
+      label: Descrição do bug
+      description: Explique o que está errado no comportamento do sistema.
+      placeholder: "Exemplo: Ao clicar em 'Salvar cliente', o formulário não é enviado."
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduction-steps
+    attributes:
+      label: Passos para reproduzir o bug
+      description: Liste o passo a passo necessário para reproduzir o erro.
+      value: |
+        1. Vá para '...'
+        2. Clique em '...'
+        3. Observe que '...'
+    validations:
+      required: true
+
+  - type: textarea
+    id: suspected-cause
+    attributes:
+      label: Suspeita da origem do problema
+      description: Indique onde você acredita que o bug esteja ocorrendo, caso saiba.
+      placeholder: |
+        Arquivo: src/modules/clientes/clientes.controller.ts
+        ---
+        Trecho suspeito:
+        if (!cliente.nome) return;
+
+  - type: textarea
+    id: additional-info
+    attributes:
+      label: Informações adicionais
+      description: Forneça logs, prints, contexto técnico ou qualquer informação relevante para ajudar na investigação.
+      placeholder: |
+        Pode incluir:
+        - Logs de erro
+        - Prints de tela
+        - URLs específicas
+
