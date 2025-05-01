@@ -1,6 +1,7 @@
 | Data       | Versão | Descrição                          | Autor                    |
 |------------|--------|------------------------------------|--------------------------|
 | 01/05/2025 | **1.0** | Preenchimento da sessão de Requisitos da integração com a API PJe | Yan Guimarães   |
+| 01/05/2025 | **1.1** | Revisão de algumas notações | Nathan Batista Santos   |
 
 # Requisitos Funcionais e Não Funcionais sobre a integração com a API PJe
 
@@ -8,10 +9,10 @@
 
 ### Requisitos de Usuário
 
-1. O usuário deve conseguir buscar todos os processos vinculados ao advogado           (`GET /processos`).
-2. O usuário deve conseguir buscar por um processo específico utilizando o numero do processo (`GET /processos/{id}`).
-3. O usuário deve conseguir lista todos os documentos vinculados a um processo específico (`GET /processos/{id}/documentos`).
-4. O usuário deve receber notificações quando houver nova movimentação em qualquer processo que ele acompanha.
+1. O usuário (ADVOGADO) deve conseguir buscar todos os processos vinculados ao seu cliente           (`GET /processos`).
+2. O usuário (ADVOGADO) deve conseguir buscar por um processo específico utilizando o número do processo (`GET /processos/{id}`).
+3. O usuário (ADVOGADO) deve conseguir listar todos os documentos vinculados a um processo específico (`GET /processos/{id}/documentos`).
+4. O usuário (ADVOGADO) deve receber notificações quando houver nova movimentação em qualquer processo que ele acompanha.
 
 ### Requisitos de Sistema
 
