@@ -2,8 +2,7 @@ name: Criar Chore
 description: Template para atividades técnicas que não impactam diretamente a experiência do usuário.
 title: "CHXXX - [descrição resumida da tarefa técnica]"
 labels: ["chore"]
-projects: ["mdsreq-fga-unb/46"] # Substitua com o ID real do seu projeto
-
+projects: ["mdsreq-fga-unb/57"]
 body:
   - type: textarea
     id: descricao

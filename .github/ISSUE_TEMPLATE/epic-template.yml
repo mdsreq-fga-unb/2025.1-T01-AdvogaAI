@@ -2,8 +2,7 @@ name: Criar Épico
 description: Use este template para descrever uma funcionalidade ampla que agrupa várias User Stories.
 title: "EPXXX - [título resumido do épico]"
 labels: ["epic"]
-projects: ["mdsreq-fga-unb/46"] # Altere conforme seu projeto real
-
+projects: ["mdsreq-fga-unb/57"]
 body:
   - type: textarea
     id: epic-context
@@ -33,11 +32,11 @@ body:
     attributes:
       label: User Stories relacionadas
       description: Liste as User Stories que fazem parte deste épico. Use markdown para referenciar issues existentes ou planejadas.
-    placeholder: |
-      Para associar User Stories, copie os links ou IDs das issues existentes, ex:
-      - [ ] #23 - US004 - Cadastro de novo cliente
-      - [ ] #24 - US005 - Edição de cliente
-      - [ ] #25 - US006 - Visualização de cliente
+      placeholder: |
+        Para associar User Stories, copie os links ou IDs das issues existentes, ex:
+        - [ ] #23 - US004 - Cadastro de novo cliente
+        - [ ] #24 - US005 - Edição de cliente
+        - [ ] #25 - US006 - Visualização de cliente
     validations:
       required: true
 

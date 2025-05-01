@@ -2,7 +2,7 @@ name: Criar User Story
 description: Template para descrever uma nova funcionalidade sob a perspectiva do usuário.
 title: "USXXX - [título resumido da funcionalidade]"
 labels: ["user-story"]
-projects: ["mdsreq-fga-unb/46"]  # Substitua com o ID do seu projeto real
+projects: ["mdsreq-fga-unb/57"]
 
 body:
   - type: textarea
