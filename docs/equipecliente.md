@@ -9,12 +9,11 @@
 **5.1 Composição da Equipe**
 
 | Papel                                    | Descrição                                                                                                    | Responsável             | Participantes |
-|------------------------------------------|--------------------------------------------------------------------------------------------------------------|-------------------------|---------------|
-| Líder de Projeto & Full Stack            | Gerencia o progresso do projeto, faz a ponte com o cliente e atua no desenvolvimento full stack.             | Ana Luiza Pfeilsticker  | –             |
-| QA & Full Stack                          | Testa o software em todas as camadas e contribui com desenvolvimento full stack.                             | Vitor Valério           | –             |
-| Analista de Requisitos & Full Stack      | Coleta e documenta necessidades do cliente, transformando-as em requisitos; também desenvolve full stack.    | Lucas                   | –             |
-| Desenvolvimento Frontend                 | Cria e mantém a interface de usuário, implementa componentes e garante integração com o backend.             | Mateus Magno            | Nathan        |
-| Desenvolvimento Backend                  | Implementa a lógica de servidor, gerencia banco de dados e integra sistemas externos (API do PJe, e‑mail).    | Yan                     | –             |
+|------------------------------------------|--------------------------------------------------------------------------------------------------------------|---------------------------|----------------------|
+| Gerente de Projeto                       | Gerencia o progresso do projeto, faz a ponte com o cliente e coordena o grupo                                | Ana Luiza Pfeilsticker    | Vitor Hoffmann       |
+| Analista de Requisitos                   | Coleta e documenta necessidades do cliente, transformando-as em requisitos.                                  | Todos                     | Todos                |
+| Desenvolvimento Frontend                 | Cria e mantém a interface de usuário, implementa componentes e garante integração com o backend.             | Vitor Hoffmann            | Mateus Magno e Lucas |
+| Desenvolvimento Backend                  | Implementa a lógica de servidor, gerencia banco de dados e integra sistemas externos (API do PJe, e‑mail).   | Ana Luiza Pfeilsticker    | Yan e Nathan         |
 ---
 
 **5.2 Comunicação**
