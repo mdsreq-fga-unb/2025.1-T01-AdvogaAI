@@ -3,6 +3,34 @@
 | 01/05/2025 | **1.0** | Preenchimento da sessão de Requisitos da integração com a API PJe | Yan Guimarães   |
 | 01/05/2025 | **1.1** | Revisão de algumas notações | Nathan Batista Santos   |
 
+# Requisitos Funcionais e Não Funcionais sobre a Automação de Documentos
+
+## Requisitos Funcionais
+
+1. A plataforma deve permitir a geração automatizada de documentos jurídicos, como contratos, procurações e petições iniciais, a partir de modelos predefinidos, com preenchimento dinâmico de campos com dados previamente cadastrados dos clientes.
+2. O sistema deve possibilitar que os usuários cadastrem, editem e excluam modelos personalizados de documentos, utilizando variáveis de preenchimento que se conectem aos dados dos clientes.
+3. O preenchimento automático dos documentos deverá ser baseado em informações previamente armazenadas no sistema, associadas aos cadastros de clientes.
+4. O sistema deve permitir o cadastro manual de novos clientes, com campos obrigatórios como nome completo, CPF/CNPJ, endereço, telefone, e-mail e outras informações relevantes à elaboração de documentos jurídicos.
+5. O usuário deverá ser capaz de editar os dados cadastrais de clientes previamente cadastrados, garantindo a atualização das informações utilizadas nos documentos.
+6. O sistema deverá permitir a exclusão de registros de clientes, com confirmação prévia, respeitando a integridade de documentos já gerados anteriormente.
+7. A plataforma deve oferecer uma interface para visualização e busca de clientes cadastrados, com filtros por nome, CPF/CNPJ e outros atributos relevantes.
+8. O sistema deverá permitir que os documentos gerados sejam exportados nos formatos .pdf.
+9. A plataforma deve disponibilizar uma listagem de documentos com suporte a busca por título ou conteúdo, e filtros por cliente, tipo de documento, status e intervalo de datas, permitindo também a ordenação por título, data de criação ou cliente.
+
+## Requisitos Não Funcionais
+
+1. **Segurança e conformidade com a LGPD**
+    - A plataforma deve garantir a segurança dos dados dos clientes, em conformidade com a Lei Geral de Proteção de Dados (LGPD), incluindo criptografia e controle de acesso.
+
+2. **Usabilidade e acessibilidade**
+    - A interface da plataforma deve ser intuitiva e acessível, permitindo que advogados com diferentes níveis de familiaridade tecnológica possam utilizá-la eficientemente.
+
+3. **Compatibilidade com diferentes dispositivos e navegadores**
+    - A plataforma deve ser compatível com os principais navegadores e dispositivos, incluindo desktops, tablets e smartphones, para garantir o acesso remoto e flexível.
+
+4. **Manutenibilidade e atualizações**
+    - A plataforma deve ser desenvolvida de forma modular, facilitando a manutenção e a implementação de atualizações e melhorias contínuas.
+
 # Requisitos Funcionais e Não Funcionais sobre a integração com a API PJe
 
 ## Requisitos Funcionais
