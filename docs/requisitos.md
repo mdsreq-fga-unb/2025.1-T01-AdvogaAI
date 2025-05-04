@@ -1,8 +1,3 @@
-| Data       | Versão | Descrição                          | Autor                    |
-|------------|--------|------------------------------------|--------------------------|
-| 01/05/2025 | **1.0** | Preenchimento da sessão de Requisitos da integração com a API PJe | Yan Guimarães   |
-| 01/05/2025 | **1.1** | Revisão de algumas notações | Nathan Batista Santos   |
-
 # Requisitos Funcionais e Não Funcionais sobre a Automação de Documentos
 
 ## Requisitos Funcionais
