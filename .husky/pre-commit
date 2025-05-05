@@ -1,0 +1,13 @@
+echo 'Check for linting errors...'
+
+npm run lint-server || (echo 'Linting errors found. Please fix them before committing.' && exit 1)
+
+echo 'Linting passed. Proceeding with tests...'
+
+
+echo 'Running tests...'
+
+npm run test-server || (echo 'Tests failed. Please fix them before committing.' && exit 1)
+
+echo 'Tests passed. Proceeding with commit...'
+ 
