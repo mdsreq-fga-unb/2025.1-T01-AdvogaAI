@@ -12,12 +12,13 @@
     "baseUrl": "./",
     "incremental": true,
     "skipLibCheck": true,
+    "types": ["node", "jest"],
     "strictNullChecks": true,
     "forceConsistentCasingInFileNames": true,
     "noImplicitAny": false,
     "strictBindCallApply": false,
     "noFallthroughCasesInSwitch": false
   },
-  "include": ["src/**/*.ts"],
+  "include": ["src/**/*.ts", "test/**/*.ts"],
   "exclude": ["node_modules", "commitlint.config.js", "scripts"]
 }
