@@ -18,5 +18,6 @@
     "strictBindCallApply": false,
     "noFallthroughCasesInSwitch": false
   },
-  "exclude": ["node_modules", "commitlint.config.js"]
+  "include": ["src/**/*.ts"],
+  "exclude": ["node_modules", "commitlint.config.js", "scripts"]
 }
