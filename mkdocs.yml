@@ -10,6 +10,7 @@ nav:
       - Estratégias de Engenharia de Software: estrategia.md
       - Cronograma: cronograma.md
       - Interação entre Equipe e Cliente: equipecliente.md
+  - Requisitos: requisitor.md
   - Entregas:
       - Unidade 1: unidade1.md
   - Nomeclaturas: naming.md
