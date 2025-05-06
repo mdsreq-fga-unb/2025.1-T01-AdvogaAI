@@ -1,0 +1,17 @@
+blank_issues_enabled: false
+issue_templates:
+  - name: Reportar Bug
+    description: Template para relatar um erro encontrado no sistema.
+    file: bug-report-template.yml
+
+  - name: Criar Chore
+    description: Template para atividades técnicas internas que não afetam diretamente o usuário.
+    file: chore-template.yml
+
+  - name: Criar Épico
+    description: Template para agrupar várias user stories sob uma funcionalidade ampla.
+    file: epic-template.yml
+
+  - name: Criar User Story
+    description: Template para descrever uma funcionalidade sob a perspectiva do usuário.
+    file: user-story-template.yml

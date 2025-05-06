@@ -1,0 +1,15 @@
+{
+  "dependencies": {
+    "husky": "^9.1.7"
+  },
+  "scripts": {
+    "prepare": "husky",
+    "lint-server": "cd advogaAI-server && npm run lint",
+    "test-server": "cd advogaAI-server && npm run test",
+    "server-build": "cd advogaAI-server build"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^19.8.0",
+    "@commitlint/config-conventional": "^19.8.0"
+  }
+}

@@ -1,0 +1,52 @@
+name: Criar Épico
+description: Use este template para descrever uma funcionalidade ampla que agrupa várias User Stories.
+title: "EPXXX - [título resumido do épico]"
+labels: ["epic"]
+projects: ["mdsreq-fga-unb/57"]
+body:
+  - type: textarea
+    id: epic-context
+    attributes:
+      label: Descrição do Épico
+      description: Explique o que será resolvido por este épico, o objetivo de negócio e sua importância para o sistema.
+      placeholder: |
+        Exemplo:
+        Este épico cobre todo o fluxo de cadastro, visualização e edição de clientes pelo advogado.
+    validations:
+      required: true
+
+  - type: textarea
+    id: epic-goals
+    attributes:
+      label: Objetivos
+      description: Liste os resultados esperados ao final da entrega deste épico.
+      placeholder: |
+        - Permitir cadastro completo de clientes
+        - Visualizar e editar clientes cadastrados
+        - Garantir validação de dados
+    validations:
+      required: true
+
+  - type: textarea
+    id: epic-user-stories
+    attributes:
+      label: User Stories relacionadas
+      description: Liste as User Stories que fazem parte deste épico. Use markdown para referenciar issues existentes ou planejadas.
+      placeholder: |
+        Para associar User Stories, copie os links ou IDs das issues existentes, ex:
+        - [ ] #23 - US004 - Cadastro de novo cliente
+        - [ ] #24 - US005 - Edição de cliente
+        - [ ] #25 - US006 - Visualização de cliente
+    validations:
+      required: true
+
+  - type: textarea
+    id: additional-notes
+    attributes:
+      label: Observações adicionais
+      description: Anexe links, protótipos ou documentos que possam complementar o entendimento do épico.
+      placeholder: |
+        - Link para Figma
+        - Ata de reunião
+        - Documentação técnica
+

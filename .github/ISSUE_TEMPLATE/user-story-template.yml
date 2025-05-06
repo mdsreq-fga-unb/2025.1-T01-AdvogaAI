@@ -1,0 +1,47 @@
+name: Criar User Story
+description: Template para descrever uma nova funcionalidade sob a perspectiva do usuário.
+title: "USXXX - [título resumido da funcionalidade]"
+labels: ["user-story"]
+projects: ["mdsreq-fga-unb/57"]
+
+body:
+  - type: textarea
+    id: historia-usuario
+    attributes:
+      label: História de usuário
+      description: "Use o formato clássico: Como [persona], quero [ação], para que [valor ou benefício]."
+      placeholder: |
+        Exemplo:
+        Como advogada, quero cadastrar um novo cliente,
+        para que eu possa iniciar um processo com os dados dele corretamente registrados.
+    validations:
+      required: true
+
+  - type: textarea
+    id: criterios-aceitacao
+    attributes:
+      label: Critérios de aceitação
+      description: Liste os critérios que devem ser verdadeiros para que a US seja considerada concluída.
+      placeholder: |
+        - O cliente é salvo com sucesso no banco
+        - Todos os campos obrigatórios são validados
+        - O sistema exibe uma mensagem de confirmação
+    validations:
+      required: true
+
+  - type: textarea
+    id: contexto-tecnico
+    attributes:
+      label: Notas técnicas (opcional)
+      description: "Detalhes técnicos úteis para quem for implementar (ex: integrações, componentes, permissões, regras de negócio)."
+      placeholder: |
+        - Esta funcionalidade precisa validar CPF antes do envio
+        - O botão deve reaproveitar o componente padrão do sistema
+
+  - type: textarea
+    id: vinculo-epico
+    attributes:
+      label: Épico vinculado
+      description: Informe o ID ou link do épico ao qual esta user story pertence.
+      placeholder: |
+        Exemplo: EP001 - Cadastro e gestão de clientes
