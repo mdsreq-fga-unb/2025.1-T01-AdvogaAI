@@ -1,3 +1,3 @@
 export default function Home() {
-  return <div>endpoint /</div>;
+  return <div>endpoint / teste</div>;
 }
