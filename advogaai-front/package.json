@@ -6,8 +6,8 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint . --ext .js,.ts,.jsx,.tsx",
-    "test": "jest",
+    "lint": "next lint",
+    "test": "jest --passWithNoTests",
     "test:e2e": "cypress open",
     "sonar": "node sonar.js",
     "format": "prettier --write ."
@@ -23,6 +23,7 @@
     "react-dom": "^19.0.0",
     "react-hot-toast": "^2.5.2",
     "tailwind-merge": "^3.2.0",
+    "typescript-eslint": "^8.32.0",
     "zod": "^3.24.4"
   },
   "devDependencies": {

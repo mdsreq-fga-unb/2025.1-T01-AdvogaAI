@@ -6,7 +6,10 @@
     "prepare": "husky",
     "lint-server": "cd advogaAI-server && npm run lint",
     "test-server": "cd advogaAI-server && npm run test",
-    "server-build": "cd advogaAI-server build"
+    "lint-front": "cd advogaAI-front && npm run lint",
+    "test-front": "cd advogaAI-front && npm run test",
+    "server-build": "cd advogaAI-server build",
+    "front-build": "cd advogaAI-front build"
   },
   "devDependencies": {
     "@commitlint/cli": "^19.8.0",
