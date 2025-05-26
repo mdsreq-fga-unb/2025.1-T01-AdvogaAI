@@ -1,8 +1,8 @@
-# 1. A Disciplina de Requisitos de Software
+# A Disciplina de Requisitos de Software
 
 Este projeto foi realizado por alunos da Universidade de Brasília durante a disciplina de Requisitos de Software, orientada pelo Professor George Marscicano Corrêa.
 
-A disciplina capacita os estudantes a estabelecerem uma comunicação eficaz entre desenvolvedores e stakeholders, além de proporcionar conhecimento sobre a gerência dos requisitos de um sistema — etapa fundamental para definir claramente o que o software deve realizar. 
+A disciplina capacita os estudantes a estabelecerem uma comunicação eficaz entre desenvolvedores e stakeholders, além de proporcionar conhecimento sobre a gerência dos requisitos de um sistema — etapa fundamental para definir claramente o que o software deve realizar.
 
 Essa fase é essencial, pois muitos problemas em projetos de software surgem por falhas ou lacunas nos requisitos. Assim, o objetivo da disciplina é garantir uma compreensão compartilhada entre todos os envolvidos no projeto, facilitando o alinhamento de expectativas e contribuindo para o desenvolvimento de soluções eficazes.
 
@@ -10,7 +10,7 @@ Durante o curso, são abordadas técnicas de elicitação, modelagem, documenta�
 
 ---
 
-# 2. O Projeto AdvogaAI
+# O Projeto AdvogaAI
 
 O projeto **AdvogaAI** foi desenvolvido com o objetivo de atender às principais dificuldades enfrentadas por escritórios de advocacia unipessoais, como o da advogada Hermínia Oliveira, personagem central do estudo de caso.
 

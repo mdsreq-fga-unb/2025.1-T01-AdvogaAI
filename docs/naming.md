@@ -2,19 +2,18 @@
 
 Este guia define os padrões de nomenclatura para issues, branches, pull requests e commits com o objetivo de manter a consistência, rastreabilidade e clareza no repositório do projeto.
 
-
-## 1. Issues
+## 11.1 Issues
 
 As issues são categorizadas em quatro tipos principais:
 
-| Tipo                        | Prefixo | Exemplo  | Descrição                                                                  |   |
-| --------------------------- | ------- | -------- | -------------------------------------------------------------------------- | - |
-| Épico                       | `EP`    | `EP001`  | Funcionalidades maiores compostas por várias user stories (subissues).     |   |
-| Funcionalidade (User Story) | `US`    | `US001`  | Novas funcionalidades voltadas à experiência ou objetivo do usuário final. |   |
-| Bug                         | `BUG`   | `BUG002` | Correção de defeitos que impedem o comportamento esperado do sistema.      |   |
-| Chore (Tarefa técnica)      | `CH`    | `CH003`  | Tarefas internas como configuração de ambiente, CI/CD ou refatoramentos.   |   |
+| Tipo                        | Prefixo | Exemplo  | Descrição                                                                  |     |
+| --------------------------- | ------- | -------- | -------------------------------------------------------------------------- | --- |
+| Épico                       | `EP`    | `EP001`  | Funcionalidades maiores compostas por várias user stories (subissues).     |     |
+| Funcionalidade (User Story) | `US`    | `US001`  | Novas funcionalidades voltadas à experiência ou objetivo do usuário final. |     |
+| Bug                         | `BUG`   | `BUG002` | Correção de defeitos que impedem o comportamento esperado do sistema.      |     |
+| Chore (Tarefa técnica)      | `CH`    | `CH003`  | Tarefas internas como configuração de ambiente, CI/CD ou refatoramentos.   |     |
 
-### 1.1 User Stories (US)
+### 11.2 User Stories (US)
 
 Devem seguir o padrão:
 
@@ -32,7 +31,7 @@ US004 - Como advogada, quero cadastrar um novo cliente, para que eu possa inicia
 
 As US devem ser pequenas e entregáveis em um único ciclo de desenvolvimento. Caso contrário, devem ser desmembradas ou agrupadas sob um Épico.
 
-### 1.2 Bugs (BUG)
+### 11.3 Bugs (BUG)
 
 **Exemplo:**
 
@@ -40,7 +39,7 @@ As US devem ser pequenas e entregáveis em um único ciclo de desenvolvimento. C
 BUG002 - O campo "prazo processual" não salva a data corretamente
 ```
 
-### 1.3 Chores (CH)
+### 11.4 Chores (CH)
 
 **Exemplo:**
 
@@ -48,7 +47,7 @@ BUG002 - O campo "prazo processual" não salva a data corretamente
 CH003 - Configurar pipeline de deploy automático para ambiente de staging
 ```
 
-### 1.4 Épicos
+### 11.5 Épicos
 
 Épicos agrupam diversas user stories que fazem parte de uma funcionalidade maior.
 
@@ -73,8 +72,7 @@ Cada Épico deve possuir:
 - [ ] US006 - Visualização de clientes cadastrados
 ```
 
-
-## 2. Branches
+## 12.1 Branches
 
 As branches devem seguir a estrutura:
 
@@ -88,8 +86,7 @@ As branches devem seguir a estrutura:
 | `fix`   | Correções de bugs                    | `fix/BUG002-campo-prazo`      |
 | `chore` | Tarefas técnicas                     | `chore/CH003-pipeline-deploy` |
 
-
-## 3. Pull Requests
+## 13.1 Pull Requests
 
 Os títulos de PR devem manter o mesmo prefixo e descrição da issue, respeitando o tipo.
 
@@ -109,7 +106,7 @@ Todo PR deve:
 
 ---
 
-## 4. Commits
+## 14.1 Commits
 
 Utilizamos o padrão [Conventional Commits](https://www.conventionalcommits.org/pt-br/v1.0.0/).
 
@@ -137,12 +134,10 @@ Mais detalhes em: [https://www.conventionalcommits.org/pt-br/v1.0.0/](https://ww
 
 ---
 
-## 5. Boas Práticas
+## 15.1 Boas Práticas
 
 - Utilize rótulos (labels) nas issues: `user-story`, `bug`, `chore`, `epic`
 - Relacione issues com PRs: `Closes #ID`
 - Crie branches com nomes claros e legíveis
 - Commits pequenos, frequentes e significativos
 - Nunca dê merge diretamente nas branches `main`, `dev` e `stg`, sempre abra PR antes
-
-
