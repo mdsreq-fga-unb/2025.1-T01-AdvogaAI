@@ -1,6 +1,14 @@
 
+# Levantamento dos Requisitos
+
+Os **requisitos funcionais e não funcionais** deste sistema foram levantados em conjunto com o cliente por meio das técnicas de **brainstorming** e **entrevistas** com a cliente.
+Essas abordagens permitiram identificar tanto as necessidades explícitas quanto os desejos latentes da usuária principal, proporcionando uma visão abrangente sobre os fluxos de trabalho, problemas enfrentados no dia a dia e oportunidades de melhoria que o sistema pode proporcionar.
+
+---
 
 # Requisitos Funcionais
+
+
 
 | Código | Nome                                                               | Objetivo Específico                                                    |
 |--------|--------------------------------------------------------------------|------------------------------------------------------------------------|
@@ -30,18 +38,25 @@
 | RF24   | Gerar links de pagamento                                           | Automatizar a gestão de pagamentos de honorários                       |
 | RF25   | Efetuar pagamento via gateway                                      | Automatizar a gestão de pagamentos de honorários                       |
 | RF26   | Gerenciar links de pagamento                                       | Automatizar a gestão de pagamentos de honorários                       |
+| RF27   | Cadastrar usuário                   | Agilizar a triagem e o processamento de informações dos clientes                |
+| RF28   | Realizar login                      | Agilizar a triagem e o processamento de informações dos clientes           |
+| RF29   | Recuperar senha                     | Agilizar a triagem e o processamento de informações dos clientes        |
+| RF30   | Confirmar e-mail                    | Agilizar a triagem e o processamento de informações dos clientes                            |
+| RF31   | Editar dados do perfil              | Agilizar a triagem e o processamento de informações dos clientes          |
+| RF32   | Visualizar dados do perfil          | Agilizar a triagem e o processamento de informações dos clientes                     |
+| RF33   | Alterar senha                       | Agilizar a triagem e o processamento de informações dos clientes                           |
+| RF34   | Encerrar sessão (logout)           | Agilizar a triagem e o processamento de informações dos clientes          |
 
 # Requisitos Não Funcionais
 
 | Código | Descrição                                                                                     | Categoria URPS+                            |
 |--------|-----------------------------------------------------------------------------------------------|--------------------------------------------|
-| RNF01  | Garantir segurança e conformidade com a LGPD, incluindo criptografia de dados e controle de acesso. | S – Suportabilidade (segurança e conformidade) |
-| RNF02  | Seguir os padrões WCAG de acessibilidade                                                      | U – Usabilidade                             |
-| RNF03  | Compatibilidade com os principais navegadores e dispositivos (desktop, tablet, smartphone).   | R – Requisitos de Interface                 |
-| RNF04  | Arquitetura modular para facilitar manutenção e atualizações contínuas.                       | P – Suportabilidade (manutenibilidade)      |
-| RNF05  | Chamadas via HTTPS, armazenamento criptografado de credenciais e logging com mascaramento.   | S – Suportabilidade (segurança)             |
-| RNF06  | Módulo de integração PJe com cobertura de testes automatizados ≥ 80%.                         | R – Requisitos de Implementação             |
-| RNF07  | Apresentação de erros da API ao usuário em português, com código e mensagem.                  | U – Usabilidade                             |
-| RNF08  | Permitir configuração de endpoint e credenciais sem necessidade de novo deploy.               | R – Requisitos de Implementação             |
-| RNF09  | Adoção do padrão RESTful em todas as integrações.                                             | R – Requisitos de Implementação             |
-| RNF10  | Histórico de transações e documentos deve permanecer disponível após reinicializações ou falhas. | R – Confiabilidade (Reliability)            |
+| RNF01  | O sistema deve permitir compatibilidade com as seguintes resoluções de tela: 1920×1080, 1366×768, 1536×864, 1280×720, 360×800, 390×844, 393×873, 412×915, 768×1024, 1280×800, 800×1280, 820×1180 | R – Requisitos de Interface 
+| RNF02  | O sistema deve conter uma arquitetura dividida em módulos                   | P – Suportabilidade (manutenibilidade)      |
+| RNF03  | O sistema deve fazer o uso de chamadas HTTPS apenas  | S – Suportabilidade (segurança)             |
+| RNF04  | O sistema deve conter testes automatizados com cobertura maior que 80% para o módulo de integração com o PJe                     | R – Requisitos de Implementação             |
+| RNF05  | O sistema deve adotar o padrão RESTFULL em todas as suas integrações                                        | R – Requisitos de Implementação             |
+| RNF06  | O código do sistema deve conter formatação uniforme estabelecida nos arquivos de formatação                                       | R – Requisitos de Implementação|
+| RNF07  | O código do sistema deve conter formatação uniforme estabelecida nos arquivos de formatação                                       | R – Requisitos de Implementação             |
+
+
