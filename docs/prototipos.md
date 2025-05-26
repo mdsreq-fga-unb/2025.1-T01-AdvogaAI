@@ -2,7 +2,7 @@
 
 Durante os ciclos do processo RAD, a equipe utilizou diferentes níveis de prototipação para validar com agilidade as ideias com a cliente e alinhar o desenvolvimento à realidade dos fluxos jurídicos.
 
-### 9.1 Protótipos de Baixa Fidelidade – Excalidraw
+### 11.1 Protótipos de Baixa Fidelidade – Excalidraw
 
 Os primeiros rascunhos foram elaborados utilizando o [Excalidraw](https://excalidraw.com/#room=216d8755bb7f0c1d95d7,TxhdGe_85oTZfRyOXt8RhQ), ferramenta de desenho livre colaborativo. Esses protótipos de baixa fidelidade serviram como base para:
 
@@ -24,7 +24,7 @@ Os primeiros rascunhos foram elaborados utilizando o [Excalidraw](https://excali
 
 ---
 
-### 9.2 Protótipos de Alta Fidelidade – Figma
+### 11.2 Protótipos de Alta Fidelidade – Figma
 
 Após a validação dos rascunhos iniciais, a equipe produziu protótipos de alta fidelidade utilizando o [Figma](https://www.figma.com/design/53Rk3JnQaVm26pfDAxWb7q/AdvogaAI?node-id=30-1687&t=Zhz60lNH58tb3E3E-1), com base nos componentes reais que serão utilizados na aplicação. Esses protótipos incluem:
 
@@ -46,6 +46,6 @@ Após a validação dos rascunhos iniciais, a equipe produziu protótipos de alt
 
 ---
 
-### 9.3 Observações
+### 11.3 Observações
 
 Todos os protótipos foram construídos e vali

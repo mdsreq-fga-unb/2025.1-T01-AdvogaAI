@@ -2,7 +2,7 @@
 
 Este guia define os padrões de nomenclatura para issues, branches, pull requests e commits com o objetivo de manter a consistência, rastreabilidade e clareza no repositório do projeto.
 
-## 11.1 Issues
+## 13.1 Issues
 
 As issues são categorizadas em quatro tipos principais:
 
@@ -13,7 +13,7 @@ As issues são categorizadas em quatro tipos principais:
 | Bug                         | `BUG`   | `BUG002` | Correção de defeitos que impedem o comportamento esperado do sistema.      |     |
 | Chore (Tarefa técnica)      | `CH`    | `CH003`  | Tarefas internas como configuração de ambiente, CI/CD ou refatoramentos.   |     |
 
-### 11.2 User Stories (US)
+### 13.2 User Stories (US)
 
 Devem seguir o padrão:
 
@@ -31,7 +31,7 @@ US004 - Como advogada, quero cadastrar um novo cliente, para que eu possa inicia
 
 As US devem ser pequenas e entregáveis em um único ciclo de desenvolvimento. Caso contrário, devem ser desmembradas ou agrupadas sob um Épico.
 
-### 11.3 Bugs (BUG)
+### 13.3 Bugs (BUG)
 
 **Exemplo:**
 
@@ -39,7 +39,7 @@ As US devem ser pequenas e entregáveis em um único ciclo de desenvolvimento. C
 BUG002 - O campo "prazo processual" não salva a data corretamente
 ```
 
-### 11.4 Chores (CH)
+### 13.4 Chores (CH)
 
 **Exemplo:**
 
@@ -47,7 +47,7 @@ BUG002 - O campo "prazo processual" não salva a data corretamente
 CH003 - Configurar pipeline de deploy automático para ambiente de staging
 ```
 
-### 11.5 Épicos
+### 13.5 Épicos
 
 Épicos agrupam diversas user stories que fazem parte de uma funcionalidade maior.
 
@@ -72,7 +72,7 @@ Cada Épico deve possuir:
 - [ ] US006 - Visualização de clientes cadastrados
 ```
 
-## 12.1 Branches
+## 14.1 Branches
 
 As branches devem seguir a estrutura:
 
@@ -86,7 +86,7 @@ As branches devem seguir a estrutura:
 | `fix`   | Correções de bugs                    | `fix/BUG002-campo-prazo`      |
 | `chore` | Tarefas técnicas                     | `chore/CH003-pipeline-deploy` |
 
-## 13.1 Pull Requests
+## 15.1 Pull Requests
 
 Os títulos de PR devem manter o mesmo prefixo e descrição da issue, respeitando o tipo.
 
@@ -106,7 +106,7 @@ Todo PR deve:
 
 ---
 
-## 14.1 Commits
+## 16.1 Commits
 
 Utilizamos o padrão [Conventional Commits](https://www.conventionalcommits.org/pt-br/v1.0.0/).
 
@@ -134,7 +134,7 @@ Mais detalhes em: [https://www.conventionalcommits.org/pt-br/v1.0.0/](https://ww
 
 ---
 
-## 15.1 Boas Práticas
+## 17.1 Boas Práticas
 
 - Utilize rótulos (labels) nas issues: `user-story`, `bug`, `chore`, `epic`
 - Relacione issues com PRs: `Closes #ID`

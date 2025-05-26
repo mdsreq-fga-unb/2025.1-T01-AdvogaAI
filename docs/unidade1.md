@@ -1,4 +1,4 @@
-# 10.1 Unidade 1
+# 12.1 Unidade 1
 
 Nesta Unidade, aprendemos sobre a importância de se utilizar o **processo**, o **ciclo de vida** e a **abordagem mais adequada** para cada tipo de projeto. Isso inclui considerar aspectos como o escopo, o tipo de problema, a complexidade das regras de negócio, o nível de experiência e habilidades da equipe, a disponibilidade dos stakeholders, sua familiaridade com tecnologia, e a forma como se relacionam com o time de desenvolvimento.
 
@@ -10,7 +10,7 @@ Como resultado dessa análise, foi escolhida a **abordagem híbrida**, com **cic
 
 ---
 
-## 10.2 Lições aprendidas pelo time
+## 12.2 Lições aprendidas pelo time
 
 Durante a fase inicial do projeto, algumas lições foram destacadas como fundamentais para o avanço nas próximas etapas:
 
@@ -32,7 +32,7 @@ Foi realizado um **mapa de calor** com os horários disponíveis de cada membro 
 
 ---
 
-## 10.3 Vídeo de apresentação da Unidade 1
+## 12.3 Vídeo de apresentação da Unidade 1
 
 <iframe src="https://drive.google.com/file/d/14YZUzCVOY5TE_fGpV7Thl4VsRrPRsDVO/preview" 
 width="640" height="480" allow="autoplay"></iframe>

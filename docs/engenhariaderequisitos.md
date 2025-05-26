@@ -1,26 +1,26 @@
-## 4. Estratégias de Engenharia de Requisitos
+## 5. Estratégias de Engenharia de Requisitos
 
-### 4.1 Atividades e Técnicas de Engenharia de Requisitos
+### 5.1 Atividades e Técnicas de Engenharia de Requisitos
 
-#### 4.1.1 Elicitação e Descoberta
+#### 5.1.1 Elicitação e Descoberta
 
 **Brainstorming:** Utilizada como técnica inicial de geração de ideias e compreensão ampla das necessidades do cliente. Foi aplicada em reuniões abertas com a participação da equipe de desenvolvimento e da cliente, permitindo a coleta de expectativas, dores e desejos em relação ao produto.
 
 **Entrevistas com a Cliente:** Entrevistas semiestruturadas foram conduzidas com a cliente para detalhar fluxos de trabalho, problemas enfrentados e funcionalidades desejadas. As entrevistas orientaram o entendimento do contexto jurídico do produto e forneceram a base para as primeiras User Stories.
 
-### 4.1.2 Análise e Consenso
+### 5.1.2 Análise e Consenso
 
 **Negociação com Stakeholders:** A definição do escopo do MVP foi fruto de negociação direta com a cliente, levando em conta a capacidade da equipe, o valor de negócio e a urgência das funcionalidades.
 
-### 4.1.3 Declaração
+### 5.1.3 Declaração
 
-**User Stories com INVEST:** Os requisitos funcionais foram documentados como User Stories, respeitando o modelo INVEST (Independente, Negociável, Valiosa, Estimável, Sucinta e Testável). 
+**User Stories com INVEST:** Os requisitos funcionais foram documentados como User Stories, respeitando o modelo INVEST (Independente, Negociável, Valiosa, Estimável, Sucinta e Testável).
 
-### 4.1.4 Representação
+### 5.1.4 Representação
 
 **Prototipação de Alta Fidelidade:** Utilizamos componentes prontos e mockups navegáveis para representar a interface e o comportamento esperados. As telas foram validadas em conjunto com a cliente ao longo dos ciclos de RAD.
 
-### 4.1.5 Verificação e Validação
+### 5.1.5 Verificação e Validação
 
 **Feedback Contínuo:** A cada novo protótipo desenvolvido, a cliente foi envolvida em testes exploratórios e revisões para validar o alinhamento com suas expectativas.
 
@@ -28,7 +28,7 @@
 
 **Definition of Ready e Done:** As histórias de usuário passam pelos critérios de DoR antes de entrarem na sprint e são consideradas concluídas apenas quando cumprem o DoD, que inclui testes, revisão de código, integração e documentação.
 
-### 4.1.6 Organização e Atualização
+### 5.1.6 Organização e Atualização
 
 **Backlog de Produto:** Todas as User Stories foram organizadas em um backlog priorizado, com base na técnica de pontuação por valor, urgência, risco, esforço e dependência.
 
@@ -36,7 +36,7 @@
 
 ---
 
-### 4.2 Engenharia de Requisitos e o Processo RAD + ScrumXP
+### 5.2 Engenharia de Requisitos e o Processo RAD + ScrumXP
 
 | Fase                      | Atividade da Engenharia de Requisitos | Prática / Técnica                         | Resultado Esperado                                         |
 | ------------------------- | ------------------------------------- | ----------------------------------------- | ---------------------------------------------------------- |

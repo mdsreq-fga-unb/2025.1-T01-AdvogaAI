@@ -1,6 +1,6 @@
-# 7. DoR e DoD
+# 8. DoR e DoD
 
-## 7.1 Definition of Ready (DoR)
+## 8.1 Definition of Ready (DoR)
 
 A **Definition of Ready (DoR)** estabelece os critérios mínimos que uma **User Story** deve atender para ser considerada pronta para entrar em uma sprint. O objetivo é garantir clareza, viabilidade e alinhamento com o valor de negócio.
 
@@ -30,7 +30,7 @@ A **Definition of Ready (DoR)** estabelece os critérios mínimos que uma **User
 
 ---
 
-## 7.2. Definition of Done (DoD)
+## 8.2. Definition of Done (DoD)
 
 A **Definition of Done (DoD)** define os critérios obrigatórios para considerar uma história completamente finalizada, garantindo qualidade, completude técnica e alinhamento com o que foi acordado.
 

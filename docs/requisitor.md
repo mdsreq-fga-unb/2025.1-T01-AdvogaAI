@@ -1,4 +1,4 @@
-# 6.1 Levantamento dos Requisitos
+# 7.1 Levantamento dos Requisitos
 
 Os **requisitos funcionais e não funcionais** deste sistema foram levantados em conjunto com o cliente por meio das técnicas de **brainstorming** e **entrevistas** com a cliente.
 Essas abordagens permitiram identificar tanto as necessidades explícitas quanto os desejos latentes da usuária principal, proporcionando uma visão abrangente sobre os fluxos de trabalho, problemas enfrentados no dia a dia e oportunidades de melhoria que o sistema pode proporcionar.

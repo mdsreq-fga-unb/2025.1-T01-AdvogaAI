@@ -1,12 +1,12 @@
 | Data       | Versão | Descrição                                            | Autor         |
 | ---------- | ------ | ---------------------------------------------------- | ------------- |
-| 21/04/2025 | 1.1    | Criação da Seção 5: Interação entre Equipe e Cliente | Vitor Valério |
+| 21/04/2026 | 1.1    | Criação da Seção 6: Interação entre Equipe e Cliente | Vitor Valério |
 
-# Interação entre Equipe e Cliente\*\*
+# Interação entre Equipe e Cliente
 
 ---
 
-**5.1 Composição da Equipe**
+**6.1 Composição da Equipe**
 
 | Papel                    | Descrição                                                                                                  | Responsável            | Participantes        |
 | ------------------------ | ---------------------------------------------------------------------------------------------------------- | ---------------------- | -------------------- |
@@ -17,7 +17,7 @@
 
 ---
 
-**5.2 Comunicação**
+**6.2 Comunicação**
 
 **Ferramentas de Comunicação**  
 **WhatsApp**  
@@ -41,7 +41,7 @@ Plataforma para videoconferências de todas as reuniões formais: Revisões de C
 
 ---
 
-**5.3 Processo de Validação**
+**6.3 Processo de Validação**
 
 1. **Definition of Ready (DoR)**
 
