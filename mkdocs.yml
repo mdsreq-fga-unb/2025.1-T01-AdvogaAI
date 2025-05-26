@@ -14,6 +14,8 @@ nav:
   - Requisitos: requisitor.md
   - DoR e DoD: dordod.md
   - Backlog: backlog.md
+  - Atas:
+      - RAD: reunioesrad.md
   - Entregas:
       - Unidade 1: unidade1.md
   - Nomeclaturas: naming.md
