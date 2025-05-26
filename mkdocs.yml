@@ -16,6 +16,7 @@ nav:
   - Backlog: backlog.md
   - Atas:
       - RAD: reunioesrad.md
+  - Protótipos: prototipos.md
   - Entregas:
       - Unidade 1: unidade1.md
   - Nomeclaturas: naming.md
