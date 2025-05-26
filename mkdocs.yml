@@ -9,6 +9,7 @@ nav:
       - Solução Proposta: solucao.md
       - Estratégias de Engenharia de Software: estrategia.md
       - Cronograma: cronograma.md
+      - Atividades de engenharia de requisitos: engenhariaderequisitos.md
       - Interação entre Equipe e Cliente: equipecliente.md
   - Requisitos: requisitor.md
   - DoR e DoD: dordod.md
