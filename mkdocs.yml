@@ -12,6 +12,7 @@ nav:
       - Interação entre Equipe e Cliente: equipecliente.md
   - Requisitos: requisitor.md
   - DoR e DoD: dordod.md
+  - Backlog: backlog.md
   - Entregas:
       - Unidade 1: unidade1.md
   - Nomeclaturas: naming.md
