@@ -14,7 +14,7 @@
 
 ### 5.1.3 Declaração
 
-**User Stories com INVEST:** Os requisitos funcionais foram documentados como User Stories, respeitando o modelo INVEST (Independente, Negociável, Valiosa, Estimável, Sucinta e Testável). Essas User Stories foram agrupadas em épicos para facilitar a organização e o planejamento iterativo.
+**User Stories com INVEST:** Os requisitos funcionais foram documentados como User Stories, respeitando o modelo INVEST (Independente, Negociável, Valiosa, Estimável, Sucinta e Testável). 
 
 ### 5.1.4 Representação
 
