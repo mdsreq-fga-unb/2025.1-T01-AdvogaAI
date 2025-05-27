@@ -4,8 +4,8 @@ theme:
   name: material
 nav:
   - Início: inicio.md
-  - Visão de Produto e Projeto: 
-      -  Cenário Atual do Cliente e do Negócio: produto.md
+  - Visão de Produto e Projeto:
+      - Cenário Atual do Cliente e do Negócio: produto.md
       - Solução Proposta: solucao.md
       - Estratégias de Engenharia de Software: estrategia.md
       - Cronograma: cronograma.md
@@ -19,4 +19,5 @@ nav:
   - Protótipos: prototipos.md
   - Entregas:
       - Unidade 1: unidade1.md
+      - Unidade 2: unidade2.md
   - Nomeclaturas: naming.md
