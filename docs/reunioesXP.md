@@ -1,5 +1,5 @@
-# Extreme Programing
-# 10.2 Atas de Reunião – Ciclos XP (Maio 2025)
+## Extreme Programing
+### 10.2 Atas de Reunião – Ciclos XP (Maio 2025)
 
 # 🗓️ 27/05/2025 (Terça-feira) – Reunião de Acompanhamento Interno
 
