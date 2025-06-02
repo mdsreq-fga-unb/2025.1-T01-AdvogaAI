@@ -1,4 +1,4 @@
-name: Pull-to-EC2
+name: Pull-to-server
 
 on:
   push:
