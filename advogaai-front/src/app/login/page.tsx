@@ -48,6 +48,7 @@ export default function Login() {
     try {
       setIsLoadingLogin(true);
       const response = await loginAuth(data.email.toLowerCase(), data.password);
+      console.log(response);
       if (response && response.statusCode === 200) {
         nookies.set(null, 'authToken', response.token, {
           path: '/',
@@ -69,15 +70,15 @@ export default function Login() {
   }
 
   return (
-    <div className="grid grid-cols-2 h-screen">
-      <div className="bg-blue-charcoal-950 flex justify-center items-center">
+    <div className="grid md:flex h-screen">
+      <div className="bg-blue-charcoal-950 flex w-full justify-center items-center">
         <Form {...form}>
           <form
             onSubmit={(e) => {
               e.preventDefault();
               void form.handleSubmit(onSubmit)(e);
             }}
-            className="w-1/3 space-y-6 text-white flex flex-col"
+            className="w-2/3 space-y-6 text-white flex flex-col"
           >
             <div className="flex flex-col gap-6">
               <FormField
@@ -144,7 +145,7 @@ export default function Login() {
         </Form>
       </div>
 
-      <div className="bg-blue-50 justify-center items-center flex flex-col gap-14">
+      <div className="bg-blue-50 justify-center w-full items-center flex flex-col gap-14">
         <p className="text-alabaster-600 text-2xl text-center font-satoshi font-extrabold">
           Registre-se para gerenciar seu escritório de <br /> advocacia com
           muito mais velocidade

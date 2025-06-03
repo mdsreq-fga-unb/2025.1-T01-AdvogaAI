@@ -22,7 +22,7 @@ export class UsersController {
     return await this.UserService.loginUser(user);
   }
   @Post('validate-token')
-  async validateToken(@Body() token: string) {
-    return await this.JwtService.verifyToken(token);
+  async validateToken(@Body() token: { token: string }) {
+    return await this.JwtService.verifyToken(token.token);
   }
 }

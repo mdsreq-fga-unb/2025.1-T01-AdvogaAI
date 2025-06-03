@@ -53,7 +53,6 @@ export class JwtService {
               role: true,
             },
           });
-
           if (!foundUser?.isActive) {
             return { message: 'Invalid or expired token', statusCode: 401 };
           }

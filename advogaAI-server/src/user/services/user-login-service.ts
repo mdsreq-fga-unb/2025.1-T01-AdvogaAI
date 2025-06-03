@@ -31,7 +31,6 @@ export class UserLoginService {
     if (!isPasswordValid) {
       throw new UnauthorizedException('E-mail ou senha incorretos');
     }
-
     const token = this.jwtService.signToken({
       userId: user.id,
       name: user.name,
