@@ -2,8 +2,9 @@ import { Module } from '@nestjs/common';
 import { JwtModule as NestJwtModule, JwtModuleOptions } from '@nestjs/jwt';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { readFileSync } from 'fs';
-import { join } from 'path';
-import { JwtWrapperService } from './jwt.service';
+import { JwtService } from './jwt.service';
+import { getKeyPath } from 'src/utils/getPathKey';
+import { PrismaService } from 'prisma/prisma.service';
 
 @Module({
   imports: [
@@ -12,25 +13,21 @@ import { JwtWrapperService } from './jwt.service';
       imports: [ConfigModule],
       inject: [ConfigService],
       useFactory: (configService: ConfigService): JwtModuleOptions => {
-        const privateKeyPath =
-          configService.get<string>('JWT_PRIVATE_KEY_PATH') ||
-          join(__dirname, '../../../src/common/keys/private.key');
-        const publicKeyPath =
-          configService.get<string>('JWT_PUBLIC_KEY_PATH') ||
-          join(__dirname, '../../../src/common/keys/public.key');
+        const privateKeyPath = getKeyPath('private.key');
+        const publicKeyPath = getKeyPath('public.key');
 
         return {
           privateKey: readFileSync(privateKeyPath, 'utf8'),
           publicKey: readFileSync(publicKeyPath, 'utf8'),
           signOptions: {
             algorithm: 'RS256',
-            expiresIn: configService.get<string>('JWT_EXPIRES_IN') || '4h',
+            expiresIn: configService.get<string>('JWT_EXPIRES_IN') ?? '4h',
           },
         };
       },
     }),
   ],
-  providers: [JwtWrapperService],
-  exports: [JwtWrapperService, NestJwtModule],
+  providers: [JwtService, PrismaService],
+  exports: [JwtService, NestJwtModule],
 })
 export class JwtModule {}
