@@ -1,0 +1,4 @@
+echo 'Checking commit message...'
+
+npx --no -- commitlint --edit $1 || (echo 'Invalid commit message format. Please follow the conventional commit format.' && exit 1)
+echo 'Commit message is valid. Proceeding with commit...'
