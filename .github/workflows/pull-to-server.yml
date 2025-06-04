@@ -1,4 +1,4 @@
-name: Pull-to-EC2
+name: Pull-to-server
 
 on:
   push:
@@ -14,13 +14,10 @@ jobs:
         include:
           - name: dev
             branch: dev
-            # Para cada ambiente, você pode apontar para pastas diferentes, se quiser:
-            target_dir_server: ${{ secrets.TARGET_DIR_SERVER_DEV }}
-            target_dir_front: ${{ secrets.TARGET_DIR_FRONT_DEV }}
+            base_path: "advogaai/advogaai_dev"
           - name: main
             branch: main
-            target_dir_server: ${{ secrets.TARGET_DIR_SERVER }}
-            target_dir_front: ${{ secrets.TARGET_DIR_FRONT }}
+            base_path: "advogaai/advogaai_prod"
 
     steps:
       - name: Checkout do código
@@ -35,43 +32,21 @@ jobs:
           username: ${{ secrets.USER }}
           password: ${{ secrets.PASSWORD }}
           port: 22
-          source: "advogaAI-server/"
-          target: "${{ matrix.target_dir_server }}"
-          rm: true
-          recursive: true
-
-      - name: Copiar advogaai-front para o server
-        if: ${{ github.ref == format('refs/heads/{0}', matrix.branch) }}
-        uses: appleboy/scp-action@v0.1.7
-        with:
-          host: ${{ secrets.HOST }}
-          username: ${{ secrets.USER }}
-          password: ${{ secrets.PASSWORD }}
-          port: 22
-          source: "advogaai-front/"
-          target: "${{ matrix.target_dir_front }}"
-          rm: true
-          recursive: true
+          # AQUI: source aponta para a pasta interna "advogaAI-server/advogaAI-server"
+          source: "advogaAI-server/."
+          target: "/home/${{ secrets.USER }}/${{ matrix.base_path }}"
 
       - name: Executar comandos remotos no server (build/seed etc.)
         if: ${{ github.ref == format('refs/heads/{0}', matrix.branch) }}
         run: |
           sshpass -p "${{ secrets.PASSWORD }}" ssh -o StrictHostKeyChecking=no ${{ secrets.USER }}@${{ secrets.HOST }} << 'EOF'
-            echo "=== BACKEND (advogaAI-server) ==="
-            cd "${{ matrix.target_dir_server }}"
-            # Ajuste conforme seu back-end: instalar dependências, migrar banco, seed etc.
+            echo "=== BACKEND (advogaAI-server) [${{ matrix.name }}] ==="
+            cd "/home/${{ secrets.USER }}/${{ matrix.base_path }}/advogaAI-server"
             npm install
             npx prisma migrate deploy
             npx prisma generate
             npm run gen:keys
             npm run build
-
-            echo "=== FRONTEND (advogaai-front) ==="
-            cd "${{ matrix.target_dir_front }}"
-            # Ajuste conforme seu front-end: instalar e gerar build
-            npm install
-            npm run build
-
             echo "Deploy concluído em $(date)"
           EOF
         shell: bash
