@@ -48,5 +48,8 @@ jobs:
             npm run gen:keys
             npm run build
             echo "Deploy concluído em $(date)"
+            # Reiniciar o PM2
+            sudo pm2 restart all  # ou pm2 restart advogaai-server-dev (caso tenha um nome específico)
+            echo "PM2 reiniciado."
           EOF
         shell: bash
