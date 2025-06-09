@@ -10,16 +10,16 @@ Essas abordagens permitiram identificar tanto as necessidades explícitas quanto
 | Código | Nome                                       | Objetivo Específico                                                                 |
 |--------|--------------------------------------------|--------------------------------------------------------------------------------------|
 | RF01   | Preencher documentos jurídicos             | Reduzir tempo para elaboração dos documentos iniciais, procurações e contratos      |
-| RF02   | Criar modelos de documentos                | Reduzir tempo para elaboração dos documentos iniciais, procurações e contratos      |
-| RF03   | Editar modelos de documentos               | Reduzir tempo para elaboração dos documentos iniciais, procurações e contratos      |
-| RF04   | Deletar modelos de documentos              | Reduzir tempo para elaboração dos documentos iniciais, procurações e contratos      |
-| RF05   | Listar modelos de documentos               | Reduzir tempo para elaboração dos documentos iniciais, procurações e contratos      |
-| RF06   | Cadastrar clientes                         | Agilizar a triagem e o processamento de informações dos clientes (nome, cpf, email, estado civil) |
+| RF02   | Criar modelos de documentos jurídicos              | Reduzir tempo para elaboração dos documentos iniciais, procurações e contratos      |
+| RF03   | Editar modelos de documentos jurídicos              | Reduzir tempo para elaboração dos documentos iniciais, procurações e contratos      |
+| RF04   | Deletar modelos de documentos jurídicos             | Reduzir tempo para elaboração dos documentos iniciais, procurações e contratos      |
+| RF05   | Listar modelos de documentos jurídicos              | Reduzir tempo para elaboração dos documentos iniciais, procurações e contratos      |
+| RF06   | Cadastrar clientes                         | Agilizar a triagem e o processamento de informações dos clientes |
 | RF07   | Atualizar dados de clientes                | Agilizar a triagem e o processamento de informações dos clientes                     |
 | RF08   | Excluir registros de clientes              | Agilizar a triagem e o processamento de informações dos clientes                     |
 | RF09   | Listar clientes                            | Agilizar a triagem e o processamento de informações dos clientes                     |
 | RF10   | Gerar arquivo PDF do documento jurídico    | Reduzir tempo para elaboração dos documentos iniciais, procurações e contratos      |
-| RF11   | Listar documentos gerados                  | Reduzir tempo para elaboração dos documentos iniciais, procurações e contratos      |
+| RF11   | Listar documentos jurídicos gerados                  | Reduzir tempo para elaboração dos documentos iniciais, procurações e contratos      |
 | RF12   | Vincular OAB à conta do advogado           | Evitar atrasos nos prazos processuais                                                 |
 | RF13   | Listar documentos vinculados a processo    | Evitar atrasos nos prazos processuais                                                 |
 | RF14   | Notificar movimentações de processos       | Evitar atrasos nos prazos processuais                                                 |
