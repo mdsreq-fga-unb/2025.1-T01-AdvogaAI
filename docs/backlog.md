@@ -4,16 +4,18 @@
 Este projeto adota uma abordagem híbrida que combina o uso do **RAD (Rapid Application Development)** na fase de levantamento e prototipação com práticas do **ScrumXP** na fase de construção. 
 
 Durante o RAD:
+
 - Utilizamos **brainstorming** e **entrevistas com a cliente** para levantar requisitos;
 - Construimos em conjunto com a cliente as user stories;
 - Construímos protótipos para validar os fluxos e funcionalidades;
 - Refinamos as ideias com feedback rápido da usuária principal.
 
 Durante o desenvolvimento com ScrumXP:
+
 - Vamos refinar as US já desenvolvidas, fazer estimativas com Poker Planning e definir os critérios de aceitação, para que estejam de acordo com o DoR;
 - Vamos desenvolver cada item do backlog utilizando estratégias de pair programming, code review e construção de testes automatizados;
 - Vamos testar e validar o desenvolvimento com a cliente, seguindo o DoD;
-- 
+  
 ## 9.2. Priorização do Backlog
 
 ### 9.2.1 Critérios Avaliados
@@ -47,15 +49,15 @@ Foi acordado com a cliente que o módulo de Gestão Financeira não será inclu�
 | US02 | Criar modelos de documentos               | Sim    | Como advogado, quero criar modelos de documentos, para agilizar a produção de documentos recorrentes.         | 5     | 4        | 2     | 2       | 4           | 18         |
 | US03 | Editar modelos de documentos              | Sim    | Como advogado, quero editar modelos de documentos, para mantê-los atualizados conforme as necessidades.       | 5     | 4        | 2     | 2       | 4           | 18         |
 | US04 | Deletar modelos de documentos             | Sim    | Como advogado, quero excluir modelos de documentos, para manter minha base de modelos organizada.             | 5     | 4        | 2     | 2       | 4           | 18         |
-| US05 | Listar modelos de documentos              | Sim    | Como advogado, quero listar os modelos de documentos disponíveis, para selecionar o mais adequado.            | 5     | 4        | 2     | 2       | 4           | 18         |
+| US05 | Visualizar modelos de documentos              | Sim    | Como advogado, quero visualizar os modelos de documentos disponíveis, para selecionar o mais adequado.            | 5     | 4        | 2     | 2       | 4           | 18         |
 | US06 | Cadastrar clientes                        | Sim    | Como advogado, quero cadastrar meus clientes no sistema, para agilizar o atendimento e organização.          | 5     | 5        | 1     | 2       | 5           | 19         |
 | US07 | Atualizar dados de clientes               | Sim    | Como advogado, quero atualizar os dados dos meus clientes, para manter as informações sempre corretas.        | 4     | 4        | 2     | 2       | 4           | 16         |
 | US08 | Excluir registros de clientes             | Sim    | Como advogado, quero excluir registros de clientes, para remover dados obsoletos do sistema.                 | 3     | 3        | 2     | 2       | 3           | 12         |
-| US09 | Listar clientes                           | Sim    | Como advogado, quero listar todos os clientes cadastrados, para facilitar a visualização e busca.             | 4     | 3        | 1     | 1       | 3           | 14         |
+| US09 | Visualizar clientes                           | Sim    | Como advogado, quero visualizar todos os clientes cadastrados, para facilitar a visualização e busca.             | 4     | 3        | 1     | 1       | 3           | 14         |
 | US10 | Gerar PDF de documentos                   | Sim    | Como advogado, quero exportar os documentos preenchidos em PDF, para compartilhamento e arquivamento.         | 4     | 3        | 1     | 2       | 3           | 13         |
-| US11 | Listar documentos gerados                 | Não    | Como advogado, quero visualizar a lista de documentos gerados, para localizar e gerenciar meus arquivos.      | 4     | 3        | 1     | 2       | 3           | 13         |
+| US11 | Visualizar documentos gerados                 | Não    | Como advogado, quero visualizar a lista de documentos gerados, para localizar e gerenciar meus arquivos.      | 4     | 3        | 1     | 2       | 3           | 13         |
 | US12 | Vincular OAB à conta                      | Sim    | Como advogado, quero vincular meu número da OAB à conta, para integrar processos e evitar atrasos.             | 5     | 5        | 2     | 3       | 5           | 19         |
-| US13 | Listar documentos vinculados ao processo  | Não    | Como advogado, quero listar os documentos de um processo, para acompanhar os anexos de forma eficiente.        | 4     | 3        | 2     | 2       | 3           | 14         |
+| US13 | Visualizar documentos vinculados ao processo  | Não    | Como advogado, quero visualizar os documentos de um processo, para acompanhar os anexos de forma eficiente.        | 4     | 3        | 2     | 2       | 3           | 14         |
 | US14 | Notificar movimentações de processos      | Sim    | Como advogado, quero ser notificado sobre movimentações processuais, para não perder prazos importantes.       | 5     | 5        | 3     | 3       | 5           | 20         |
 | US15 | Registrar honorários contratuais          | Não    | Como advogado, quero registrar os honorários contratuais, para facilitar o controle financeiro do processo.   | 4     | 3        | 3     | 3       | 3           | 17         |
 | US16 | Registrar honorários de êxito             | Não    | Como advogado, quero registrar honorários de êxito, para automatizar o cálculo de recebíveis por resultado.  | 4     | 3        | 3     | 3       | 3           | 17         |
