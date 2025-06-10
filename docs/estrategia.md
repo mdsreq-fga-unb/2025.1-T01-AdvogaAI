@@ -108,7 +108,7 @@ Com base na aplicação do **Framework de Gupta (2008)** ao projeto **AdvogaAI**
 
 A combinação dos processos **RAD (Rapid Application Development)** e **ScrumXP** foi adotada para o projeto pelas seguintes razões:
 
-- **RAD**: No início do projeto, utilizamos protótipos rápidos para validar ideias com a cliente, que não possui experiência em programação. Isso facilita o entendimento e o feedback rápido.
+- **RAD**: No início do projeto, utilizamos protótipos rápidos para validar ideias com a cliente, assim focando no usuário final e suas necessidades com uma entrega rapida.
 - **ScrumXP**: Após a validação inicial, o processo **ScrumXP** é utilizado para garantir flexibilidade, entregas contínuas e qualidade técnica, permitindo que a equipe evolua o projeto de forma eficiente, com foco em melhorias constantes e adaptadas às necessidades do cliente.
 
 Com a combinação desses dois processos, iniciando com **RAD** para protótipos rápidos e seguindo com **ScrumXP** para desenvolvimento ágil e contínuo, o **ciclo de vida adaptativo** se torna a escolha mais adequada para o **AdvogaAI**, garantindo eficiência, flexibilidade e qualidade ao longo de todo o projeto.

@@ -28,6 +28,9 @@ A **Definition of Ready (DoR)** estabelece os critérios mínimos que uma **User
 - O entendimento sobre o que deve ser entregue é claro e compartilhado pela equipe.  
   _→ Técnica: Refinamento com validação do entendimento por todos os membros_
 
+- Garantir alinhamento de expectativas com a cliente.
+  _→ Protótipação: Validação com a cliente sobre o protótipo de cada user story_
+
 ---
 
 ## 8.2. Definition of Done (DoD)

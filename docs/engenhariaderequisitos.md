@@ -14,7 +14,7 @@
 
 ### 5.1.3 Declaração
 
-**User Stories com INVEST:** Os requisitos funcionais foram documentados como User Stories, respeitando o modelo INVEST (Independente, Negociável, Valiosa, Estimável, Sucinta e Testável).
+**User Stories:** Os requisitos funcionais foram documentados como User Stories, respeitando o modelo INVEST (Independente, Negociável, Valiosa, Estimável, Sucinta e Testável).
 
 ### 5.1.4 Representação
 
@@ -27,6 +27,8 @@
 **Critérios de Aceitação:** Cada User Story possui critérios de aceitação definidos em conjunto com a cliente, garantindo clareza quanto à finalização e validação da funcionalidade.
 
 **Definition of Ready e Done:** As histórias de usuário passam pelos critérios de DoR antes de entrarem na sprint e são consideradas concluídas apenas quando cumprem o DoD, que inclui testes, revisão de código, integração e documentação.
+
+**INVEST:** As histórias de usuário passam pelos critérios do INVEST para garantir qualidade, sendo os critérios: independente, negociavel, valiosa, estimável, pequena, testável.
 
 ### 5.1.6 Organização e Atualização
 
