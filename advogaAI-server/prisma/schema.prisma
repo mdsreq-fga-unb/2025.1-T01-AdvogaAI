@@ -21,3 +21,40 @@ model User {
 
   @@map("users")
 }
+
+enum EstadoCivil {
+  SOLTEIRO
+  CASADO
+  DIVORCIADO
+  VIUVO
+  UNIAO_ESTAVEL
+}
+
+model Cliente {
+  id           String      @id @default(uuid())
+  nomeCompleto String
+  documento    String      @unique @db.VarChar(14)
+  email        String      @unique
+  telefone     String
+  estadoCivil  EstadoCivil
+  enderecos    Endereco[]
+  createdAt    DateTime    @default(now())
+  updatedAt    DateTime    @updatedAt
+
+  @@map("clientes")
+}
+
+model Endereco {
+  id          String   @id @default(uuid())
+  logradouro  String  
+  numero      String 
+  complemento String?
+  bairro      String
+  cidade      String
+  estado      String   @db.Char(2) 
+  cep         String   @db.VarChar(8)
+  clienteId   String
+  cliente     Cliente  @relation(fields: [clienteId], references: [id], onDelete: Cascade)
+
+  @@map("enderecos")
+}
