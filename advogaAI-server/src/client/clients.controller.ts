@@ -1,5 +1,21 @@
-import { Body, Controller, Post, HttpCode, HttpStatus } from '@nestjs/common';
-import { ApiTags, ApiOperation, ApiResponse, ApiBody } from '@nestjs/swagger';
+import {
+  Body,
+  Get,
+  Controller,
+  Post,
+  HttpCode,
+  HttpStatus,
+  Query,
+  DefaultValuePipe,
+  ParseIntPipe,
+} from '@nestjs/common';
+import {
+  ApiTags,
+  ApiQuery,
+  ApiOperation,
+  ApiResponse,
+  ApiBody,
+} from '@nestjs/swagger';
 import { PessoaFisicaService } from './services/pessoa-fisica.service';
 import { RegisterClientDto } from './dto/register-client.dto';
 import { RegisterJuridicalClientDto } from './dto/register-juridical-client.dto';
@@ -55,5 +71,42 @@ export class ClientsController {
     @Body() registerJuridicalClientDto: RegisterJuridicalClientDto,
   ) {
     return this.pessoaJuridicaService.create(registerJuridicalClientDto);
+  }
+
+  @Get('pessoa-fisica')
+  @HttpCode(HttpStatus.OK)
+  @ApiOperation({
+    summary: 'Listar clientes (Pessoa Física) com paginação e busca',
+  })
+  @ApiQuery({
+    name: 'page',
+    required: false,
+    description: 'Número da página',
+    type: Number,
+    example: 1,
+  })
+  @ApiQuery({
+    name: 'pageSize',
+    required: false,
+    description: 'Itens por página',
+    type: Number,
+    example: 10,
+  })
+  @ApiQuery({
+    name: 'search',
+    required: false,
+    description: 'Termo de busca (nome, CPF, telefone)',
+    type: String,
+  })
+  @ApiResponse({
+    status: 200,
+    description: 'Lista de clientes (pessoa física) retornada com sucesso.',
+  })
+  findAllPessoasFisicas(
+    @Query('page', new DefaultValuePipe(1), ParseIntPipe) page: number,
+    @Query('pageSize', new DefaultValuePipe(10), ParseIntPipe) pageSize: number,
+    @Query('search') search?: string,
+  ) {
+    return this.pessoaFisicaService.findAll(page, pageSize, search);
   }
 }

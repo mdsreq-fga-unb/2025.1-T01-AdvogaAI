@@ -8,6 +8,15 @@ import { PessoaFisicaRepository } from '../repositories/pessoa-fisica.repository
 import { RegisterClientDto } from '../dto/register-client.dto';
 import { PessoaFisica } from '@prisma/client';
 
+// Define PaginatedResult generic type if not already defined elsewhere
+export interface PaginatedResult<T> {
+  data: T[];
+  page: number;
+  pageSize: number;
+  total: number;
+  totalPages: number;
+}
+
 @Injectable()
 export class PessoaFisicaService {
   private readonly logger = new Logger(PessoaFisicaService.name);
@@ -55,6 +64,38 @@ export class PessoaFisicaService {
       );
       throw new InternalServerErrorException(
         'Não foi possível criar o cliente. Por favor, tente novamente mais tarde.',
+      );
+    }
+  }
+
+  async findAll(
+    page: number,
+    pageSize: number,
+    search?: string,
+  ): Promise<PaginatedResult<PessoaFisica>> {
+    try {
+      this.logger.log(
+        `Buscando clientes. Página: ${page}, Itens por Página: ${pageSize}, Busca: "${search}"`,
+      );
+      const { data, total } = await this.pessoaFisicaRepository.findAll(
+        page,
+        pageSize,
+        search,
+      );
+
+      return {
+        data,
+        page,
+        pageSize,
+        total,
+        totalPages: Math.ceil(total / pageSize),
+      };
+    } catch {
+      this.logger.error(
+        `Falha ao buscar clientes. Query: ${JSON.stringify({ page, pageSize, search })}`,
+      );
+      throw new InternalServerErrorException(
+        'Não foi possível buscar os clientes. Tente novamente mais tarde.',
       );
     }
   }

@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { PessoaFisica } from '@prisma/client';
+import { PessoaFisica, Prisma } from '@prisma/client';
 import { PrismaService } from 'prisma/prisma.service';
 import { CreatePessoaFisicaDto } from '../dto/create-pessoa-fisica.dto';
 
@@ -64,5 +64,40 @@ export class PessoaFisicaRepository {
       where: { userId },
       include: { endereco: true },
     });
+  }
+
+  async findAll(
+    page: number,
+    pageSize: number,
+    search?: string,
+  ): Promise<{ data: PessoaFisica[]; total: number }> {
+    const skip = (page - 1) * pageSize;
+    const take = pageSize;
+
+    const where: Prisma.PessoaFisicaWhereInput = search
+      ? {
+          OR: [
+            { nomeCompleto: { contains: search, mode: 'insensitive' } },
+            { cpf: { contains: search } },
+            { telefone: { contains: search } },
+          ],
+        }
+      : {};
+
+    const [data, total] = await this.prisma.$transaction([
+      this.prisma.pessoaFisica.findMany({
+        where,
+        skip,
+        take,
+        include: {
+          endereco: true,
+          user: true,
+          empresasRepresentadas: true,
+        },
+      }),
+      this.prisma.pessoaFisica.count({ where }),
+    ]);
+
+    return { data, total };
   }
 }
