@@ -28,12 +28,9 @@ export class PessoaJuridicaService {
    */
   async create(
     registerDto: RegisterJuridicalClientDto,
+    userId: string,
   ): Promise<PessoaJuridica> {
-    const {
-      userId,
-      pessoaJuridica: pjDto,
-      representanteLegal: pfDto,
-    } = registerDto;
+    const { pessoaJuridica: pjDto, representanteLegal: pfDto } = registerDto;
 
     try {
       // 1. Check if a company with this CNPJ already exists

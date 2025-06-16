@@ -33,8 +33,11 @@ export class PessoaFisicaService {
    * @throws {ConflictException} If a client with the same CPF already exists.
    * @throws {InternalServerErrorException} For any other unexpected errors.
    */
-  async create(registerClientDto: RegisterClientDto): Promise<PessoaFisica> {
-    const { userId, pessoaFisica: pessoaFisicaDto } = registerClientDto;
+  async create(
+    registerClientDto: RegisterClientDto,
+    userId: string,
+  ): Promise<PessoaFisica> {
+    const { pessoaFisica: pessoaFisicaDto } = registerClientDto;
 
     try {
       // 1. Check if a client with this CPF already exists

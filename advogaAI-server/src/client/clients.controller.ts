@@ -8,6 +8,7 @@ import {
   Query,
   DefaultValuePipe,
   ParseIntPipe,
+  UseGuards,
 } from '@nestjs/common';
 import {
   ApiTags,
@@ -20,6 +21,8 @@ import { PessoaFisicaService } from './services/pessoa-fisica.service';
 import { RegisterClientDto } from './dto/register-client.dto';
 import { RegisterJuridicalClientDto } from './dto/register-juridical-client.dto';
 import { PessoaJuridicaService } from './services/pessoa-juridica.service';
+import { JwtAuthGuard } from 'src/shared/jwt/jwt-auth.guard';
+import { UserId } from 'src/shared/decorators/user-id.decorator';
 
 @ApiTags('Clients')
 @Controller('clients')
@@ -29,6 +32,7 @@ export class ClientsController {
     private readonly pessoaJuridicaService: PessoaJuridicaService,
   ) {}
 
+  @UseGuards(JwtAuthGuard)
   @Post('pessoa-fisica')
   @HttpCode(HttpStatus.CREATED)
   @ApiOperation({ summary: 'Registrar um novo cliente (Pessoa Física)' })
@@ -45,10 +49,14 @@ export class ClientsController {
     status: 400,
     description: 'Requisição inválida. Verifique os dados enviados.',
   })
-  createPessoaFisica(@Body() registerClientDto: RegisterClientDto) {
-    return this.pessoaFisicaService.create(registerClientDto);
+  createPessoaFisica(
+    @Body() registerClientDto: RegisterClientDto,
+    @UserId() userId: string,
+  ) {
+    return this.pessoaFisicaService.create(registerClientDto, userId);
   }
 
+  @UseGuards(JwtAuthGuard)
   @Post('pessoa-juridica')
   @HttpCode(HttpStatus.CREATED)
   @ApiOperation({
@@ -69,10 +77,15 @@ export class ClientsController {
   })
   createPessoaJuridica(
     @Body() registerJuridicalClientDto: RegisterJuridicalClientDto,
+    @UserId() userId: string,
   ) {
-    return this.pessoaJuridicaService.create(registerJuridicalClientDto);
+    return this.pessoaJuridicaService.create(
+      registerJuridicalClientDto,
+      userId,
+    );
   }
 
+  @UseGuards(JwtAuthGuard)
   @Get('pessoa-fisica')
   @HttpCode(HttpStatus.OK)
   @ApiOperation({
