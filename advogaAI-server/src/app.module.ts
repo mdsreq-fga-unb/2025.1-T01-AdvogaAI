@@ -9,11 +9,13 @@ import { PrismaService } from 'prisma/prisma.service';
 import { UserLoginService } from './user/services/user-login-service';
 import { ClientsController } from './client/clients.controller';
 import { ClientsService } from './client/clients.service';
+import { ClientsRepository } from './client/repositories/clients.repository';
 
 @Module({
   imports: [JwtModule],
   controllers: [AppController, UsersController, ClientsController],
   providers: [
+    ClientsRepository,
     AppService,
     UsersService,
     UserCreationService,

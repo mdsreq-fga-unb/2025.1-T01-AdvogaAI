@@ -66,7 +66,13 @@ export class JwtService {
   }
 
   //Method to decode token
-  decodeToken(token: string): any {
+  decodeToken(token: string): {
+    userId: string;
+    name: string;
+    email: string;
+    role: string;
+    isActive: boolean;
+  } {
     return this.jwtService.decode(token);
   }
 }
