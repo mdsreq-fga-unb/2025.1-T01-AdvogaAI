@@ -8,7 +8,7 @@ export enum EstadoCivil {
   UNIAO_ESTAVEL = 'UNIAO_ESTAVEL',
 }
 
-export interface UpdatePessoaFisicaType {
+export interface PessoaFisicaType {
   nomeCompleto?: string;
   cpf?: string;
   rg?: string;
@@ -29,7 +29,7 @@ export interface UpdatePessoaFisicaResponseType {
 }
 
 export async function updatePessoaFisica(
-  payload: UpdatePessoaFisicaType,
+  payload: PessoaFisicaType,
 ): Promise<UpdatePessoaFisicaResponseType> {
   try {
     const cookies = nookies.get();

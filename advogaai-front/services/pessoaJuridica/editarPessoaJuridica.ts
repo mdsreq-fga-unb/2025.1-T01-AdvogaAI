@@ -1,6 +1,6 @@
 import nookies from 'nookies';
 
-export interface UpdatePessoaJuridicaType {
+export interface PessoaJuridicaType {
   razaoSocial?: string;
   nomeFantasia?: string;
   cnpj?: string;
@@ -18,7 +18,7 @@ export interface UpdatePessoaJuridicaResponseType {
 }
 
 export async function updatePessoaJuridica(
-  payload: UpdatePessoaJuridicaType,
+  payload: PessoaJuridicaType,
 ): Promise<UpdatePessoaJuridicaResponseType> {
   try {
     const cookies = nookies.get();
