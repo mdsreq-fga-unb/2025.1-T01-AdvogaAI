@@ -32,7 +32,6 @@ jobs:
           username: ${{ secrets.USER }}
           password: ${{ secrets.PASSWORD }}
           port: 22
-          # AQUI: source aponta para a pasta interna "advogaAI-server/advogaAI-server"
           source: "advogaAI-server/."
           target: "/home/${{ secrets.USER }}/${{ matrix.base_path }}"
 
@@ -50,6 +49,30 @@ jobs:
             echo "Deploy concluído em $(date)"
             # Reiniciar o PM2
             sudo pm2 restart all  # ou pm2 restart advogaai-server-dev (caso tenha um nome específico)
+            echo "PM2 reiniciado."
+
+
+      - name: Copiar advogaAI-front para o server
+        if: ${{ github.ref == format('refs/heads/{0}', matrix.branch) }}
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USER }}
+          password: ${{ secrets.PASSWORD }}
+          port: 22
+          source: "advogaai-front/."
+          target: "/home/${{ secrets.USER }}/${{ matrix.base_path }}"
+
+      - name: Executar comandos remotos no front (build etc.)
+        if: ${{ github.ref == format('refs/heads/{0}', matrix.branch) }}
+        run: |
+          sshpass -p "${{ secrets.PASSWORD }}" ssh -o StrictHostKeyChecking=no ${{ secrets.USER }}@${{ secrets.HOST }} << 'EOF'
+            echo "=== BACKEND (advogaai-front) [${{ matrix.name }}] ==="
+            cd "/home/${{ secrets.USER }}/${{ matrix.base_path }}/advogaai-front"
+            npm install
+            npm run build
+            echo "Deploy concluído em $(date)"
+            sudo pm2 restart all
             echo "PM2 reiniciado."
           EOF
         shell: bash
