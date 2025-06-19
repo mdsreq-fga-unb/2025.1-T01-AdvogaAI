@@ -48,7 +48,6 @@ export default function Login() {
     try {
       setIsLoadingLogin(true);
       const response = await loginAuth(data.email.toLowerCase(), data.password);
-      console.log(response);
       if (response && response.statusCode === 200) {
         nookies.set(null, 'authToken', response.token, {
           path: '/',
@@ -78,9 +77,9 @@ export default function Login() {
               e.preventDefault();
               void form.handleSubmit(onSubmit)(e);
             }}
-            className="w-2/3 space-y-6 text-white flex flex-col"
+            className="w-2/3 space-y-4 text-white flex flex-col"
           >
-            <div className="flex flex-col gap-6">
+            <div className="flex flex-col gap-4">
               <FormField
                 control={form.control}
                 name="email"
@@ -127,6 +126,12 @@ export default function Login() {
                   </FormItem>
                 )}
               />
+              <p
+                onClickCapture={() => router.push('/send-recover-password')}
+                className="italic opacity-70 cursor-pointer w-fit h-fit"
+              >
+                Esqueci minha senha
+              </p>
               <p>{message}</p>
             </div>
 
