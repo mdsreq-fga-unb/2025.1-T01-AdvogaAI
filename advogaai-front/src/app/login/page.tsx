@@ -48,7 +48,6 @@ export default function Login() {
     try {
       setIsLoadingLogin(true);
       const response = await loginAuth(data.email.toLowerCase(), data.password);
-      console.log(response);
       if (response && response.statusCode === 200) {
         nookies.set(null, 'authToken', response.token, {
           path: '/',

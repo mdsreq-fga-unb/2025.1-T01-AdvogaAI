@@ -48,20 +48,21 @@ export class JwtService {
             },
             select: {
               isActive: true,
+              isConfirmed: true,
               name: true,
               email: true,
               role: true,
             },
           });
           if (!foundUser?.isActive) {
-            return { message: 'Invalid or expired token', statusCode: 401 };
+            return { message: 'Token inválido ou expirado!', statusCode: 401 };
           }
-          return { message: 'Valid token', statusCode: 200, user: foundUser };
+          return { message: 'Token valido!', statusCode: 200, user: foundUser };
         }
-        return { message: 'Invalid or expired token', statusCode: 401 };
+        return { message: 'Token inválido ou expirado!', statusCode: 401 };
       }
     } catch {
-      return { message: 'Invalid or expired token', statusCode: 401 };
+      return { message: 'Token inválido ou expirado!', statusCode: 401 };
     }
   }
 

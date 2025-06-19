@@ -27,6 +27,12 @@ export class UserLoginService {
     if (!user.isActive) {
       throw new HttpException('Usuario bloqueado', HttpStatus.FORBIDDEN);
     }
+    if (!user.isConfirmed) {
+      throw new HttpException(
+        'E-mail ainda não confirmado',
+        HttpStatus.FORBIDDEN,
+      );
+    }
     const isPasswordValid = await compare(inuser.password, user.password);
     if (!isPasswordValid) {
       throw new UnauthorizedException('E-mail ou senha incorretos');
