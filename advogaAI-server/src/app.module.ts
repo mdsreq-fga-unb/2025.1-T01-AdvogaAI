@@ -27,7 +27,7 @@ import { GenerateConfirmEmailTokenService } from './user/services/generate-confi
       imports: [ConfigModule],
       useFactory: (configService: ConfigService) => ({
         transport: {
-          host: 'smtp.gmail.com',
+          host: 'smtp.zoho.com',
           secure: true,
           port: 465,
           auth: {
