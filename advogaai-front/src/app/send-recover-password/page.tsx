@@ -88,7 +88,7 @@ export default function RecoverPassword() {
                 {isLoadingRecover ? (
                   <div className="border-4 h-5 w-5 border-t-transparent border-white rounded-full animate-spin" />
                 ) : (
-                  'Entrar'
+                  'Recuperar senha'
                 )}
               </Button>
             </form>
