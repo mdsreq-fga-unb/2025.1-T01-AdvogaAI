@@ -3,6 +3,7 @@ import {
   ConflictException,
   InternalServerErrorException,
   Logger,
+  NotFoundException,
 } from '@nestjs/common';
 import { PessoaJuridicaRepository } from '../repositories/pessoa-juridica.repository';
 import { PessoaFisicaRepository } from '../repositories/pessoa-fisica.repository';
@@ -81,6 +82,25 @@ export class PessoaJuridicaService {
       );
       throw new InternalServerErrorException(
         'Não foi possível criar o cliente pessoa jurídica. Por favor, tente novamente mais tarde.',
+      );
+    }
+  }
+
+  async delete(id: string): Promise<{ deletedClient: PessoaJuridica }> {
+    try {
+      this.logger.log(`Deletando a pessoa juridica de id:${id}`);
+      const deletedClient = await this.pessoaJuridicaRepository.delete(id);
+      this.logger.log(`Pessoa juridica deletada com sucesso`);
+      return { deletedClient };
+    } catch (error) {
+      if (error instanceof NotFoundException) {
+        throw error;
+      }
+      this.logger.error(
+        `Não foi possível encontrar a pessoa juridica de id: ${id}`,
+      );
+      throw new InternalServerErrorException(
+        'Não foi possível deletar o cliente pessoa jurídica. Por favor, tente novamente mais tarde.',
       );
     }
   }

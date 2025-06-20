@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { PessoaJuridica } from '@prisma/client';
 import { PrismaService } from 'prisma/prisma.service';
 import { CreatePessoaJuridicaDto } from '../dto/create-pessoa-juridica.dto';
@@ -69,6 +69,22 @@ export class PessoaJuridicaRepository {
     return this.prisma.pessoaJuridica.findMany({
       where: { userId },
       include: { endereco: true, representanteLegal: true },
+    });
+  }
+
+  async delete(id: string): Promise<PessoaJuridica> {
+    const pessoaJuridicaToDelete = await this.prisma.pessoaJuridica.findUnique({
+      where: { id },
+    });
+
+    if (!pessoaJuridicaToDelete) {
+      throw new NotFoundException(
+        `Pessoa Juridica de Id ${id} não encontrada.`,
+      );
+    }
+
+    return this.prisma.pessoaJuridica.delete({
+      where: { id },
     });
   }
 }

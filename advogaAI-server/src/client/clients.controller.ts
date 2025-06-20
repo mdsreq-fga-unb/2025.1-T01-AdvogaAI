@@ -9,6 +9,8 @@ import {
   DefaultValuePipe,
   ParseIntPipe,
   UseGuards,
+  Delete,
+  Param,
 } from '@nestjs/common';
 import {
   ApiTags,
@@ -16,6 +18,7 @@ import {
   ApiOperation,
   ApiResponse,
   ApiBody,
+  ApiParam,
 } from '@nestjs/swagger';
 import { PessoaFisicaService } from './services/pessoa-fisica.service';
 import { RegisterClientDto } from './dto/register-client.dto';
@@ -121,5 +124,57 @@ export class ClientsController {
     @Query('search') search?: string,
   ) {
     return this.pessoaFisicaService.findAll(page, pageSize, search);
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Delete('pessoa-fisica/:id')
+  @HttpCode(HttpStatus.OK)
+  @ApiOperation({ summary: 'Deletar um cliente (Pessoa Física) por ID' })
+  @ApiParam({
+    name: 'id',
+    description: 'ID do cliente pessoa física a ser deletado',
+    type: String,
+    format: 'uuid',
+  })
+  @ApiResponse({
+    status: 200,
+    description: 'Cliente pessoa física deletado com sucesso.',
+  })
+  @ApiResponse({
+    status: 404,
+    description: 'Cliente pessoa física não encontrado.',
+  })
+  @ApiResponse({
+    status: 500,
+    description: 'Erro interno do servidor ao tentar deletar o cliente.',
+  })
+  deletePessoaFisica(@Param('id') id: string) {
+    return this.pessoaFisicaService.delete(id);
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Delete('pessoa-juridica/:id')
+  @HttpCode(HttpStatus.OK)
+  @ApiOperation({ summary: 'Deletar um cliente (Pessoa Jurídica) por ID' })
+  @ApiParam({
+    name: 'id',
+    description: 'ID do cliente pessoa jurídica a ser deletado',
+    type: String,
+    format: 'uuid',
+  })
+  @ApiResponse({
+    status: 200,
+    description: 'Cliente pessoa jurídica deletado com sucesso.',
+  })
+  @ApiResponse({
+    status: 404,
+    description: 'Cliente pessoa jurídica não encontrado.',
+  })
+  @ApiResponse({
+    status: 500,
+    description: 'Erro interno do servidor ao tentar deletar o cliente.',
+  })
+  deletePessoaJuridica(@Param('id') id: string) {
+    return this.pessoaJuridicaService.delete(id);
   }
 }

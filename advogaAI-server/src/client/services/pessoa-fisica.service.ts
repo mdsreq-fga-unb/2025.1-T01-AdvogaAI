@@ -3,6 +3,7 @@ import {
   ConflictException,
   InternalServerErrorException,
   Logger,
+  NotFoundException,
 } from '@nestjs/common';
 import { PessoaFisicaRepository } from '../repositories/pessoa-fisica.repository';
 import { RegisterClientDto } from '../dto/register-client.dto';
@@ -67,6 +68,23 @@ export class PessoaFisicaService {
       );
       throw new InternalServerErrorException(
         'Não foi possível criar o cliente. Por favor, tente novamente mais tarde.',
+      );
+    }
+  }
+
+  async delete(id: string): Promise<{ deletedClient: PessoaFisica }> {
+    try {
+      this.logger.log(`deletando o usuario de id: ${id}`);
+      const deletedClient = await this.pessoaFisicaRepository.delete(id);
+      this.logger.log(`pessoa fisica deletada com sucesso!`);
+      return { deletedClient };
+    } catch (error) {
+      if (error instanceof NotFoundException) {
+        throw error;
+      }
+      this.logger.error(`Failed to delete Pessoa Fisica with ID: ${id}.`);
+      throw new InternalServerErrorException(
+        'Não foi possível deletar o cliente pessoa física. Por favor, tente novamente mais tarde.',
       );
     }
   }

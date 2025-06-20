@@ -80,7 +80,6 @@ export default function Register() {
       }
     } catch (error) {
       console.error(error);
-      console.log();
     } finally {
       setIsLoadingRegister(false);
     }

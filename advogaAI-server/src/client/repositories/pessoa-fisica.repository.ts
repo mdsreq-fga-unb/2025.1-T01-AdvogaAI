@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { PessoaFisica, Prisma } from '@prisma/client';
 import { PrismaService } from 'prisma/prisma.service';
 import { CreatePessoaFisicaDto } from '../dto/create-pessoa-fisica.dto';
@@ -99,5 +99,21 @@ export class PessoaFisicaRepository {
     ]);
 
     return { data, total };
+  }
+
+  async delete(id: string): Promise<PessoaFisica> {
+    const pessoaFisicaToDelete = await this.prisma.pessoaFisica.findUnique({
+      where: { id },
+    });
+
+    if (!pessoaFisicaToDelete) {
+      throw new NotFoundException(
+        `Pessoa Física com o ID ${id} não encontrado`,
+      );
+    }
+
+    return this.prisma.pessoaFisica.delete({
+      where: { id },
+    });
   }
 }
