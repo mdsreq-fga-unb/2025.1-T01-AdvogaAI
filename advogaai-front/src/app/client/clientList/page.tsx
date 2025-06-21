@@ -46,6 +46,7 @@ import {
 } from '@/components/ui/breadcrumb';
 import { Separator } from '@/components/ui/separator';
 import { cn } from '@/lib/utils';
+import { CreateClientSidebar } from '@/components/create-client-sidebar';
 
 interface Client {
   id: string;
@@ -57,6 +58,7 @@ interface Client {
 
 export default function ClientesPage() {
   const [searchTerm, setSearchTerm] = useState('');
+  const [isCreateClientOpen, setIsCreateClientOpen] = useState(false);
   const [clients, setClients] = useState<Client[]>([
     {
       id: '1',
@@ -111,6 +113,15 @@ export default function ClientesPage() {
     //Todo
   };
 
+  const handleCreateClient = (newClient: Omit<Client, 'id'>) => {
+    const client: Client = {
+      id: Date.now().toString(),
+      ...newClient,
+    };
+    setClients([...clients, client]);
+    setIsCreateClientOpen(false);
+  };
+
   return (
     <div className="dark">
       <SidebarProvider defaultOpen={true}>
@@ -161,7 +172,10 @@ export default function ClientesPage() {
                   />
                 </div>
               </div>
-              <Button className="gap-2 bg-cyan-500 hover:bg-cyan-600 text-slate-900 font-medium">
+              <Button
+                className="gap-2 bg-cyan-500 hover:bg-cyan-600 text-slate-900 font-medium"
+                onClick={() => setIsCreateClientOpen(true)}
+              >
                 <UserPlus className="h-4 w-4" />
                 Novo Cliente
               </Button>
@@ -271,6 +285,12 @@ export default function ClientesPage() {
             </Card>
           </div>
         </SidebarInset>
+
+        <CreateClientSidebar
+          isOpen={isCreateClientOpen}
+          onClose={() => setIsCreateClientOpen(false)}
+          onCreateClient={handleCreateClient}
+        />
       </SidebarProvider>
     </div>
   );
