@@ -11,6 +11,8 @@ import {
   UseGuards,
   Delete,
   Param,
+  Headers,
+  Patch
 } from '@nestjs/common';
 import {
   ApiTags,
@@ -26,6 +28,9 @@ import { RegisterJuridicalClientDto } from './dto/register-juridical-client.dto'
 import { PessoaJuridicaService } from './services/pessoa-juridica.service';
 import { JwtAuthGuard } from 'src/shared/jwt/jwt-auth.guard';
 import { UserId } from 'src/shared/decorators/user-id.decorator';
+import { UpdatePessoaFisicaDto } from './dto/update-pessoa-fisica.dto';
+import { ClientsService } from './clients.service';
+import { UpdatePessoaJuridicaDto } from './dto/update-pessoa-juridica.dto';
 
 @ApiTags('Clients')
 @Controller('clients')
@@ -33,6 +38,7 @@ export class ClientsController {
   constructor(
     private readonly pessoaFisicaService: PessoaFisicaService,
     private readonly pessoaJuridicaService: PessoaJuridicaService,
+    private readonly clientsService: ClientsService
   ) {}
 
   @UseGuards(JwtAuthGuard)
@@ -176,5 +182,34 @@ export class ClientsController {
   })
   deletePessoaJuridica(@Param('id') id: string) {
     return this.pessoaJuridicaService.delete(id);
+
+  @Patch('pessoa-fisica')
+  async updatePessoaFisica(
+    @Body() data: UpdatePessoaFisicaDto,
+    @Headers('authorization') token: string,
+  ) {
+    if (!token) {
+      return {
+        message: 'Acesso não autorizado por falta de token',
+        statusCode: 500,
+      };
+    }
+    const tokenParts = token.split(' ');
+    return await this.clientsService.updatePessoaFisica(data, tokenParts[1]);
+  }
+
+  @Patch('pessoa-juridica')
+  async updatePessoaJuridica(
+    @Body() data: UpdatePessoaJuridicaDto,
+    @Headers('authorization') token: string,
+  ) {
+    if (!token) {
+      return {
+        message: 'Acesso não autorizado por falta de token',
+        statusCode: 500,
+      };
+    }
+    const tokenParts = token.split(' ');
+    return await this.clientsService.updatePessoaJuridica(data, tokenParts[1]);
   }
 }
