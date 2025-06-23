@@ -33,6 +33,7 @@ export class PessoaFisicaRepository {
         user: true,
       },
     });
+    console.log(pessoaFisica);
 
     return pessoaFisica;
   }
