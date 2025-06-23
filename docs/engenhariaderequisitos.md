@@ -49,7 +49,5 @@
 |                           | Verificação e Validação               | Feedback da cliente                       | Ajustes constantes nas funcionalidades                     |
 | Sprint Planning (ScrumXP) | Organização e Atualização             | Atualização do Backlog                    | US com critérios claros de aceitação e prontos para sprint |
 |                           | Declaração                            | Estimativas, análise de dependências      | Sprint definida com base na prioridade e capacidade        |
-| Execução da Sprint        | Representação                         | Pair Programming, Code Review             | Código testado, revisado e integrado continuamente         |
-|                           | Verificação e Validação               | Integração Contínua, Testes Automatizados | Entregas incrementais validadas                            |
 | Sprint Review             | Verificação e Validação               | DoD, Feedback da cliente                  | Funcionalidade validada com a cliente                      |
 |                           | Organização e Atualização             | Replanejamento com base no feedback       | Backlog atualizado e sprint ajustada para o próximo ciclo  |
