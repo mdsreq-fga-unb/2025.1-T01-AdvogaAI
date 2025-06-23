@@ -5,9 +5,10 @@ import { PrismaModule } from 'prisma/prisma.module';
 import { UsersRepository } from './repositories/users.repository';
 import { JwtModule } from 'src/shared/jwt/jwt.module';
 import { ConfigModule } from '@nestjs/config';
-import { UserCreationService } from './services/user-creation-service';
-import { UserLoginService } from './services/user-login-service';
-
+import { UserCreationService } from './services/user-creation.service';
+import { UserLoginService } from './services/user-login.service';
+import { GenerateConfirmEmailTokenService } from './services/generate-confirm-email-token.service';
+import { SendEmailService } from 'src/email/services/send-email.service';
 @Module({
   imports: [
     PrismaModule,
@@ -21,6 +22,8 @@ import { UserLoginService } from './services/user-login-service';
     UsersRepository,
     UserCreationService,
     UserLoginService,
+    GenerateConfirmEmailTokenService,
+    SendEmailService,
   ],
   controllers: [UsersController],
   exports: [],
