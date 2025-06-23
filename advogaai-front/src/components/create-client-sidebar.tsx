@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 'use client';
 
 import type React from 'react';
@@ -16,15 +15,22 @@ import {
 } from '@/components/ui/select';
 import { X, Plus, Link } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import type { Client } from '@/app/client/clientList/page';
 
 interface CreateClientSidebarProps {
   isOpen: boolean;
   onClose: () => void;
   onCreateClient: (client: {
-    nome: string;
-    email: string;
+    nomeCompleto: string;
+    documento: string;
     telefone: string;
-    cpf: string;
+    email: string;
+    estadoCivil:
+      | 'SOLTEIRO'
+      | 'CASADO'
+      | 'DIVORCIADO'
+      | 'VIUVO'
+      | 'UNIAO_ESTAVEL';
   }) => void;
 }
 
@@ -78,10 +84,11 @@ export function CreateClientSidebar({
     }
 
     onCreateClient({
-      nome: formData.nome,
-      email: formData.email,
+      nomeCompleto: formData.nome,
+      documento: formData.cpf,
       telefone: formData.telefone,
-      cpf: formData.cpf,
+      email: formData.email,
+      estadoCivil: formData.estadoCivil as Client['estadoCivil'],
     });
 
     setFormData({

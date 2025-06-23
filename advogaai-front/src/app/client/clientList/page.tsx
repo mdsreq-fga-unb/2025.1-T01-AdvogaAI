@@ -1,6 +1,12 @@
+/* eslint-disable @typescript-eslint/no-floating-promises */
+/* eslint-disable @typescript-eslint/no-misused-promises */
+/* eslint-disable @typescript-eslint/no-unsafe-return */
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import {
@@ -48,61 +54,97 @@ import { Separator } from '@/components/ui/separator';
 import { cn } from '@/lib/utils';
 import { CreateClientSidebar } from '@/components/create-client-sidebar';
 
-interface Client {
+export interface Client {
   id: string;
-  nome: string;
-  email: string;
+  nomeCompleto: string;
+  documento: string;
   telefone: string;
-  cpf: string;
+  email: string;
+  estadoCivil: 'SOLTEIRO' | 'CASADO' | 'DIVORCIADO' | 'VIUVO' | 'UNIAO_ESTAVEL';
+}
+
+export async function registerClient(clientData: {
+  nome: string;
+  documento: string;
+  telefone: string;
+  email: string;
+}) {
+  const token = localStorage.getItem('token');
+  const response = await fetch('http://localhost:5555/clients/pessoa-fisica', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify(clientData),
+  });
+
+  const data = await response.json();
+  if (!response.ok) throw new Error(data.message || 'Erro ao criar cliente');
+  return data;
+}
+
+export async function fetchClients(
+  page = 1,
+  pageSize = 10,
+  search = '',
+): Promise<{ items: Client[]; totalPages: number }> {
+  const token = localStorage.getItem('token');
+  const query = new URLSearchParams({
+    page: page.toString(),
+    pageSize: pageSize.toString(),
+    search,
+  });
+
+  const response = await fetch(
+    `http://localhost:5555/clients/pessoa-fisica?${query}`,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    },
+  );
+
+  if (!response.ok) {
+    const data = await response.json();
+    throw new Error(data.message || 'Erro ao buscar clientes');
+  }
+
+  const result = await response.json();
+  return {
+    items: result.items,
+    totalPages: result.totalPages,
+  };
 }
 
 export default function ClientesPage() {
   const [searchTerm, setSearchTerm] = useState('');
   const [isCreateClientOpen, setIsCreateClientOpen] = useState(false);
-  const [clients, setClients] = useState<Client[]>([
-    {
-      id: '1',
-      nome: 'Herminia Silva',
-      email: 'pfelisticker@gmail.com',
-      telefone: '(11) 91234-5678',
-      cpf: '274.850.540-91',
-    },
-    {
-      id: '2',
-      nome: 'João Santos',
-      email: 'joao.santos@gmail.com',
-      telefone: '(21) 99876-5432',
-      cpf: '036.127.370-82',
-    },
-    {
-      id: '3',
-      nome: 'Maria Oliveira',
-      email: 'maria.oliveira@gmail.com',
-      telefone: '(31) 98765-4321',
-      cpf: '801.034.100-53',
-    },
-    {
-      id: '4',
-      nome: 'Pedro Costa',
-      email: 'pedro.costa@gmail.com',
-      telefone: '(61) 99666-1122',
-      cpf: '587.316.670-04',
-    },
-    {
-      id: '5',
-      nome: 'Ana Ferreira',
-      email: 'ana.ferreira@gmail.com',
-      telefone: '(41) 99900-8877',
-      cpf: '923.580.420-00',
-    },
-  ]);
+  const [clients, setClients] = useState<Client[]>([]);
+  const [page, setPage] = useState(1);
+  const [pageSize] = useState(10);
+  const [totalPages, setTotalPages] = useState(1);
+
+  useEffect(() => {
+    async function loadClients() {
+      try {
+        const data = await fetchClients(page, pageSize, searchTerm);
+        setClients(data.items);
+        setTotalPages(data.totalPages);
+      } catch (error: any) {
+        alert(error.message || 'Erro ao carregar clientes');
+      }
+    }
+
+    loadClients();
+  }, [page, pageSize, searchTerm]);
 
   const filteredClients = clients.filter(
     (client) =>
-      client.nome.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      client.nomeCompleto.toLowerCase().includes(searchTerm.toLowerCase()) ||
       client.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
       client.telefone.includes(searchTerm) ||
-      client.cpf.includes(searchTerm),
+      client.documento.includes(searchTerm),
   );
 
   const handleDeleteClient = (clientId: string) => {
@@ -113,13 +155,23 @@ export default function ClientesPage() {
     //Todo
   };
 
-  const handleCreateClient = (newClient: Omit<Client, 'id'>) => {
-    const client: Client = {
-      id: Date.now().toString(),
-      ...newClient,
-    };
-    setClients([...clients, client]);
-    setIsCreateClientOpen(false);
+  const handleCreateClient = async (newClient: Omit<Client, 'id'>) => {
+    try {
+      await registerClient({
+        nome: newClient.nomeCompleto,
+        documento: newClient.documento,
+        telefone: newClient.telefone,
+        email: newClient.email,
+      });
+
+      const data = await fetchClients(page, pageSize, searchTerm);
+      setClients(data.items);
+      setTotalPages(data.totalPages);
+
+      setIsCreateClientOpen(false);
+    } catch (err: any) {
+      alert(err.message);
+    }
   };
 
   return (
@@ -216,7 +268,7 @@ export default function ClientesPage() {
                           className="border-slate-700 hover:bg-slate-700/30"
                         >
                           <TableCell className="font-medium text-white">
-                            {client.nome}
+                            {client.nomeCompleto}
                           </TableCell>
                           <TableCell className="text-slate-300">
                             {client.email}
@@ -225,7 +277,7 @@ export default function ClientesPage() {
                             {client.telefone}
                           </TableCell>
                           <TableCell className="text-slate-300">
-                            {client.cpf}
+                            {client.documento}
                           </TableCell>
                           <TableCell>
                             <div className="flex items-center gap-2">
@@ -255,8 +307,8 @@ export default function ClientesPage() {
                                     </AlertDialogTitle>
                                     <AlertDialogDescription className="text-slate-400">
                                       Tem certeza que deseja excluir o cliente{' '}
-                                      {client.nome}? Esta ação não pode ser
-                                      desfeita.
+                                      {client.nomeCompleto}? Esta ação não pode
+                                      ser desfeita.
                                     </AlertDialogDescription>
                                   </AlertDialogHeader>
                                   <AlertDialogFooter>
@@ -282,6 +334,59 @@ export default function ClientesPage() {
                   </TableBody>
                 </Table>
               </CardContent>
+              <div className="mt-4 flex justify-end">
+                <div className="flex items-center gap-4 text-slate-300">
+                  <span>
+                    Página {page} de {totalPages}
+                  </span>
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    disabled={page <= 1}
+                    onClick={() => setPage((prev) => prev - 1)}
+                    className="hover:text-white"
+                  >
+                    <span className="sr-only">Anterior</span>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth={2}
+                      stroke="currentColor"
+                      className="w-5 h-5"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M15 19l-7-7 7-7"
+                      />
+                    </svg>
+                  </Button>
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    disabled={page >= totalPages}
+                    onClick={() => setPage((prev) => prev + 1)}
+                    className="hover:text-white"
+                  >
+                    <span className="sr-only">Próxima</span>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth={2}
+                      stroke="currentColor"
+                      className="w-5 h-5"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M9 5l7 7-7 7"
+                      />
+                    </svg>
+                  </Button>
+                </div>
+              </div>
             </Card>
           </div>
         </SidebarInset>
