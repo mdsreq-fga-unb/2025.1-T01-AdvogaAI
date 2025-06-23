@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/no-misused-promises */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-floating-promises */
 'use client';
 
 import { useCallback, useEffect, useState } from 'react';
@@ -55,6 +58,7 @@ import { PessoaFisica } from '../../../types/client';
 import { createPessoaFisica } from '../../../services/clients/createClient';
 import { getPessoasFisicas } from '../../../services/clients/listClient';
 import CompletePagination from '@/components/completePagination';
+import { deletePessoaFisica } from '../../../services/clients/deleteClient';
 
 const showToast = (message: string, type: 'success' | 'error' = 'success') => {
   console.log(`Toast (${type}):`, message);
@@ -83,17 +87,17 @@ export default function ClientesPage() {
     fetchClients();
   }, [fetchClients]);
 
-  const handleDeleteClient = (clientId: string) => {
+  const handleDeleteClient = async (clientId: string) => {
     console.log(clientId);
-    //     try {
-    //       await deletePessoaFisica(clientId);
-    //       showToast('Client deleted successfully!', 'success'); // Refresh the client list
-    //       fetchClients();
-    //     } catch (error) {
-    //       const errorMessage =
-    //         error instanceof Error ? error.message : 'Could not delete client';
-    //       showToast(errorMessage, 'error');
-    //     }
+    try {
+      await deletePessoaFisica(clientId);
+      showToast('Client deleted successfully!', 'success');
+      fetchClients();
+    } catch (error) {
+      const errorMessage =
+        error instanceof Error ? error.message : 'Could not delete client';
+      showToast(errorMessage, 'error');
+    }
   };
 
   const handleEditClient = () => {
