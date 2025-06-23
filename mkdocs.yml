@@ -18,6 +18,8 @@ nav:
       - RAD: reunioesrad.md
       - ScrumXP: reunioesXP.md
   - Protótipos: prototipos.md
+  - Temas, Épicos e US:
+    - Tema 2: tema2.md
   - Entregas:
       - Unidade 1: unidade1.md
       - Unidade 2: unidade2.md
