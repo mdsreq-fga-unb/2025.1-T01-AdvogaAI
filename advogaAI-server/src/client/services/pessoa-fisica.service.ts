@@ -82,7 +82,7 @@ export class PessoaFisicaService {
       if (error instanceof NotFoundException) {
         throw error;
       }
-      this.logger.error(`Failed to delete Pessoa Fisica with ID: ${id}.`);
+      this.logger.error(`Erro ao deletar Pessoa Fisica com o ID: ${id}.`);
       throw new InternalServerErrorException(
         'Não foi possível deletar o cliente pessoa física. Por favor, tente novamente mais tarde.',
       );
