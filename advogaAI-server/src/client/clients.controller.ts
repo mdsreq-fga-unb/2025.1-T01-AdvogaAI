@@ -12,7 +12,7 @@ import {
   Delete,
   Param,
   Headers,
-  Patch
+  Patch,
 } from '@nestjs/common';
 import {
   ApiTags,
@@ -38,7 +38,7 @@ export class ClientsController {
   constructor(
     private readonly pessoaFisicaService: PessoaFisicaService,
     private readonly pessoaJuridicaService: PessoaJuridicaService,
-    private readonly clientsService: ClientsService
+    private readonly clientsService: ClientsService,
   ) {}
 
   @UseGuards(JwtAuthGuard)
@@ -182,7 +182,7 @@ export class ClientsController {
   })
   deletePessoaJuridica(@Param('id') id: string) {
     return this.pessoaJuridicaService.delete(id);
-
+  }
   @Patch('pessoa-fisica')
   async updatePessoaFisica(
     @Body() data: UpdatePessoaFisicaDto,
