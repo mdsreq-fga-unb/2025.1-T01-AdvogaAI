@@ -1,6 +1,8 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { ClientsModule } from './client/clients.module';
+import { UsersModule } from './user/users.module';
 import { JwtModule } from './shared/jwt/jwt.module';
 import { UsersController } from './user/users.controller';
 import { UsersService } from './user/users.service';
@@ -16,10 +18,16 @@ import { EmailController } from './email/email.controller';
 import { MailerModule } from '@nestjs-modules/mailer';
 import { SendEmailService } from './email/services/send-email.service';
 import { GenerateConfirmEmailTokenService } from './user/services/generate-confirm-email-token.service';
+import { PessoaFisicaService } from './client/services/pessoa-fisica.service';
+import { PessoaFisicaRepository } from './client/repositories/pessoa-fisica.repository';
+import { PessoaJuridicaService } from './client/services/pessoa-juridica.service';
+import { PessoaJuridicaRepository } from './client/repositories/pessoa-juridica.repository';
 
 @Module({
   imports: [
     JwtModule,
+    ClientsModule,
+    UsersModule,
     ConfigModule.forRoot({
       isGlobal: true,
     }),
@@ -50,10 +58,15 @@ import { GenerateConfirmEmailTokenService } from './user/services/generate-confi
   ],
   providers: [
     ClientsRepository,
+    PessoaFisicaRepository,
+    PessoaJuridicaService,
+    PessoaFisicaRepository,
+    PessoaJuridicaRepository,
     AppService,
     UsersService,
     EmailService,
     UserCreationService,
+    PessoaFisicaService,
     SendEmailService,
     GenerateConfirmEmailTokenService,
     ClientsService,
