@@ -21,8 +21,9 @@ export class UsersController {
   @Post('logout')
   logout(@Res({ passthrough: true }) res: Response) {
     let cookieDomain: string | undefined;
+    const isProduction = process.env.MODE === 'cloud';
 
-    if (process.env.NODE_ENV === 'production' && process.env.FRONTEND_URL) {
+    if (isProduction && process.env.FRONTEND_URL) {
       try {
         const frontendUrl = new URL(process.env.FRONTEND_URL);
         if (frontendUrl.hostname !== 'localhost') {
@@ -38,8 +39,8 @@ export class UsersController {
       domain: cookieDomain,
       path: '/',
       maxAge: 60 * 60 * 24 * 7,
-      secure: process.env.NODE_ENV === 'production',
-      sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
+      secure: isProduction,
+      sameSite: isProduction ? 'none' : 'lax',
     });
 
     return {

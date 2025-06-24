@@ -122,7 +122,7 @@ export default function ClientesPage() {
       await updatePessoaFisica(clientId, clientData);
 
       toast.success('Cliente atualizado com sucesso!');
-
+      setIsEditClientOpen(false);
       await fetchClients();
     } catch (err) {
       const errorMessage =
