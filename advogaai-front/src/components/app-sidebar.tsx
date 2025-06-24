@@ -155,7 +155,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
               <DropdownMenuTrigger asChild>
                 <SidebarMenuButton
                   size="lg"
-                  className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
+                  className="cursor-pointer data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
                 >
                   <Avatar className="h-8 w-8 rounded-lg">
                     <AvatarImage src="/avatars/01.png" alt="Avatar" />
@@ -176,11 +176,11 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                 align="end"
                 sideOffset={4}
               >
-                <DropdownMenuItem className="text-slate-300 hover:bg-slate-700 hover:text-white">
+                <DropdownMenuItem className="text-slate-300 cursor-pointer hover:bg-slate-700 hover:text-white">
                   <User2 className="mr-2 h-4 w-4" />
                   Perfil
                 </DropdownMenuItem>
-                <DropdownMenuItem className="text-slate-300 hover:bg-slate-700 hover:text-white">
+                <DropdownMenuItem className="text-slate-300 cursor-pointer hover:bg-slate-700 hover:text-white">
                   <Settings className="mr-2 h-4 w-4" />
                   Configurações
                 </DropdownMenuItem>
