@@ -20,11 +20,26 @@ export class UsersController {
   }
   @Post('logout')
   logout(@Res({ passthrough: true }) res: Response) {
+    let cookieDomain: string | undefined;
+
+    if (process.env.NODE_ENV === 'production' && process.env.FRONTEND_URL) {
+      try {
+        const frontendUrl = new URL(process.env.FRONTEND_URL);
+        if (frontendUrl.hostname !== 'localhost') {
+          const domainParts = frontendUrl.hostname.split('.');
+          cookieDomain = '.' + domainParts.slice(-2).join('.');
+        }
+      } catch (e) {
+        console.error('Invalid FRONTEND_URL:', e);
+      }
+    }
     res.clearCookie('authToken', {
       httpOnly: true,
+      domain: cookieDomain,
+      path: '/',
+      maxAge: 60 * 60 * 24 * 7,
       secure: process.env.NODE_ENV === 'production',
       sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
-      path: '/',
     });
 
     return {
