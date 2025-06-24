@@ -50,8 +50,8 @@ export class UserLoginService {
 
     res.cookie('authToken', token, {
       httpOnly: true,
-      secure: !isProduction,
-      sameSite: 'lax',
+      secure: isProduction,
+      sameSite: isProduction ? 'none' : 'lax',
       path: '/',
       maxAge: 60 * 60 * 24 * 7,
     });
