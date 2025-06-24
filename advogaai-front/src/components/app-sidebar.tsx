@@ -9,6 +9,8 @@ import {
   Home,
   Briefcase,
   HelpCircle,
+  ChevronUp,
+  User2,
 } from 'lucide-react';
 
 import {
@@ -30,19 +32,18 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { ChevronUp, User2 } from 'lucide-react';
 
 // Menu items
 const data = {
   navMain: [
     {
       title: 'Dashboard',
-      url: '/dashboard',
+      url: '#',
       icon: Home,
     },
     {
       title: 'Clientes',
-      url: '/dashboard/clientes',
+      url: '/dashboard/client',
       icon: Users,
       isActive: true,
     },
@@ -82,7 +83,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton size="lg" asChild>
-              <a href="/dashboard">
+              <a href="#">
                 <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-cyan-500 text-slate-900">
                   <Briefcase className="size-4" />
                 </div>

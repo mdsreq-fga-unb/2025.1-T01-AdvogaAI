@@ -89,6 +89,19 @@ export class PessoaFisicaService {
     }
   }
 
+  async findAllByUserId(
+    userId: string,
+    limit: number,
+    offset: number,
+    search: string | undefined,
+  ) {
+    return await this.pessoaFisicaRepository.findAllByUserId(userId, {
+      limit: limit,
+      offset: offset,
+      search: search,
+    });
+  }
+
   async findAll(
     page: number,
     pageSize: number,

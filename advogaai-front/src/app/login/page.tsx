@@ -53,7 +53,7 @@ export default function Login() {
           path: '/',
           maxAge: 60 * 60 * 24 * 7,
         });
-        router.push('/dashboard');
+        router.push('/dashboard/client');
         return;
       } else {
         setMessage(response?.message ?? 'Um erro desconhecido aconteceu');

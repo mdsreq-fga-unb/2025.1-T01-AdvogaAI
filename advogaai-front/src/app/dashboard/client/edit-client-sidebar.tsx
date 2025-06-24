@@ -1,7 +1,7 @@
 'use client';
 
 import type React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -12,10 +12,13 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { X, Plus, Link } from 'lucide-react';
+import { X, Save } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import toast from 'react-hot-toast';
 
-// --- Type Definitions (Moved from external service file to resolve import error) ---
+// =================================================================
+// DEFINIÇÕES DE TIPO CORRIGIDAS E UNIFICADAS
+// =================================================================
 
 export enum EstadoCivil {
   SOLTEIRO = 'SOLTEIRO',
@@ -25,7 +28,9 @@ export enum EstadoCivil {
   UNIAO_ESTAVEL = 'UNIAO_ESTAVEL',
 }
 
-export interface CreateAddressDto {
+// Representa um endereço completo, como vem do backend (com ID)
+export interface Endereco {
+  id: string;
   cep: string;
   logradouro: string;
   numero: string;
@@ -35,7 +40,9 @@ export interface CreateAddressDto {
   estado: string;
 }
 
-export interface CreatePessoaFisicaDto {
+// Representa um cliente completo, como vem do backend (com ID)
+export interface PessoaFisica {
+  id: string;
   nomeCompleto: string;
   cpf: string;
   rg: string;
@@ -45,21 +52,41 @@ export interface CreatePessoaFisicaDto {
   telefone: string;
   estadoCivil: EstadoCivil;
   profissao: string;
-  endereco: CreateAddressDto;
+  endereco: Endereco;
 }
 
-export interface CreatePessoaFisica {
-  pessoaFisica: CreatePessoaFisicaDto;
+// DTO para a submissão do formulário de EDIÇÃO (campos opcionais)
+export interface UpdatePessoaFisicaDto {
+  nomeCompleto?: string;
+  cpf?: string;
+  rg?: string;
+  ctps?: string;
+  nacionalidade?: string;
+  email?: string;
+  telefone?: string;
+  estadoCivil?: EstadoCivil;
+  profissao?: string;
+  endereco?: {
+    id: string; // ID do endereço é obrigatório na atualização
+    cep?: string;
+    logradouro?: string;
+    numero?: string;
+    complemento?: string;
+    bairro?: string;
+    cidade?: string;
+    estado?: string;
+  };
 }
 
-// --- Component ---
-
-interface CreateClientSidebarProps {
+// --- Props do Componente ---
+interface EditClientSidebarProps {
   isOpen: boolean;
   onClose: () => void;
-  onCreateClient: (client: CreatePessoaFisicaDto) => void;
+  onUpdateClient: (clientId: string, clientData: UpdatePessoaFisicaDto) => void;
+  clientToEdit: PessoaFisica | null;
 }
 
+// --- Função Utilitária ---
 const formatPhone = (value: string) => {
   const cleanValue = value.replace(/\D/g, '');
   if (cleanValue.length <= 10) {
@@ -73,7 +100,9 @@ const formatPhone = (value: string) => {
   }
 };
 
-const initialFormData: CreatePessoaFisicaDto = {
+// --- Estado Inicial Vazio (com a estrutura correta de PessoaFisica) ---
+const initialPessoaFisicaState: PessoaFisica = {
+  id: '',
   nomeCompleto: '',
   cpf: '',
   rg: '',
@@ -84,6 +113,7 @@ const initialFormData: CreatePessoaFisicaDto = {
   estadoCivil: EstadoCivil.SOLTEIRO,
   profissao: '',
   endereco: {
+    id: '',
     cep: '',
     logradouro: '',
     numero: '',
@@ -94,24 +124,34 @@ const initialFormData: CreatePessoaFisicaDto = {
   },
 };
 
-export function CreateClientSidebar({
+export function EditClientSidebar({
   isOpen,
   onClose,
-  onCreateClient,
-}: CreateClientSidebarProps) {
-  const [formData, setFormData] =
-    useState<CreatePessoaFisicaDto>(initialFormData);
+  onUpdateClient,
+  clientToEdit,
+}: Readonly<EditClientSidebarProps>) {
+  const [formData, setFormData] = useState<PessoaFisica>(
+    initialPessoaFisicaState,
+  );
+
+  useEffect(() => {
+    if (clientToEdit && isOpen) {
+      setFormData(clientToEdit);
+    } else {
+      setFormData(initialPessoaFisicaState);
+    }
+  }, [clientToEdit, isOpen]);
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement>,
-    field: keyof Omit<CreatePessoaFisicaDto, 'endereco'>,
+    field: keyof Omit<PessoaFisica, 'id' | 'endereco'>,
   ) => {
     setFormData({ ...formData, [field]: e.target.value });
   };
 
   const handleAddressChange = (
     e: React.ChangeEvent<HTMLInputElement>,
-    field: keyof CreatePessoaFisicaDto['endereco'],
+    field: keyof Omit<Endereco, 'id'>,
   ) => {
     setFormData({
       ...formData,
@@ -121,17 +161,39 @@ export function CreateClientSidebar({
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!formData.nomeCompleto || !formData.cpf || !formData.email) {
-      console.error('Validation failed: Required fields are missing.');
+    if (!clientToEdit) {
+      toast.error('Nenhum cliente selecionado para edição.');
       return;
     }
-    onCreateClient(formData);
-    setFormData(initialFormData);
-    onClose();
-  };
 
-  const handleGenerateLink = () => {
-    console.log('Gerar link de cadastro');
+    if (!formData.nomeCompleto || !formData.cpf || !formData.email) {
+      toast.error('Nome, CPF e Email são obrigatórios.');
+      return;
+    }
+
+    const updatePayload: UpdatePessoaFisicaDto = {
+      nomeCompleto: formData.nomeCompleto,
+      cpf: formData.cpf,
+      rg: formData.rg,
+      ctps: formData.ctps,
+      nacionalidade: formData.nacionalidade,
+      email: formData.email,
+      telefone: formData.telefone,
+      estadoCivil: formData.estadoCivil,
+      profissao: formData.profissao,
+      endereco: {
+        id: formData.endereco.id,
+        cep: formData.endereco.cep,
+        logradouro: formData.endereco.logradouro,
+        numero: formData.endereco.numero,
+        complemento: formData.endereco.complemento,
+        bairro: formData.endereco.bairro,
+        cidade: formData.endereco.cidade,
+        estado: formData.endereco.estado,
+      },
+    };
+
+    onUpdateClient(clientToEdit.id, updatePayload);
   };
 
   return (
@@ -153,17 +215,17 @@ export function CreateClientSidebar({
           <header className="flex items-center justify-between p-6 border-b border-slate-700">
             <div>
               <h2 className="text-xl font-semibold text-white">
-                Adicionar Cliente
+                Editar Cliente
               </h2>
               <p className="text-sm text-slate-400 mt-1">
-                Preencha as informações para adicionar um novo cliente.
+                Altere as informações do cliente abaixo.
               </p>
             </div>
             <Button
               variant="ghost"
               size="sm"
               onClick={onClose}
-              className="text-slate-400 hover:text-white hover:bg-slate-700"
+              className="text-slate-400 cursor-pointer hover:text-white hover:bg-slate-700"
               aria-label="Fechar"
             >
               <X className="h-4 w-4" />
@@ -182,8 +244,7 @@ export function CreateClientSidebar({
                     id="nomeCompleto"
                     value={formData.nomeCompleto}
                     onChange={(e) => handleInputChange(e, 'nomeCompleto')}
-                    className="bg-slate-700 border-slate-600 text-white placeholder-slate-400 focus:border-cyan-500"
-                    placeholder="Digite o nome completo"
+                    className="bg-slate-700 border-slate-600 text-white"
                     required
                   />
                 </div>
@@ -194,14 +255,8 @@ export function CreateClientSidebar({
                   <Input
                     id="cpf"
                     value={formData.cpf}
-                    onChange={(e) =>
-                      setFormData({
-                        ...formData,
-                        cpf: e.target.value,
-                      })
-                    }
-                    className="bg-slate-700 border-slate-600 text-white placeholder-slate-400 focus:border-cyan-500"
-                    placeholder="000.000.000-00"
+                    onChange={(e) => handleInputChange(e, 'cpf')}
+                    className="bg-slate-700 border-slate-600 text-white"
                     maxLength={11}
                     required
                   />
@@ -254,7 +309,6 @@ export function CreateClientSidebar({
                     value={formData.email}
                     onChange={(e) => handleInputChange(e, 'email')}
                     className="bg-slate-700 border-slate-600 text-white"
-                    placeholder="email@exemplo.com"
                     required
                   />
                 </div>
@@ -272,7 +326,6 @@ export function CreateClientSidebar({
                       })
                     }
                     className="bg-slate-700 border-slate-600 text-white"
-                    placeholder="(00) 00000-0000"
                     maxLength={15}
                     required
                   />
@@ -330,15 +383,7 @@ export function CreateClientSidebar({
                   <Input
                     id="cep"
                     value={formData.endereco.cep}
-                    onChange={(e) =>
-                      setFormData({
-                        ...formData,
-                        endereco: {
-                          ...formData.endereco,
-                          cep: e.target.value,
-                        },
-                      })
-                    }
+                    onChange={(e) => handleAddressChange(e, 'cep')}
                     className="bg-slate-700 border-slate-600 text-white"
                     maxLength={9}
                     required
@@ -375,7 +420,7 @@ export function CreateClientSidebar({
                     </Label>
                     <Input
                       id="complemento"
-                      value={formData.endereco.complemento || ''}
+                      value={formData.endereco.complemento ?? ''}
                       onChange={(e) => handleAddressChange(e, 'complemento')}
                       className="bg-slate-700 border-slate-600 text-white"
                     />
@@ -415,6 +460,7 @@ export function CreateClientSidebar({
                       value={formData.endereco.estado}
                       onChange={(e) => handleAddressChange(e, 'estado')}
                       className="bg-slate-700 border-slate-600 text-white"
+                      maxLength={2}
                       required
                     />
                   </div>
@@ -425,36 +471,11 @@ export function CreateClientSidebar({
               <div className="space-y-3 pt-4">
                 <Button
                   type="submit"
-                  className="w-full bg-cyan-500 hover:bg-cyan-600 text-slate-900 font-medium"
+                  className="w-full cursor-pointer bg-cyan-500 hover:bg-cyan-600 text-slate-900 font-medium"
                 >
-                  <Plus className="h-4 w-4 mr-2" />
-                  Adicionar Cliente
+                  <Save className="h-4 w-4 mr-2" />
+                  Salvar Alterações
                 </Button>
-              </div>
-
-              <div className="pt-6 border-t border-slate-700">
-                <div className="space-y-3">
-                  <h3 className="text-white font-medium">
-                    Gerar link do cadastro
-                  </h3>
-                  <p className="text-sm text-slate-400">
-                    Gere um link para ser preenchido pelo cliente.
-                  </p>
-                  <Input
-                    readOnly
-                    value="Clique no botão para gerar um link"
-                    className="bg-slate-700 border-slate-600 text-slate-400"
-                  />
-                  <Button
-                    type="button"
-                    onClick={handleGenerateLink}
-                    variant="outline"
-                    className="w-full bg-slate-700 border-slate-600 text-white hover:bg-slate-600"
-                  >
-                    <Link className="h-4 w-4 mr-2" />
-                    Gerar Link
-                  </Button>
-                </div>
               </div>
             </form>
           </div>

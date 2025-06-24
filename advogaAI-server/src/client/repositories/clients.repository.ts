@@ -23,10 +23,11 @@ export class ClientsRepository {
       return { message: 'Internal server error', statusCode: 500 };
     }
   }
-  async getPessoaFisicaWithID(id: string) {
+  async getPessoaFisicaByIdAndUserId(id: string, userId: string) {
     try {
       const PF = await this.prisma.pessoaFisica.findUnique({
         where: {
+          userId: userId,
           id: id,
         },
       });
@@ -48,34 +49,41 @@ export class ClientsRepository {
       return { message: 'Internal server error', statusCode: 500 };
     }
   }
-  async updatePessoaFisica(data: UpdatePessoaFisicaDto) {
-    try {
-      await this.prisma.pessoaFisica.update({
-        where: {
-          id: data.idPessoaFisica,
-        },
-        data: {
-          cpf: data.cpf,
-          ctps: data.ctps,
-          email: data.email,
-          enderecoId: data.endereco,
-          estadoCivil: data.estadoCivil,
-          nacionalidade: data.nacionalidade,
-          nomeCompleto: data.nomeCompleto,
-          profissao: data.profissao,
-          rg: data.rg,
-          telefone: data.telefone,
-          updatedAt: new Date(),
+  async updatePessoaFisica(id: string, data: UpdatePessoaFisicaDto) {
+    const { endereco, empresasRepresentadasIds, ...pessoaFisicaData } = data;
+
+    return this.prisma.pessoaFisica.update({
+      where: { id },
+      data: {
+        ...pessoaFisicaData,
+        updatedAt: new Date(),
+
+        ...(endereco && {
+          endereco: {
+            update: {
+              where: { id: endereco.id },
+              data: {
+                cep: endereco.cep,
+                logradouro: endereco.logradouro,
+                numero: endereco.numero,
+                complemento: endereco.complemento,
+                bairro: endereco.bairro,
+                cidade: endereco.cidade,
+                estado: endereco.estado,
+              },
+            },
+          },
+        }),
+
+        ...(empresasRepresentadasIds !== undefined && {
           empresasRepresentadas: {
-            connect: data.empresasRepresentadasIds?.map((idEmpresa) => ({
+            set: empresasRepresentadasIds.map((idEmpresa) => ({
               id: idEmpresa,
             })),
           },
-        },
-      });
-    } catch {
-      return { message: 'Internal server error', statusCode: 500 };
-    }
+        }),
+      },
+    });
   }
 
   async updatePessoaJuridica(data: UpdatePessoaJuridicaDto) {

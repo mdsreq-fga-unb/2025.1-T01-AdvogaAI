@@ -41,26 +41,18 @@ export class ClientsService {
     }
   }
 
-  async updatePessoaFisica(data: UpdatePessoaFisicaDto, token: string) {
+  async updatePessoaFisica(
+    id: string,
+    data: UpdatePessoaFisicaDto,
+    userId: string,
+  ) {
     try {
-      const decToken = this.jwtService.decodeToken(token);
-      if (!decToken) {
-        return { message: 'Token inválido', statusCode: 400 };
-      }
-      if (!decToken.isActive) {
-        return { message: 'Usuario bloqueado', statusCode: 400 };
-      }
-      const user = await this.ClientsRepository.getUserWithID(decToken.userId);
-      if (!user) {
-        return { message: 'Usuario não encontrado', statusCode: 400 };
-      }
-      const pessoaFisica = await this.ClientsRepository.getPessoaFisicaWithID(
-        data.idPessoaFisica,
-      );
+      const pessoaFisica =
+        await this.ClientsRepository.getPessoaFisicaByIdAndUserId(id, userId);
       if (!pessoaFisica) {
         return { message: 'Pessoa fisica não encontrada', statusCode: 400 };
       }
-      await this.ClientsRepository.updatePessoaFisica(data);
+      await this.ClientsRepository.updatePessoaFisica(id, data);
       return {
         message: 'Pessoa fisica atualizada com sucesso',
         statusCode: 200,

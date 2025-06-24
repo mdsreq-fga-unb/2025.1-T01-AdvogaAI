@@ -1,4 +1,4 @@
-import { CreatePessoaFisicaDto } from '@/app/client/create-client-sidebar';
+import { CreatePessoaFisicaDto } from '@/app/dashboard/client/create-client-sidebar';
 import { PessoaFisica } from '../../types/client';
 import nookies from 'nookies';
 

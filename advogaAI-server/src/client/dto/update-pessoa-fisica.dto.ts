@@ -9,8 +9,10 @@ import {
   IsOptional,
   IsArray,
   IsUUID,
+  ValidateNested,
 } from 'class-validator';
 import { UpdateEnderecoDto } from './update-endereco.dto';
+import { Type } from 'class-transformer';
 
 export enum EstadoCivil {
   SOLTEIRO = 'SOLTEIRO',
@@ -114,13 +116,14 @@ export class UpdatePessoaFisicaDto {
   profissao?: string;
 
   @ApiProperty({
-    description: 'ID do endereço',
+    description: 'Dados do endereço a serem atualizados.',
     type: UpdateEnderecoDto,
     required: false,
   })
-  @IsUUID()
   @IsOptional()
-  endereco?: string;
+  @ValidateNested()
+  @Type(() => UpdateEnderecoDto)
+  endereco?: UpdateEnderecoDto;
 
   @ApiProperty({
     description:
@@ -136,17 +139,4 @@ export class UpdatePessoaFisicaDto {
     message: 'Cada ID de empresa deve ser um UUID válido',
   })
   empresasRepresentadasIds?: string[];
-
-  @ApiProperty({
-    description: 'Id da pessoa fisica a ser atualizada',
-    example: 'd290f1ee-6c54-4b01-90e6-d701748f0851',
-    required: false,
-    type: String,
-  })
-  @IsString()
-  @IsUUID('all', {
-    each: true,
-    message: 'O idPessoaFisica da pessoa fisica deve ser um UUID válido',
-  })
-  idPessoaFisica: string;
 }

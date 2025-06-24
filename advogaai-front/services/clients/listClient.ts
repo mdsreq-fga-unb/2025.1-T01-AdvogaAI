@@ -3,34 +3,22 @@ import nookies from 'nookies';
 
 export interface PessoasFisicasResponse {
   data: PessoaFisica[];
-  meta: {
-    total: number;
-    lastPage: number;
-    currentPage: number;
-    perPage: number;
-    prev: number | null;
-    next: number | null;
-  };
+  total: number;
+  totalPages: number;
+  currentPage: number;
+  totalItems: number;
+  itemsPerPage: number;
 }
 
 export async function getPessoasFisicas(
-  page: number = 1,
-  pageSize: number = 10,
+  limit: number = 10,
+  offset: number = 0,
   search?: string,
 ): Promise<PessoasFisicasResponse> {
   const token = nookies.get().authToken;
-
-  const params = new URLSearchParams({
-    page: String(page),
-    pageSize: String(pageSize),
-  });
-
-  if (search) {
-    params.append('search', search);
-  }
   const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 
-  const apiUrl = `${API_BASE_URL}/clients/pessoa-fisica?${params.toString()}`;
+  const apiUrl = `${API_BASE_URL}/clients/pessoa-fisica?limit=${limit}&offset=${offset}&search=${search}`;
 
   try {
     const response = await fetch(apiUrl, {

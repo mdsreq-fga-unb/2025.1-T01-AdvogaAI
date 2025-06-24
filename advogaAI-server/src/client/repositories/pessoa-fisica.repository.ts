@@ -3,9 +3,17 @@ import { PessoaFisica, Prisma } from '@prisma/client';
 import { PrismaService } from 'prisma/prisma.service';
 import { CreatePessoaFisicaDto } from '../dto/create-pessoa-fisica.dto';
 
+export interface PaginatedResult<T> {
+  data: T[];
+  totalItems: number;
+  totalPages: number;
+  currentPage: number;
+  itemsPerPage: number;
+}
+
 @Injectable()
 export class PessoaFisicaRepository {
-  constructor(private prisma: PrismaService) {}
+  constructor(private readonly prisma: PrismaService) {}
 
   /**
    * Creates a new PessoaFisica record, including its associated address,
@@ -33,7 +41,6 @@ export class PessoaFisicaRepository {
         user: true,
       },
     });
-    console.log(pessoaFisica);
 
     return pessoaFisica;
   }
@@ -60,13 +67,48 @@ export class PessoaFisicaRepository {
     });
   }
 
-  async findAllByUserId(userId: string): Promise<PessoaFisica[]> {
-    return this.prisma.pessoaFisica.findMany({
-      where: { userId },
-      include: { endereco: true },
-    });
-  }
+  async findAllByUserId(
+    userId: string,
+    options: { limit: number; offset: number; search?: string },
+  ): Promise<PaginatedResult<PessoaFisica>> {
+    const { limit, offset, search } = options;
 
+    const whereClause: Prisma.PessoaFisicaWhereInput = {
+      userId,
+    };
+
+    if (search) {
+      whereClause.nomeCompleto = {
+        contains: search,
+        mode: 'insensitive',
+      };
+    }
+
+    const [totalItems, data] = await this.prisma.$transaction([
+      this.prisma.pessoaFisica.count({
+        where: whereClause,
+      }),
+      this.prisma.pessoaFisica.findMany({
+        where: whereClause,
+        include: { endereco: true },
+        skip: offset,
+        take: limit,
+        orderBy: {
+          nomeCompleto: 'asc',
+        },
+      }),
+    ]);
+    const totalPages = Math.ceil(totalItems / limit);
+    const currentPage = Math.floor(offset / limit) + 1;
+
+    return {
+      data,
+      totalItems,
+      totalPages,
+      currentPage,
+      itemsPerPage: limit,
+    };
+  }
   async findAll(
     page: number,
     pageSize: number,

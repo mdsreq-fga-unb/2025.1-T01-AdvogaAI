@@ -1,7 +1,24 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsNotEmpty, IsOptional, IsString, Length } from 'class-validator';
+import {
+  IsNotEmpty,
+  IsOptional,
+  IsString,
+  Length,
+  IsUUID, // Importe o IsUUID
+} from 'class-validator';
 
 export class UpdateEnderecoDto {
+  // --- CAMPO ADICIONADO ---
+  @ApiProperty({
+    description: 'O ID do endereço que está sendo atualizado.',
+    example: 'd290f1ee-6c54-4b01-90e6-d701748f0851',
+    required: true,
+  })
+  @IsUUID('all', { message: 'O ID do endereço deve ser um UUID válido' })
+  id: string; // Este campo é obrigatório para a atualização
+
+  // --- SEUS CAMPOS EXISTENTES (todos opcionais, o que está correto) ---
+
   @ApiProperty({
     description: 'O logradouro do endereço (ex: Rua, Avenida)',
     example: 'Rua das Flores',

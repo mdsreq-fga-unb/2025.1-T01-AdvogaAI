@@ -1,3 +1,4 @@
+import { Endereco } from '@/app/dashboard/client/edit-client-sidebar';
 import { CreateAddressDto } from './address';
 
 export enum EstadoCivil {
@@ -41,7 +42,7 @@ export interface PessoaFisica {
   telefone: string;
   estadoCivil: EstadoCivil;
   profissao: string;
-  endereco: CreateAddressDto;
+  endereco: Endereco;
   createdAt: string;
   updatedAt: string;
 }

@@ -32,6 +32,7 @@ import { UpdatePessoaFisicaDto } from './dto/update-pessoa-fisica.dto';
 import { ClientsService } from './clients.service';
 import { UpdatePessoaJuridicaDto } from './dto/update-pessoa-juridica.dto';
 
+@UseGuards(JwtAuthGuard)
 @ApiTags('Clients')
 @Controller('clients')
 export class ClientsController {
@@ -125,11 +126,17 @@ export class ClientsController {
     description: 'Lista de clientes (pessoa física) retornada com sucesso.',
   })
   findAllPessoasFisicas(
-    @Query('page', new DefaultValuePipe(1), ParseIntPipe) page: number,
-    @Query('pageSize', new DefaultValuePipe(10), ParseIntPipe) pageSize: number,
+    @Query('limit', new DefaultValuePipe(3), ParseIntPipe) limit: number,
+    @Query('offset', new DefaultValuePipe(0), ParseIntPipe) offset: number,
+    @UserId() userId: string,
     @Query('search') search?: string,
   ) {
-    return this.pessoaFisicaService.findAll(page, pageSize, search);
+    return this.pessoaFisicaService.findAllByUserId(
+      userId,
+      limit,
+      offset,
+      search,
+    );
   }
 
   @UseGuards(JwtAuthGuard)
@@ -183,21 +190,17 @@ export class ClientsController {
   deletePessoaJuridica(@Param('id') id: string) {
     return this.pessoaJuridicaService.delete(id);
   }
-  @Patch('pessoa-fisica')
+  @UseGuards(JwtAuthGuard)
+  @Patch('pessoa-fisica/:id')
   async updatePessoaFisica(
+    @Param('id') id: string,
     @Body() data: UpdatePessoaFisicaDto,
-    @Headers('authorization') token: string,
+    @UserId() userId: string,
   ) {
-    if (!token) {
-      return {
-        message: 'Acesso não autorizado por falta de token',
-        statusCode: 500,
-      };
-    }
-    const tokenParts = token.split(' ');
-    return await this.clientsService.updatePessoaFisica(data, tokenParts[1]);
+    return await this.clientsService.updatePessoaFisica(id, data, userId);
   }
 
+  @UseGuards(JwtAuthGuard)
   @Patch('pessoa-juridica')
   async updatePessoaJuridica(
     @Body() data: UpdatePessoaJuridicaDto,
