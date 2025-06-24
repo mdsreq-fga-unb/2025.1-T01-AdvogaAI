@@ -1,11 +1,9 @@
 import { CreatePessoaFisicaDto } from '@/app/dashboard/client/create-client-sidebar';
 import { PessoaFisica } from '../../types/client';
-import nookies from 'nookies';
 
 export async function createPessoaFisica(pessoaFisica: CreatePessoaFisicaDto) {
   const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
   const apiUrl = `${API_BASE_URL}/clients/pessoa-fisica`;
-  const token = nookies.get().authToken;
   const newClient = {
     pessoaFisica: pessoaFisica,
   };
@@ -14,9 +12,9 @@ export async function createPessoaFisica(pessoaFisica: CreatePessoaFisicaDto) {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify(newClient),
+      credentials: 'include',
     });
 
     if (!response.ok) {

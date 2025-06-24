@@ -3,6 +3,7 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UserCreationService } from './services/user-creation.service';
 import { LoginUserDto } from './dto/user-login.dto';
 import { UserLoginService } from './services/user-login.service';
+import { Response } from 'express';
 
 @Injectable()
 export class UsersService {
@@ -15,7 +16,7 @@ export class UsersService {
     return this.UserCreationService.createUser(user);
   }
 
-  async loginUser(user: LoginUserDto) {
-    return this.UserLoginService.loginUser(user);
+  async loginUser(user: LoginUserDto, res: Response) {
+    return this.UserLoginService.loginUser(user, res);
   }
 }

@@ -3,6 +3,7 @@ import { INestApplication, ValidationPipe } from '@nestjs/common';
 import { AppModule } from './app.module';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { readFileSync } from 'fs';
+import * as cookieParser from 'cookie-parser';
 
 async function bootstrap() {
   let app: INestApplication;
@@ -21,8 +22,9 @@ async function bootstrap() {
   } else {
     app = await NestFactory.create(AppModule);
   }
+  app.use(cookieParser());
   app.enableCors({
-    origin: '*', // ou ['https://meudominio.com', 'https://outro.com']
+    origin: `${process.env.FRONTEND_URL}`, // ou ['https://meudominio.com', 'https://outro.com']
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
     credentials: true,
   });

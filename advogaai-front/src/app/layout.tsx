@@ -16,7 +16,11 @@ export default function RootLayout({
   return (
     <html lang="pt-BR">
       <body>{children}</body>
-      <Toaster />
+      <Toaster
+        toastOptions={{
+          position: 'top-right',
+        }}
+      />
     </html>
   );
 }

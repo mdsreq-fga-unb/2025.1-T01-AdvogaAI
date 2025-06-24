@@ -1,10 +1,11 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { PassportStrategy } from '@nestjs/passport';
-import { ExtractJwt, Strategy } from 'passport-jwt';
+import { Strategy } from 'passport-jwt';
 import { ConfigService } from '@nestjs/config';
 import { readFileSync } from 'fs';
 import { getKeyPath } from 'src/utils/getPathKey';
 import { PrismaService } from 'prisma/prisma.service';
+import { Request } from 'express';
 
 // Define o tipo do payload que esperamos do JWT
 export interface JwtPayload {
@@ -13,6 +14,13 @@ export interface JwtPayload {
   email: string;
   role: string;
 }
+
+const cookieExtractor = (req: Request): string | null => {
+  if (req && req.cookies) {
+    return req.cookies['authToken'] as string;
+  }
+  return null;
+};
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
@@ -23,7 +31,8 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     // Configurações da estratégia
     super({
       // Extrai o token do cabeçalho 'Authorization' como um Bearer Token
-      jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+      jwtFromRequest: cookieExtractor,
+      // jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
       // Garante que tokens expirados sejam rejeitados
       ignoreExpiration: false,
       // Chave pública para verificar a assinatura do token

@@ -126,7 +126,7 @@ export class ClientsController {
     description: 'Lista de clientes (pessoa física) retornada com sucesso.',
   })
   findAllPessoasFisicas(
-    @Query('limit', new DefaultValuePipe(3), ParseIntPipe) limit: number,
+    @Query('limit', new DefaultValuePipe(10), ParseIntPipe) limit: number,
     @Query('offset', new DefaultValuePipe(0), ParseIntPipe) offset: number,
     @UserId() userId: string,
     @Query('search') search?: string,

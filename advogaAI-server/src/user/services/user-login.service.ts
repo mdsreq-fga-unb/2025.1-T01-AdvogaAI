@@ -8,6 +8,7 @@ import { PrismaService } from 'prisma/prisma.service';
 import { LoginUserDto } from '../dto/user-login.dto';
 import { compare } from 'src/utils/hash.util';
 import { JwtService } from 'src/shared/jwt/jwt.service';
+import { Response } from 'express';
 
 @Injectable()
 export class UserLoginService {
@@ -16,7 +17,7 @@ export class UserLoginService {
     private readonly jwtService: JwtService,
   ) {}
 
-  async loginUser(inuser: LoginUserDto) {
+  async loginUser(inuser: LoginUserDto, res: Response) {
     const user = await this.prisma.user.findUnique({
       where: { email: inuser.email },
     });
@@ -45,10 +46,21 @@ export class UserLoginService {
       isActive: user.isActive,
     });
 
+    const isProduction = process.env.MODE === 'cloud';
+
+    res.cookie('authToken', token, {
+      httpOnly: true,
+      secure: isProduction,
+      sameSite: isProduction ? 'none' : 'lax',
+      path: '/',
+      maxAge: 60 * 60 * 24 * 7,
+    });
+
     return {
+      name: user.name,
+      email: user.email,
       statusCode: HttpStatus.OK,
       message: 'Login bem sucedido',
-      token,
     };
   }
 }

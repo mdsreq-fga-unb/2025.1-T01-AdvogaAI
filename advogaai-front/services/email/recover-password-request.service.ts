@@ -14,6 +14,7 @@ export async function recoverPasswordRequest(
         headers: {
           'Content-Type': 'application/json',
         },
+        credentials: 'include',
       },
     );
 

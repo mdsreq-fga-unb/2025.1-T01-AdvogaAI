@@ -1,5 +1,4 @@
 import { PessoaFisica } from '../../types/client';
-import nookies from 'nookies';
 
 export interface PessoasFisicasResponse {
   data: PessoaFisica[];
@@ -15,7 +14,6 @@ export async function getPessoasFisicas(
   offset: number = 0,
   search?: string,
 ): Promise<PessoasFisicasResponse> {
-  const token = nookies.get().authToken;
   const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 
   const apiUrl = `${API_BASE_URL}/clients/pessoa-fisica?limit=${limit}&offset=${offset}&search=${search}`;
@@ -25,8 +23,8 @@ export async function getPessoasFisicas(
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
       },
+      credentials: 'include',
     });
 
     if (!response.ok) {

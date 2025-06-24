@@ -1,15 +1,11 @@
-import nookies from 'nookies';
 export async function deletePessoaFisica(id: string): Promise<void> {
   const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
   const apiUrl = `${API_BASE_URL}/clients/pessoa-fisica/${id}`;
-  const token = nookies.get().authToken;
 
   try {
     const response = await fetch(apiUrl, {
       method: 'DELETE',
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
+      credentials: 'include',
     });
 
     if (!response.ok) {

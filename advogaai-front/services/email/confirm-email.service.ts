@@ -14,6 +14,7 @@ export async function confirmEmail(
         headers: {
           'Content-Type': 'application/json',
         },
+        credentials: 'include',
       },
     );
 

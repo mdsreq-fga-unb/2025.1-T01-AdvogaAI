@@ -3,7 +3,6 @@
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
-import nookies from 'nookies';
 import {
   Form,
   FormControl,
@@ -49,13 +48,11 @@ export default function Login() {
       setIsLoadingLogin(true);
       const response = await loginAuth(data.email.toLowerCase(), data.password);
       if (response && response.statusCode === 200) {
-        nookies.set(null, 'authToken', response.token, {
-          path: '/',
-          maxAge: 60 * 60 * 24 * 7,
-        });
+        localStorage.setItem('userName', response.name);
+        localStorage.setItem('userEmail', response.email);
         router.push('/dashboard/client');
-        return;
       } else {
+        setIsLoadingLogin(false);
         setMessage(response?.message ?? 'Um erro desconhecido aconteceu');
         setTimeout(() => {
           setMessage('');
@@ -63,8 +60,6 @@ export default function Login() {
       }
     } catch (error) {
       console.error(error);
-    } finally {
-      setIsLoadingLogin(false);
     }
   }
 

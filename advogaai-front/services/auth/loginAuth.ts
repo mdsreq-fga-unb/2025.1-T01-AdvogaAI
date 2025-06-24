@@ -1,7 +1,8 @@
 interface LoginAuthResponse {
   message: string;
-  token: string;
   statusCode: number;
+  email: string;
+  name: string;
 }
 export default async function loginAuth(
   email: string,
@@ -19,6 +20,7 @@ export default async function loginAuth(
         email: email,
         password: password,
       }),
+      credentials: 'include',
     });
 
     const data: LoginAuthResponse =

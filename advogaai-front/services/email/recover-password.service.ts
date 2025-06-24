@@ -17,6 +17,7 @@ export async function recoverPassword(
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({ password, confirmPassword }),
+        credentials: 'include',
       },
     );
 

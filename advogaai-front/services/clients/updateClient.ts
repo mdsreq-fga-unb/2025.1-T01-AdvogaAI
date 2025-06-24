@@ -1,5 +1,3 @@
-import nookies from 'nookies';
-
 export enum EstadoCivil {
   SOLTEIRO = 'SOLTEIRO',
   CASADO = 'CASADO',
@@ -43,22 +41,15 @@ export async function updatePessoaFisica(
   data: UpdatePessoaFisicaDto,
 ): Promise<UpdatePessoaFisicaResponseType> {
   try {
-    const cookies = nookies.get();
-    const token = cookies.authToken;
-
-    if (!token) {
-      throw new Error('Token de autenticação não encontrado.');
-    }
-
     const apiUrl = `${process.env.NEXT_PUBLIC_API_BASE_URL}/clients/pessoa-fisica/${id}`;
 
     const response = await fetch(apiUrl, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify(data),
+      credentials: 'include',
     });
 
     const responseData =

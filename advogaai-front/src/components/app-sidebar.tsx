@@ -1,6 +1,6 @@
 'use client';
 
-import type * as React from 'react';
+import * as React from 'react';
 import {
   Users,
   FileText,
@@ -32,6 +32,8 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import logoutUser from '../../services/auth/logoutUser';
+import toast from 'react-hot-toast';
 
 // Menu items
 const data = {
@@ -72,7 +74,31 @@ const data = {
   ],
 };
 
+async function handleLogout() {
+  try {
+    await logoutUser();
+  } catch (error) {
+    console.error(error);
+    toast.error('Um erro desconhecido ocorreu ao fazer o logout!');
+  }
+}
+
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+  const [userName, setUserName] = React.useState<string>('Advogado');
+  const [userEmail, setUserEmail] = React.useState<string>('');
+
+  React.useEffect(() => {
+    const storedName = localStorage.getItem('userName');
+    const storedEmail = localStorage.getItem('userEmail');
+
+    if (storedName) {
+      setUserName(storedName);
+    }
+    if (storedEmail) {
+      setUserEmail(storedEmail);
+    }
+  }, []);
+
   return (
     <Sidebar
       collapsible="icon"
@@ -138,8 +164,8 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                     </AvatarFallback>
                   </Avatar>
                   <div className="grid flex-1 text-left text-sm leading-tight">
-                    <span className="truncate font-semibold">Advogado</span>
-                    <span className="truncate text-xs">advogado@email.com</span>
+                    <span className="truncate font-semibold">{userName}</span>
+                    <span className="truncate text-xs">{userEmail}</span>
                   </div>
                   <ChevronUp className="ml-auto size-4" />
                 </SidebarMenuButton>
@@ -158,7 +184,10 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                   <Settings className="mr-2 h-4 w-4" />
                   Configurações
                 </DropdownMenuItem>
-                <DropdownMenuItem className="text-slate-300 hover:bg-slate-700 hover:text-white">
+                <DropdownMenuItem
+                  onClick={() => void handleLogout()}
+                  className="text-slate-300 cursor-pointer hover:bg-slate-700 hover:text-white"
+                >
                   Sair
                 </DropdownMenuItem>
               </DropdownMenuContent>
