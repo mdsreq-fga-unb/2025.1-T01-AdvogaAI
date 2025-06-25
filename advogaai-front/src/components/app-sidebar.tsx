@@ -51,12 +51,12 @@ const data = {
     },
     {
       title: 'Documentos',
-      url: '/dashboard/documentos',
+      url: '/dashboard/documents',
       icon: FileText,
     },
     {
       title: 'Processos',
-      url: '/dashboard/processos',
+      url: '/dashboard/process',
       icon: Calendar,
     },
   ],
