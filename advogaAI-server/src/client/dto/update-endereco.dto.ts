@@ -17,8 +17,6 @@ export class UpdateEnderecoDto {
   @IsUUID('all', { message: 'O ID do endereço deve ser um UUID válido' })
   id: string; // Este campo é obrigatório para a atualização
 
-  // --- SEUS CAMPOS EXISTENTES (todos opcionais, o que está correto) ---
-
   @ApiProperty({
     description: 'O logradouro do endereço (ex: Rua, Avenida)',
     example: 'Rua das Flores',

@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
-import verifyToken from '../services/auth/verifyToken';
+import verifyToken from './services/auth/verifyToken';
 
 export async function middleware(req: NextRequest) {
   const jwtToken = req.cookies.get('authToken')?.value;

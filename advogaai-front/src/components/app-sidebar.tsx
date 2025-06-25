@@ -32,8 +32,8 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import logoutUser from '../../services/auth/logoutUser';
 import toast from 'react-hot-toast';
+import logoutUser from '@/services/auth/logoutUser';
 
 // Menu items
 const data = {
@@ -45,18 +45,18 @@ const data = {
     },
     {
       title: 'Clientes',
-      url: '/dashboard/client',
+      url: '/dashboard/clients',
       icon: Users,
       isActive: true,
     },
     {
       title: 'Documentos',
-      url: '/dashboard/processos',
+      url: '/dashboard/documentos',
       icon: FileText,
     },
     {
       title: 'Processos',
-      url: '/dashboard/agenda',
+      url: '/dashboard/processos',
       icon: Calendar,
     },
   ],

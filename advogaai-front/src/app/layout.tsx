@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import './globals.css';
+import { Providers } from './providers';
 import { Toaster } from 'react-hot-toast';
 
 export const metadata: Metadata = {
@@ -15,12 +16,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-BR">
-      <body>{children}</body>
-      <Toaster
-        toastOptions={{
-          position: 'top-right',
-        }}
-      />
+      <body>
+        {' '}
+        <Providers>
+          {children}
+          <Toaster />
+        </Providers>
+      </body>
     </html>
   );
 }

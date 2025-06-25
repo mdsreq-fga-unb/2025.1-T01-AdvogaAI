@@ -34,7 +34,7 @@ enum EstadoCivil {
 model PessoaFisica {
   id              String   @id @default(uuid())
   nomeCompleto    String
-  cpf             String   @unique @db.VarChar(11)
+  cpf             String   @unique @db.VarChar(14)
   rg              String   @unique
   ctps            String   @unique
   nacionalidade   String
