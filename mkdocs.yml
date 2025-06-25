@@ -26,4 +26,5 @@ nav:
       - Unidade 2: unidade2.md
       - Unidade 3: unidade3.md
   - Nomeclaturas: naming.md
-  - Exercicios: exercicios.md
+  - Estudos de Caso:
+      - USM: exercicios.md
