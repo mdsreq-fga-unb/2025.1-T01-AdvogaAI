@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 
-import { PessoaFisica } from '@/schemas/clientSchema';
+import { PessoaFisica } from '@/modules/clients';
 import { maskCPF, maskTelefone } from '@/lib/masks';
 
 import { Button } from '@/components/ui/button';
@@ -95,7 +95,7 @@ export default function ClientesPage() {
         </div>
         <Button
           onClick={() => setIsCreateClientOpen(true)}
-          className="gap-2 bg-cyan-500 hover:bg-cyan-600 text-slate-900 font-medium"
+          className="gap-2 bg-cyan-500 cursor-pointer hover:bg-cyan-600 text-slate-900 font-medium"
         >
           <UserPlus className="h-4 w-4" />
           Novo Cliente
@@ -161,7 +161,7 @@ export default function ClientesPage() {
                               setClientToEdit(client);
                               setIsEditClientOpen(true);
                             }}
-                            className="text-slate-400 hover:text-white"
+                            className="text-slate-400 cursor-pointer hover:text-white"
                           >
                             <Edit className="w-4 h-4" />
                           </Button>
@@ -171,7 +171,7 @@ export default function ClientesPage() {
                                 variant="ghost"
                                 size="icon"
                                 disabled={isDeleting}
-                                className="text-slate-400 hover:text-red-500"
+                                className="text-slate-400 cursor-pointer hover:text-red-500"
                               >
                                 <Trash2 className="w-4 h-4" />
                               </Button>

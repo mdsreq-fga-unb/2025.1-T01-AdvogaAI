@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev -p 5000 --turbopack",
     "build": "next build",
+    "start": "next start",
     "start:dev": "next start -p 3232",
     "start:prod": "next start -p 5252",
     "lint": "next lint",

@@ -128,7 +128,13 @@ export function CreateClientSidebar({
             </Button>
           </header>
 
-          <div className="flex-1 overflow-y-auto">
+          <div
+            className="flex-1 overflow-y-auto [&::-webkit-scrollbar]:w-2
+            [&::-webkit-scrollbar-track]:rounded-full
+            [&::-webkit-scrollbar-track]:bg-white
+            [&::-webkit-scrollbar-thumb]:rounded-full
+            [&::-webkit-scrollbar-thumb]:bg-gray-500"
+          >
             <form onSubmit={handleSubmit(onSubmit)} className="p-6 space-y-6">
               <div className="space-y-4">
                 <div className="space-y-1">
@@ -304,7 +310,7 @@ export function CreateClientSidebar({
                         value={field.value}
                         onValueChange={field.onChange}
                       >
-                        <SelectTrigger className="capitalize text-white">
+                        <SelectTrigger className="capitalize cursor-pointer text-white">
                           <SelectValue placeholder="Selecione..." />
                         </SelectTrigger>
                         <SelectContent className="bg-slate-700 border-slate-600 text-white placeholder-slate-400">
@@ -312,7 +318,7 @@ export function CreateClientSidebar({
                             <SelectItem
                               key={s}
                               value={s}
-                              className="capitalize "
+                              className="capitalize cursor-pointer "
                             >
                               {s.replace(/_/g, ' ').toLowerCase()}
                             </SelectItem>
@@ -460,7 +466,7 @@ export function CreateClientSidebar({
                 <Button type="submit" className="w-full ...">
                   <Button
                     type="submit"
-                    className="w-full ..."
+                    className="w-full cursor-pointer ..."
                     disabled={isPending}
                   >
                     {isPending ? 'Salvando...' : 'Adicionar Cliente'}

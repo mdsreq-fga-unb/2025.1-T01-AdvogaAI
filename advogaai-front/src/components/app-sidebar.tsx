@@ -32,31 +32,31 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import logoutUser from '../services/auth/logoutUser';
 import toast from 'react-hot-toast';
-import { usePathname } from 'next/navigation';
-import Link from 'next/link';
+import logoutUser from '@/services/auth/logoutUser';
 
+// Menu items
 const data = {
   navMain: [
     {
       title: 'Dashboard',
-      url: '/dashboard',
+      url: '#',
       icon: Home,
     },
     {
       title: 'Clientes',
       url: '/dashboard/clients',
       icon: Users,
+      isActive: true,
     },
     {
       title: 'Documentos',
-      url: '/dashboard/documents',
+      url: '/dashboard/documentos',
       icon: FileText,
     },
     {
       title: 'Processos',
-      url: '/dashboard/process',
+      url: '/dashboard/processos',
       icon: Calendar,
     },
   ],
@@ -84,7 +84,6 @@ async function handleLogout() {
 }
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
-  const pathname = usePathname();
   const [userName, setUserName] = React.useState<string>('Advogado');
   const [userEmail, setUserEmail] = React.useState<string>('');
 
@@ -130,27 +129,20 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         <SidebarGroup>
           <SidebarGroupContent>
             <SidebarMenu>
-              {data.navMain.map((item) => {
-                const isActive =
-                  item.url === '/dashboard'
-                    ? pathname === item.url
-                    : pathname.startsWith(item.url);
-
-                return (
-                  <SidebarMenuItem key={item.title}>
-                    <SidebarMenuButton
-                      asChild
-                      isActive={isActive}
-                      tooltip={item.title}
-                    >
-                      <Link href={item.url}>
-                        <item.icon />
-                        <span>{item.title}</span>
-                      </Link>
-                    </SidebarMenuButton>
-                  </SidebarMenuItem>
-                );
-              })}
+              {data.navMain.map((item) => (
+                <SidebarMenuItem key={item.title}>
+                  <SidebarMenuButton
+                    asChild
+                    isActive={item.isActive}
+                    tooltip={item.title}
+                  >
+                    <a href={item.url}>
+                      <item.icon />
+                      <span>{item.title}</span>
+                    </a>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+              ))}
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
@@ -168,7 +160,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                   <Avatar className="h-8 w-8 rounded-lg">
                     <AvatarImage src="/avatars/01.png" alt="Avatar" />
                     <AvatarFallback className="rounded-lg bg-cyan-500 text-slate-900">
-                      {userName[0]}
+                      AD
                     </AvatarFallback>
                   </Avatar>
                   <div className="grid flex-1 text-left text-sm leading-tight">

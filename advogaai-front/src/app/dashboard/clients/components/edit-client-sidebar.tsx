@@ -106,7 +106,13 @@ export function EditClientSidebar({
             </Button>
           </header>
 
-          <div className="flex-1 overflow-y-auto">
+          <div
+            className="flex-1 overflow-y-auto [&::-webkit-scrollbar]:w-2
+            [&::-webkit-scrollbar-track]:rounded-full
+            [&::-webkit-scrollbar-track]:bg-white
+            [&::-webkit-scrollbar-thumb]:rounded-full
+            [&::-webkit-scrollbar-thumb]:bg-gray-500"
+          >
             <form onSubmit={handleSubmit(onSubmit)} className="p-6 space-y-6">
               <div className="space-y-4">
                 <div className="space-y-1">
@@ -428,7 +434,7 @@ export function EditClientSidebar({
               <div className="pt-6 border-t border-slate-700">
                 <Button
                   type="submit"
-                  className="w-full bg-cyan-500 hover:bg-cyan-600 text-slate-900 font-medium"
+                  className="w-full cursor-pointer bg-cyan-500 hover:bg-cyan-600 text-slate-900 font-medium"
                   disabled={isSubmitting}
                 >
                   {isSubmitting ? (
