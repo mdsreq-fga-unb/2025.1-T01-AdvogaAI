@@ -1,4 +1,8 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  ConflictException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { PessoaFisica, Prisma } from '@prisma/client';
 import { PrismaService } from 'prisma/prisma.service';
 import { CreatePessoaFisicaDto } from '../dto/create-pessoa-fisica.dto';
@@ -25,24 +29,42 @@ export class PessoaFisicaRepository {
     data: CreatePessoaFisicaDto,
     userId: string,
   ): Promise<PessoaFisica> {
-    const { endereco, ...pessoaFisicaData } = data;
-    const pessoaFisica = await this.prisma.pessoaFisica.create({
-      data: {
-        ...pessoaFisicaData,
-        user: {
-          connect: { id: userId },
-        },
-        endereco: {
-          create: endereco,
-        },
-      },
-      include: {
-        endereco: true,
-        user: true,
-      },
-    });
+    try {
+      const { endereco, ...pessoaFisicaData } = data;
 
-    return pessoaFisica;
+      const pessoaFisica = await this.prisma.pessoaFisica.create({
+        data: {
+          ...pessoaFisicaData,
+          user: {
+            connect: { id: userId },
+          },
+          endereco: {
+            create: endereco,
+          },
+        },
+        include: {
+          endereco: true,
+        },
+      });
+
+      return pessoaFisica as PessoaFisica;
+    } catch (error) {
+      if (
+        error instanceof Prisma.PrismaClientKnownRequestError &&
+        error.code === 'P2002'
+      ) {
+        const failedField = (error.meta?.target as string[])?.[0];
+
+        let friendlyMessage = 'Já existe um registro com os dados informados.';
+        if (failedField) {
+          friendlyMessage = `O ${failedField.toUpperCase()} informado já está em uso.`;
+        }
+
+        throw new ConflictException(friendlyMessage);
+      }
+
+      throw error;
+    }
   }
 
   async findByCpf(cpf: string): Promise<PessoaFisica | null> {

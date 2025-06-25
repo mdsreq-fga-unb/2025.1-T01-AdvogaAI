@@ -50,7 +50,7 @@ export default function Login() {
       if (response && response.statusCode === 200) {
         localStorage.setItem('userName', response.name);
         localStorage.setItem('userEmail', response.email);
-        router.push('/dashboard/client');
+        router.push('/dashboard/clients');
       } else {
         setIsLoadingLogin(false);
         setMessage(response?.message ?? 'Um erro desconhecido aconteceu');

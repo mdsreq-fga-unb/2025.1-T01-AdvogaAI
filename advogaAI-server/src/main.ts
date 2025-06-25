@@ -24,7 +24,7 @@ async function bootstrap() {
   }
   app.use(cookieParser());
   app.enableCors({
-    origin: `${process.env.FRONTEND_URL}`, // ou ['https://meudominio.com', 'https://outro.com']
+    origin: `${process.env.FRONTEND_URL}`,
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
     credentials: true,
   });
