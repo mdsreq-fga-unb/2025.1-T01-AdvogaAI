@@ -22,6 +22,8 @@ import { PessoaFisicaService } from './client/services/pessoa-fisica.service';
 import { PessoaFisicaRepository } from './client/repositories/pessoa-fisica.repository';
 import { PessoaJuridicaService } from './client/services/pessoa-juridica.service';
 import { PessoaJuridicaRepository } from './client/repositories/pessoa-juridica.repository';
+import { GetUserService } from './user/services/get-user.service';
+import { UpdateUserService } from './user/services/update-user.service';
 
 @Module({
   imports: [
@@ -71,6 +73,8 @@ import { PessoaJuridicaRepository } from './client/repositories/pessoa-juridica.
     GenerateConfirmEmailTokenService,
     ClientsService,
     PrismaService,
+    GetUserService,
+    UpdateUserService,
     UserLoginService,
   ],
 })

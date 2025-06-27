@@ -34,6 +34,7 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import toast from 'react-hot-toast';
 import logoutUser from '@/services/auth/logoutUser';
+import { useRouter, usePathname } from 'next/navigation';
 
 // Menu items
 const data = {
@@ -45,18 +46,17 @@ const data = {
     },
     {
       title: 'Clientes',
-      url: '/dashboard/clients',
+      url: '/dashboard/clientes',
       icon: Users,
-      isActive: true,
     },
     {
       title: 'Documentos',
-      url: '/dashboard/documents',
+      url: '/dashboard/documentos',
       icon: FileText,
     },
     {
       title: 'Processos',
-      url: '/dashboard/process',
+      url: '/dashboard/processos',
       icon: Calendar,
     },
   ],
@@ -83,7 +83,26 @@ async function handleLogout() {
   }
 }
 
+function getInitials(fullName: string) {
+  const names = fullName.trim().split(/\s+/);
+
+  if (names.length === 0 || names[0] === '') {
+    return 'XX';
+  }
+
+  if (names.length === 1) {
+    return names[0].substring(0, 2).toUpperCase();
+  }
+
+  const firstNameInitial = names[0].charAt(0);
+  const secondNameInitial = names[1].charAt(0);
+
+  return `${firstNameInitial}${secondNameInitial}`.toUpperCase();
+}
+
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+  const router = useRouter();
+  const pathname = usePathname();
   const [userName, setUserName] = React.useState<string>('Advogado');
   const [userEmail, setUserEmail] = React.useState<string>('');
 
@@ -133,7 +152,11 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton
                     asChild
-                    isActive={item.isActive}
+                    isActive={
+                      item.url === '/dashboard'
+                        ? pathname === item.url
+                        : pathname.startsWith(item.url)
+                    }
                     tooltip={item.title}
                   >
                     <a href={item.url}>
@@ -160,7 +183,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                   <Avatar className="h-8 w-8 rounded-lg">
                     <AvatarImage src="/avatars/01.png" alt="Avatar" />
                     <AvatarFallback className="rounded-lg bg-cyan-500 text-slate-900">
-                      AD
+                      {getInitials(userName)}
                     </AvatarFallback>
                   </Avatar>
                   <div className="grid flex-1 text-left text-sm leading-tight">
@@ -176,13 +199,12 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                 align="end"
                 sideOffset={4}
               >
-                <DropdownMenuItem className="text-slate-300 cursor-pointer hover:bg-slate-700 hover:text-white">
+                <DropdownMenuItem
+                  onClick={() => router.push('perfil')}
+                  className="text-slate-300 cursor-pointer hover:bg-slate-700 hover:text-white"
+                >
                   <User2 className="mr-2 h-4 w-4" />
                   Perfil
-                </DropdownMenuItem>
-                <DropdownMenuItem className="text-slate-300 cursor-pointer hover:bg-slate-700 hover:text-white">
-                  <Settings className="mr-2 h-4 w-4" />
-                  Configurações
                 </DropdownMenuItem>
                 <DropdownMenuItem
                   onClick={() => void handleLogout()}
