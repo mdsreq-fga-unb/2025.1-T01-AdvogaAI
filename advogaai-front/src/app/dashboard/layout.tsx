@@ -1,5 +1,5 @@
 'use client';
-import { AppSidebar } from '@/components/app-sidebar';
+import { AppSidebar, pathsData } from '@/components/app-sidebar';
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -19,12 +19,19 @@ import React from 'react';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 
-const breadcrumbNameMap: { [key: string]: string } = {
-  clients: 'Clientes',
-  documents: 'Documentos',
-  home: 'Home',
-  process: 'Processos',
-};
+const breadcrumbNameMap: { [key: string]: string } = [
+  ...pathsData.navMain,
+  ...pathsData.navSecondary,
+].reduce(
+  (map, item) => {
+    const key = item.url.split('/').pop() || item.url;
+    map[key] = item.title;
+    return map;
+  },
+  {} as { [key: string]: string },
+);
+
+breadcrumbNameMap['create'] = 'Criar Modelo de Documento';
 
 export default function DashboardLayout({
   children,
@@ -57,6 +64,7 @@ export default function DashboardLayout({
                 {pathSegments.map((segment, index) => {
                   const href = `/${pathSegments.slice(0, index + 1).join('/')}`;
                   const isLast = index === pathSegments.length - 1;
+                  console.log(segment);
                   const displayName =
                     breadcrumbNameMap[segment] ||
                     segment.charAt(0).toUpperCase() + segment.slice(1);

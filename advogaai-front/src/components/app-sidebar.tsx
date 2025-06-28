@@ -37,11 +37,11 @@ import logoutUser from '@/services/auth/logoutUser';
 import { useRouter, usePathname } from 'next/navigation';
 
 // Menu items
-const data = {
+export const pathsData = {
   navMain: [
     {
       title: 'Dashboard',
-      url: '#',
+      url: '/dashboard',
       icon: Home,
     },
     {
@@ -50,8 +50,8 @@ const data = {
       icon: Users,
     },
     {
-      title: 'Documentos',
-      url: '/dashboard/documentos',
+      title: 'Modelos de Documentos',
+      url: '/dashboard/modelo-documentos',
       icon: FileText,
     },
     {
@@ -148,7 +148,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         <SidebarGroup>
           <SidebarGroupContent>
             <SidebarMenu>
-              {data.navMain.map((item) => (
+              {pathsData.navMain.map((item) => (
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton
                     asChild

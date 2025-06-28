@@ -1,9 +1,6 @@
 'use client';
 
-import { useState } from 'react';
-
-import { PessoaFisica } from '@/modules/clients';
-import { maskCPF, maskTelefone } from '@/lib/masks';
+import { useEffect, useState } from 'react';
 
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -34,51 +31,57 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from '@/components/ui/alert-dialog';
-import { Search, Edit, Trash2, UserPlus } from 'lucide-react';
-import { CreateClientSidebar } from './components/create-client-sidebar';
-import { EditClientSidebar } from './components/edit-client-sidebar';
+import { Search, Edit, Trash2, UserPlus, Download, Plus } from 'lucide-react';
 import CompletePagination from '@/components/completePagination';
+import { useRouter } from 'next/navigation';
+import toast from 'react-hot-toast';
 
-import { useDebounce } from '../../../../hooks/use-debounce';
-import {
-  useDeleteClient,
-  useGetClients,
-  useUpdateClient,
-} from '@/modules/clients';
+export interface docModelsType {
+  id: number;
+  name: string;
+  tipo: string;
+}
 
-export default function ClientesPage() {
-  const [searchTerm, setSearchTerm] = useState('');
-  const [isCreateClientOpen, setIsCreateClientOpen] = useState(false);
-  const [isEditClientOpen, setIsEditClientOpen] = useState(false);
-  const [clientToEdit, setClientToEdit] = useState<PessoaFisica | null>(null);
-  const [page, setPage] = useState(1);
-  const limit = 10;
+export default function DocModelPage() {
+  const router = useRouter();
+  const [searchTerm, setSearchTerm] = useState<string>('');
+  const [docModels, setDocModels] = useState<docModelsType[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isDeleting, setIsDeleting] = useState<boolean>(false);
+  const [page, setPage] = useState<number>(1);
+  const [totalPages, setTotalPages] = useState<number>(1);
 
-  const debouncedSearchTerm = useDebounce(searchTerm, 500);
+  function handleNewModel() {
+    router.push('modelo-documentos/create');
+  }
 
-  const {
-    data: response,
-    isLoading,
-    isError,
-    error,
-  } = useGetClients({ page, limit, search: debouncedSearchTerm });
+  useEffect(() => {
+    setIsLoading(true);
+    setTotalPages(1);
+    setDocModels([
+      { name: 'Modelo 1', id: 1, tipo: 'Procuração' },
+      { name: 'Modelo 2', id: 2, tipo: 'Procuração' },
+      { name: 'Modelo 3', id: 3, tipo: 'Procuração' },
+      { name: 'Modelo 4', id: 4, tipo: 'Procuração' },
+      { name: 'Modelo 5', id: 5, tipo: 'Procuração' },
+      { name: 'Modelo 6', id: 6, tipo: 'Procuração' },
+      { name: 'Modelo 7', id: 7, tipo: 'Procuração' },
+      { name: 'Modelo 8', id: 8, tipo: 'Procuração' },
+      { name: 'Modelo 9', id: 9, tipo: 'Procuração' },
+      { name: 'Modelo 10', id: 10, tipo: 'Procuração' },
+    ]);
+    setIsLoading(false);
+  }, []);
 
-  const clients = response?.data ?? [];
-  const totalPages = response?.totalPages ?? 1;
-
-  const { mutate: deleteClient, isPending: isDeleting } = useDeleteClient();
-
-  const { mutate: updateClient } = useUpdateClient({
-    onSuccess: () => {
-      setIsEditClientOpen(false);
-    },
-  });
-  if (isError) {
-    return (
-      <div className="flex items-center justify-center h-full text-red-500">
-        Erro ao carregar clientes: {error.message}
-      </div>
-    );
+  function handleDelete() {
+    try {
+      setIsDeleting(true);
+    } catch (error) {
+      console.error(error);
+      toast.error('Um erro desconhecido ocorreu!');
+    } finally {
+      setIsDeleting(false);
+    }
   }
 
   return (
@@ -87,26 +90,26 @@ export default function ClientesPage() {
         <div className="relative w-full max-w-md">
           <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-slate-400" />
           <Input
-            placeholder="Pesquisar por nome, email, CPF..."
+            placeholder="Pesquisar por nome, tipo..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             className="pl-8 w-full bg-slate-700 border-slate-600 text-white"
           />
         </div>
         <Button
-          onClick={() => setIsCreateClientOpen(true)}
+          onClick={() => handleNewModel()}
           className="gap-2 bg-cyan-500 cursor-pointer hover:bg-cyan-600 text-slate-900 font-medium"
         >
           <UserPlus className="h-4 w-4" />
-          Novo Cliente
+          Novo Modelo
         </Button>
       </div>
 
       <Card className="bg-slate-800 border-slate-700">
         <CardHeader>
-          <CardTitle className="text-white">Lista de Clientes</CardTitle>
+          <CardTitle className="text-white">Modelos de Documentos</CardTitle>
           <CardDescription className="text-slate-400">
-            Visualize e gerencie todos os seus clientes cadastrados
+            Visualize e gerencie todos os seus modelos de documento cadastrados
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -118,39 +121,38 @@ export default function ClientesPage() {
             <Table>
               <TableHeader>
                 <TableRow className="border-slate-700 hover:bg-slate-700/50">
+                  <TableHead className="text-slate-300">ID</TableHead>
                   <TableHead className="text-slate-300">Nome</TableHead>
-                  <TableHead className="text-slate-300">Email</TableHead>
-                  <TableHead className="text-slate-300">Telefone</TableHead>
-                  <TableHead className="text-slate-300">CPF</TableHead>
+                  <TableHead className="text-slate-300">Tipo</TableHead>
                   <TableHead className="text-right text-slate-300">
                     Ações
                   </TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {clients.length === 0 ? (
+                {docModels.length === 0 ? (
                   <TableRow>
                     <TableCell
                       colSpan={5}
                       className="text-center py-8 text-slate-400"
                     >
-                      Nenhum cliente encontrado
+                      Nenhum modelo de documento encontrado
                     </TableCell>
                   </TableRow>
                 ) : (
-                  clients.map((client) => (
-                    <TableRow key={client.id} className="border-slate-700">
+                  docModels.map((model) => (
+                    <TableRow
+                      key={model.id}
+                      className="border-slate-700 w-full"
+                    >
                       <TableCell className="font-medium text-white">
-                        {client.nomeCompleto}
+                        {model.id}
+                      </TableCell>
+                      <TableCell className="font-medium  text-white">
+                        {model.name}
                       </TableCell>
                       <TableCell className="text-slate-300">
-                        {client.email}
-                      </TableCell>
-                      <TableCell className="text-slate-300">
-                        {maskTelefone(client.telefone)}
-                      </TableCell>
-                      <TableCell className="text-slate-300">
-                        {maskCPF(client.cpf)}
+                        {model.tipo}
                       </TableCell>
                       <TableCell className="text-right">
                         <div className="flex items-center justify-end gap-1">
@@ -158,8 +160,27 @@ export default function ClientesPage() {
                             variant="ghost"
                             size="icon"
                             onClick={() => {
-                              setClientToEdit(client);
-                              setIsEditClientOpen(true);
+                              console.log('Sla oq é isso');
+                            }}
+                            className="text-slate-400 cursor-pointer hover:text-white"
+                          >
+                            <Plus className="w-4 h-4" />
+                          </Button>
+                          <Button
+                            variant="ghost"
+                            size="icon"
+                            onClick={() => {
+                              console.log('Baixar');
+                            }}
+                            className="text-slate-400 cursor-pointer hover:text-white"
+                          >
+                            <Download className="w-4 h-4" />
+                          </Button>
+                          <Button
+                            variant="ghost"
+                            size="icon"
+                            onClick={() => {
+                              console.log('Editar');
                             }}
                             className="text-slate-400 cursor-pointer hover:text-white"
                           >
@@ -182,8 +203,8 @@ export default function ClientesPage() {
                                   Confirmar exclusão
                                 </AlertDialogTitle>
                                 <AlertDialogDescription className="text-slate-400">
-                                  Tem certeza que deseja excluir o cliente{' '}
-                                  {client.nomeCompleto}? Esta ação não pode ser
+                                  Tem certeza que deseja excluir o modelo de
+                                  documento {model.name}? Esta ação não pode ser
                                   desfeita.
                                 </AlertDialogDescription>
                               </AlertDialogHeader>
@@ -192,7 +213,7 @@ export default function ClientesPage() {
                                   Cancelar
                                 </AlertDialogCancel>
                                 <AlertDialogAction
-                                  onClick={() => deleteClient(client.id)}
+                                  onClick={() => handleDelete()}
                                   className="bg-red-600 cursor-pointer hover:bg-red-700 text-white"
                                 >
                                   {isDeleting ? 'Excluindo...' : 'Excluir'}
@@ -219,19 +240,6 @@ export default function ClientesPage() {
           </CardFooter>
         )}
       </Card>
-
-      <CreateClientSidebar
-        isOpen={isCreateClientOpen}
-        onClose={() => setIsCreateClientOpen(false)}
-      />
-      <EditClientSidebar
-        clientToEdit={clientToEdit}
-        isOpen={isEditClientOpen}
-        onClose={() => setIsEditClientOpen(false)}
-        onUpdateClient={(clientId, clientData) =>
-          updateClient({ clientId, clientData })
-        }
-      />
     </>
   );
 }
