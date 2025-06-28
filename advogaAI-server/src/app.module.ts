@@ -22,6 +22,9 @@ import { PessoaFisicaService } from './client/services/pessoa-fisica.service';
 import { PessoaFisicaRepository } from './client/repositories/pessoa-fisica.repository';
 import { PessoaJuridicaService } from './client/services/pessoa-juridica.service';
 import { PessoaJuridicaRepository } from './client/repositories/pessoa-juridica.repository';
+import { DocumentModelsController } from './document-models/document-models.controller';
+import { DocumentModelsModule } from './document-models/document-models.module';
+import { StorageModule } from './storage/storage.module';
 
 @Module({
   imports: [
@@ -49,12 +52,15 @@ import { PessoaJuridicaRepository } from './client/repositories/pessoa-juridica.
       }),
       inject: [ConfigService],
     }),
+    DocumentModelsModule,
+    StorageModule,
   ],
   controllers: [
     AppController,
     UsersController,
     ClientsController,
     EmailController,
+    DocumentModelsController,
   ],
   providers: [
     ClientsRepository,
