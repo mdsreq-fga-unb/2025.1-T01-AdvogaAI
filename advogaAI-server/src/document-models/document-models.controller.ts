@@ -5,16 +5,17 @@ import {
   HttpCode,
   HttpStatus,
   Param,
-  //UseGuards,
+  UseGuards,
 } from '@nestjs/common';
-//import { JwtAuthGuard } from 'src/shared/jwt/jwt-auth.guard';
+import { UserId } from 'src/shared/decorators/user-id.decorator';
+import { JwtAuthGuard } from 'src/shared/jwt/jwt-auth.guard';
 
 @Controller('document-models')
 export class DocumentModelsController {
-  //@UseGuards(JwtAuthGuard)
+  @UseGuards(JwtAuthGuard)
   @Delete(':id')
   @HttpCode(HttpStatus.OK)
-  deletePessoaJuridica(@Param('id') id: string) {
-    return id;
+  deleteDocumentModel(@Param('id') id: string, @UserId() userId: string) {
+    return userId;
   }
 }
