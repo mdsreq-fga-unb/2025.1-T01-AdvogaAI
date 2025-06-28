@@ -3,27 +3,64 @@
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Download, FileText, Plus, X } from 'lucide-react';
+import { Download, Plus, X } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useState, useCallback } from 'react';
 import { useDropzone } from 'react-dropzone';
 import { Parameter, ParameterInput } from './componentes/parameterInput';
+import { DocxPreviewer } from './componentes/docxPreviewer';
+import * as mammoth from 'mammoth';
 
 export default function CreateDocModelPage() {
   const router = useRouter();
   const [nome, setNome] = useState<string>('');
   const [tipo, setTipo] = useState<string>('');
   const [arquivo, setArquivo] = useState<File | null>(null);
-  const [parametros, setParametros] = useState<Parameter[]>([
-    { id: 1, text: 'Cliente - Nome', color: 'blue' },
-    { id: 2, text: 'Cliente - CPF', color: 'red' },
-    { id: 3, text: 'Cliente - Estado Civil', color: 'blue' },
-    { id: 4, text: 'Cliente - Telefone', color: 'green' },
-  ]);
+  const [parametros, setParametros] = useState<Parameter[]>([]);
+
+  function extractTagsFromText(text: string): string[] {
+    const regex = /{{\s*([^}]+?)\s*}}/g;
+    const matches = text.match(regex) || [];
+
+    const uniqueKeys = new Set(
+      matches.map((tag) => tag.replace(/{{|}}/g, '').trim()),
+    );
+
+    return Array.from(uniqueKeys);
+  }
 
   const onDrop = useCallback((acceptedFiles: File[]) => {
     if (acceptedFiles?.length) {
-      setArquivo(acceptedFiles[0]);
+      const file = acceptedFiles[0];
+      setArquivo(file);
+      const reader = new FileReader();
+      reader.onload = async (event) => {
+        const arrayBuffer = event.target?.result as ArrayBuffer;
+
+        if (arrayBuffer) {
+          try {
+            const result = await mammoth.extractRawText({ arrayBuffer });
+
+            const foundTags = extractTagsFromText(result.value);
+
+            const autoDetectedParams: Parameter[] = foundTags.map(
+              (tagText, index) => ({
+                id: index,
+                chave: `{{${tagText}}}`,
+                nome:
+                  tagText.charAt(0).toUpperCase() +
+                  tagText.slice(1).replace(/_/g, ' '),
+                color: 'blue',
+              }),
+            );
+
+            setParametros(autoDetectedParams);
+          } catch (error) {
+            console.error('Erro ao processar o arquivo .docx:', error);
+          }
+        }
+      };
+      reader.readAsArrayBuffer(file);
     }
   }, []);
 
@@ -31,7 +68,6 @@ export default function CreateDocModelPage() {
     useDropzone({
       onDrop,
       accept: {
-        // Define que só aceitamos arquivos .docx
         'application/vnd.openxmlformats-officedocument.wordprocessingml.document':
           ['.docx'],
       },
@@ -70,10 +106,7 @@ export default function CreateDocModelPage() {
             />
           </div>
 
-          <ParameterInput
-            parametros={parametros}
-            setParametros={setParametros}
-          />
+          <ParameterInput parametros={parametros} />
         </div>
 
         <h1 className="text-alabaster-50 text-4xl font-bold">
@@ -108,40 +141,33 @@ export default function CreateDocModelPage() {
         </div>
       </div>
       <div className="flex w-full max-w-[600px] max-h-[900px] flex-col justify-center bg-[#525252] h-full rounded-2xl p-6">
-        <p className="font-inter text-lg font-bold ml-8 mt-6">
-          Preview do documento
-        </p>
+        {arquivo && (
+          <div className="flex items-center justify-between">
+            <p className="font-inter text-lg font-bold ml-0 mt-0">
+              <p>Preview do documento</p>
+            </p>
+            <button
+              onClick={() => {
+                setArquivo(null);
+                setParametros([]);
+              }}
+              className="cursor-pointer"
+            >
+              <X />
+            </button>
+          </div>
+        )}
 
         <div className="flex-1 flex self-center h-full w-full items-center justify-center">
           <div
             {...getRootProps()}
-            className={`w-3/4 max-w-[500px] h-auto p-6 rounded-2xl flex flex-col gap-4 justify-center items-center bg-white text-[#2A2A2A] transition-all duration-300 cursor-pointer`}
+            className={`w-full ${arquivo ? 'max-h-[550px] h-full' : 'max-w-[500px] cursor-pointer h-auto'} p-6 rounded-2xl flex flex-col gap-4 justify-center items-center bg-white text-[#2A2A2A] transition-all duration-300 `}
           >
-            <input {...getInputProps()} />
-
             {arquivo ? (
-              <div className="flex flex-col items-center gap-2 text-center">
-                <FileText size={40} className="text-blue-600" />
-                <p className="font-bold text-lg">{arquivo.name}</p>
-                <p className="text-sm text-gray-600">
-                  {(arquivo.size / 1024).toFixed(2)} KB
-                </p>
-                <Button
-                  variant="destructive"
-                  size="sm"
-                  className="mt-2 cursor-pointer"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    setArquivo(null);
-                  }}
-                >
-                  <X className="mr-2 h-4 w-4" />
-                  Remover
-                </Button>
-              </div>
+              <DocxPreviewer file={arquivo} />
             ) : (
               <div className="flex flex-col items-center gap-4 text-center">
-                <Download size={40} />
+                <input {...getInputProps()} />
                 <p className="font-bold text-xl">
                   {isDragActive
                     ? 'Solte o arquivo aqui!'
@@ -150,6 +176,7 @@ export default function CreateDocModelPage() {
                 <p className="text-md">
                   Arraste e solte ou clique para selecionar
                 </p>
+                <Download size={40} />
               </div>
             )}
 
