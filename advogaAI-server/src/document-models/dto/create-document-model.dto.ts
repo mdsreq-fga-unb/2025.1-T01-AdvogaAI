@@ -4,10 +4,8 @@ import {
   IsNumber,
   IsOptional,
   IsString,
-  ValidateNested,
 } from 'class-validator';
 import { Type } from 'class-transformer';
-import { CreateCampoPersonalizadoDto } from './create-campo-personalizado';
 
 export class CreateModeloDocumentoDto {
   @IsString({ message: 'O nome deve ser um texto.' })
@@ -18,6 +16,9 @@ export class CreateModeloDocumentoDto {
   @IsOptional()
   descricao?: string;
 
+  @IsString()
+  tipo_documento: string;
+
   @IsOptional()
   @IsArray()
   @IsNumber({}, { each: true })
@@ -25,8 +26,5 @@ export class CreateModeloDocumentoDto {
   tagsSistemaIds?: number[];
 
   @IsOptional()
-  @IsArray()
-  @ValidateNested({ each: true })
-  @Type(() => CreateCampoPersonalizadoDto)
-  camposPersonalizados?: CreateCampoPersonalizadoDto[];
+  url: string;
 }

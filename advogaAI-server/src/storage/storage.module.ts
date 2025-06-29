@@ -7,5 +7,6 @@ import { S3Provider } from './s3.provider';
 @Module({
   providers: [StorageService, S3Provider],
   imports: [ConfigModule.forFeature(storageConfig)],
+  exports: [StorageService],
 })
 export class StorageModule {}

@@ -39,7 +39,9 @@ export class StorageService {
     try {
       await this.s3Client.send(command);
       this.logger.log(`Arquivo enviado com sucesso para: ${destinationPath}`);
-      return destinationPath;
+      const protocol = this.config.useSSL ? 'https' : 'http';
+      const fileUrl = `${protocol}://${this.config.endpoint}:${this.config.port}/${this.config.bucket}/${destinationPath}`;
+      return fileUrl;
     } catch (error) {
       this.logger.error(`Falha ao fazer upload para ${destinationPath}`, error);
       throw new Error('Falha no upload do arquivo.');

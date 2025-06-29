@@ -31,6 +31,7 @@ import { StorageModule } from './storage/storage.module';
     JwtModule,
     ClientsModule,
     UsersModule,
+    DocumentModelsModule,
     ConfigModule.forRoot({
       isGlobal: true,
     }),
