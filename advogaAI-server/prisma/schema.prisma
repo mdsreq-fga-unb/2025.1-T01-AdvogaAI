@@ -19,6 +19,7 @@ model User {
   updatedAt   DateTime @updatedAt
   clientesPessoaFisica  PessoaFisica[]
   clientesPessoaJuridica PessoaJuridica[]
+  modelosDocumento ModeloDocumento[]
 
   @@map("users")
 }
@@ -106,6 +107,9 @@ model ModeloDocumento {
   nome      String   
   descricao String?
   url String   
+
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   tagsDoSistema CampoModeloDocumento[]
 
