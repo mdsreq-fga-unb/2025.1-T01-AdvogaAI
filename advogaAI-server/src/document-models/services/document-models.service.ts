@@ -1,46 +1,49 @@
-import {
-  Injectable,
-  InternalServerErrorException,
-  Logger,
-} from '@nestjs/common';
-import { CreateModeloDocumentoDto } from '../dto/create-document-model.dto';
-import { StorageService } from 'src/storage/storage.service';
-import { CreateDocumentModelRepository } from '../repositories/create-document-model.repository';
+import { Injectable, Logger } from '@nestjs/common';
 import { ModeloDocumento } from '@prisma/client';
+import { DocumentModelsRepository } from '../repositories/document-models.repository';
+import {
+  InternalServerErrorException,
+  NotFoundException,
+} from '@nestjs/common/exceptions';
+import { StorageService } from 'src/storage/storage.service';
+import { CreateModeloDocumentoDto } from '../dto/create-document-model.dto';
 import { UpdateModeloDocumentoDto } from '../dto/update-document-model.dto';
-// import { ModeloDocumento } from '@prisma/client';
 
 @Injectable()
 export class DocumentModelsService {
   private readonly logger = new Logger(DocumentModelsService.name);
 
   constructor(
+    private readonly documentModelsRepository: DocumentModelsRepository,
     private readonly storageService: StorageService,
-    private readonly createDocumentModelsRepository: CreateDocumentModelRepository,
   ) {}
 
-  //   async delete(
-  //     id: string,
-  //     userId: string,
-  //   ): Promise<{ deletedDocument: ModeloDocumento }> {
-  //     try {
-  //       this.logger.log(`Deletando modelo de documento com id:${id}`);
-  //       const deletedDocument = await this.pessoaJuridicaRepository.delete(id);
-  //       this.logger.log(`Pessoa juridica deletada com sucesso`);
-  //       return { deletedDocument };
-  //     } catch (error) {
-  //       if (error instanceof NotFoundException) {
-  //         throw error;
-  //       }
-  //       this.logger.error(
-  //         `Não foi possível encontrar a pessoa juridica de id: ${id}`,
-  //       );
-  //       throw new InternalServerErrorException(
-  //         'Não foi possível deletar o cliente pessoa jurídica. Por favor, tente novamente mais tarde.',
-  //       );
-  //     }
-  //   }
-
+  async delete(
+    id: string,
+    userId: string,
+  ): Promise<{ deletedDocument: ModeloDocumento }> {
+    try {
+      this.logger.log(
+        `Deletando modelo de documento com id:${id} e user ${userId}`,
+      );
+      const deletedDocument = await this.documentModelsRepository.delete(
+        id,
+        userId,
+      );
+      this.logger.log(`Modelo de documento deletada com sucesso`);
+      return { deletedDocument };
+    } catch (error) {
+      if (error instanceof NotFoundException) {
+        throw error;
+      }
+      this.logger.error(
+        `Não foi possível encontrar o modelo de documento de id: ${id} e user ${userId}`,
+      );
+      throw new InternalServerErrorException(
+        'Não foi possível deletar o cliente pessoa jurídica. Por favor, tente novamente mais tarde.',
+      );
+    }
+  }
   async create(
     createDocumentModelDto: CreateModeloDocumentoDto,
     file: Express.Multer.File,
@@ -50,13 +53,11 @@ export class DocumentModelsService {
     this.logger.log(
       `Dados do modelo de documento: ${JSON.stringify(createDocumentModelDto)}`,
     );
-    this.logger.log(`Detalhes do arquivo enviado: ${JSON.stringify(file)}`);
     const timestamp = Date.now();
     const objectName = `users/${userId}/document-models/${timestamp}`;
 
     let initialModelData = {
       ...createDocumentModelDto,
-      //userId: userId,
       url: '',
     };
     try {
@@ -65,7 +66,6 @@ export class DocumentModelsService {
 
       initialModelData = {
         ...createDocumentModelDto,
-        //userId: userId,
         url: fileUrl,
       };
       this.logger.log(`Upload concluído. Atualizando o registro no banco.`);
@@ -79,8 +79,10 @@ export class DocumentModelsService {
       );
     }
 
-    const newDocumentModel =
-      await this.createDocumentModelsRepository.create(initialModelData);
+    const newDocumentModel = await this.documentModelsRepository.create(
+      initialModelData,
+      userId,
+    );
     this.logger.log(
       `Registro criado no banco com o ID: ${newDocumentModel.id}`,
     );
@@ -90,7 +92,7 @@ export class DocumentModelsService {
   async update(id: string, updateDto: UpdateModeloDocumentoDto) {
     this.logger.log(`Tentando atualizar o modelo de documento com ID: ${id}`);
 
-    const updatedDocument = await this.createDocumentModelsRepository.update(
+    const updatedDocument = await this.documentModelsRepository.update(
       id,
       updateDto,
     );

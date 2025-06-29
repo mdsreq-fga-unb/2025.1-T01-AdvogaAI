@@ -22,6 +22,8 @@ import { PessoaFisicaService } from './client/services/pessoa-fisica.service';
 import { PessoaFisicaRepository } from './client/repositories/pessoa-fisica.repository';
 import { PessoaJuridicaService } from './client/services/pessoa-juridica.service';
 import { PessoaJuridicaRepository } from './client/repositories/pessoa-juridica.repository';
+import { DocumentModelsService } from './document-models/services/document-models.service';
+import { DocumentModelsRepository } from './document-models/repositories/document-models.repository';
 import { DocumentModelsController } from './document-models/document-models.controller';
 import { DocumentModelsModule } from './document-models/document-models.module';
 import { StorageModule } from './storage/storage.module';
@@ -79,6 +81,8 @@ import { StorageModule } from './storage/storage.module';
     ClientsService,
     PrismaService,
     UserLoginService,
+    DocumentModelsService,
+    DocumentModelsRepository,
   ],
 })
 export class AppModule {}

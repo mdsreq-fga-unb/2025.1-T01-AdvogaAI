@@ -1,10 +1,20 @@
 import {
-  Injectable,
   ConflictException,
+  //ConflictException,
+  Injectable,
   NotFoundException,
 } from '@nestjs/common';
-import { ModeloDocumento, Prisma } from '@prisma/client';
 import { PrismaService } from 'prisma/prisma.service';
+
+export interface PaginatedResult<T> {
+  data: T[];
+  totalItems: number;
+  totalPages: number;
+  currentPage: number;
+  itemsPerPage: number;
+}
+
+import { ModeloDocumento, Prisma } from '@prisma/client';
 import { CreateModeloDocumentoDto } from '../dto/create-document-model.dto';
 
 type UpdateDocumentModelData = Partial<{
@@ -13,25 +23,52 @@ type UpdateDocumentModelData = Partial<{
   tipoDocumento: string;
   url: string;
 }>;
-
 @Injectable()
-export class CreateDocumentModelRepository {
+export class DocumentModelsRepository {
   constructor(private readonly prisma: PrismaService) {}
 
+  /**
+   * Creates a new PessoaFisica record, including its associated address,
+   * and links it to a specific User (attorney).
+   * @param data The DTO containing PessoaFisica and Address details.
+   * @param userId The ID of the User (attorney) who owns this client.
+   */
+
+  async delete(id: string, userId: string): Promise<ModeloDocumento> {
+    const documentModelToDelete = await this.prisma.modeloDocumento.findFirst({
+      where: { id, userId },
+    });
+
+    if (!documentModelToDelete) {
+      throw new NotFoundException(
+        `Documento com o ID ${id} e user ${userId} não encontrado`,
+      );
+    }
+
+    return this.prisma.modeloDocumento.delete({
+      where: { id, userId },
+    });
+  }
   /**
    * Cria um novo registro de modelo de documento no banco de dados.
    * @param data - Os dados para a criação do novo modelo.
    * @returns A entidade completa do modelo de documento recém-criada.
    * @throws ConflictException se um modelo com o mesmo nome já existir para o usuário.
    */
-  async create(data: CreateModeloDocumentoDto): Promise<ModeloDocumento> {
+  async create(
+    data: CreateModeloDocumentoDto,
+    userId: string,
+  ): Promise<ModeloDocumento> {
     const { tagsSistemaIds, ...modeloData } = data;
 
     try {
       const newDocumentModel = await this.prisma.modeloDocumento.create({
         data: {
           ...modeloData,
-          url: modeloData.url || '', // Garante que a URL não seja nula
+          url: modeloData.url || '',
+          user: {
+            connect: { id: userId },
+          },
 
           tagsDoSistema: {
             create: tagsSistemaIds?.map((tagId) => ({

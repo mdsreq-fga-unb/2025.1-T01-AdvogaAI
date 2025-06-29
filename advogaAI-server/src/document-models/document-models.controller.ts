@@ -17,10 +17,10 @@ import {
 } from '@nestjs/common';
 import { UserId } from 'src/shared/decorators/user-id.decorator';
 import { JwtAuthGuard } from 'src/shared/jwt/jwt-auth.guard';
+import { DocumentModelsService } from './services/document-models.service';
 import { CreateModeloDocumentoDto } from './dto/create-document-model.dto';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { ApiConsumes } from '@nestjs/swagger';
-import { DocumentModelsService } from './services/document-model.service';
 import { UpdateModeloDocumentoDto } from './dto/update-document-model.dto';
 import { TagSistemaService } from './services/system-tags.service';
 
@@ -35,7 +35,7 @@ export class DocumentModelsController {
   @Delete(':id')
   @HttpCode(HttpStatus.OK)
   deleteDocumentModel(@Param('id') id: string, @UserId() userId: string) {
-    return userId;
+    return this.documentModelsService.delete(id, userId);
   }
 
   @UseGuards(JwtAuthGuard)
