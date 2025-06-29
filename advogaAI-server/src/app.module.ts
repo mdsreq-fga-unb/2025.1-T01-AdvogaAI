@@ -27,6 +27,8 @@ import { DocumentModelsRepository } from './document-models/repositories/documen
 import { DocumentModelsController } from './document-models/document-models.controller';
 import { DocumentModelsModule } from './document-models/document-models.module';
 import { StorageModule } from './storage/storage.module';
+import { GetUserService } from './user/services/get-user.service';
+import { UpdateUserService } from './user/services/update-user.service';
 
 @Module({
   imports: [
@@ -80,6 +82,8 @@ import { StorageModule } from './storage/storage.module';
     GenerateConfirmEmailTokenService,
     ClientsService,
     PrismaService,
+    GetUserService,
+    UpdateUserService,
     UserLoginService,
     DocumentModelsService,
     DocumentModelsRepository,

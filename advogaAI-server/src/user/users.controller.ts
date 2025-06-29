@@ -1,10 +1,22 @@
-import { Body, Controller, HttpStatus, Post, Res } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  HttpStatus,
+  Patch,
+  Post,
+  Res,
+  UseGuards,
+} from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UsersService } from './users.service';
 import { LoginUserDto } from './dto/user-login.dto';
 import { JwtService } from 'src/shared/jwt/jwt.service';
 import { Response } from 'express';
+import { UserId } from 'src/shared/decorators/user-id.decorator';
+import { JwtAuthGuard } from 'src/shared/jwt/jwt-auth.guard';
+import { UpdateUserDto } from './dto/update-user.dto';
 
 @ApiTags('Users')
 @Controller('users')
@@ -13,6 +25,18 @@ export class UsersController {
     private readonly UserService: UsersService,
     private readonly JwtService: JwtService,
   ) {}
+
+  @UseGuards(JwtAuthGuard)
+  @Get('data')
+  async getUserData(@UserId() userId: string) {
+    return await this.UserService.getUserData(userId);
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Patch('data')
+  async updateUserData(@UserId() userId: string, @Body() data: UpdateUserDto) {
+    return await this.UserService.updateUserData(userId, data);
+  }
 
   @Post('register')
   async createUser(@Body() user: CreateUserDto) {
