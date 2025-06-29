@@ -102,4 +102,28 @@ export class DocumentModelsService {
     );
     return updatedDocument;
   }
+
+  /**
+   * Busca e pagina os modelos de documento de um usuário.
+   * @param userId O ID do usuário.
+   * @param limit A quantidade de itens por página.
+   * @param offset O número de itens a pular.
+   * @param search O termo de busca opcional.
+   * @returns O resultado paginado dos modelos de documento.
+   */
+  async findAllByUserId(
+    userId: string,
+    limit: number,
+    offset: number,
+    search: string | undefined,
+  ) {
+    this.logger.log(
+      `Buscando modelos de documento para o usuário ${userId} com o termo: '${search}'`,
+    );
+    return await this.documentModelsRepository.findAllByUserId(userId, {
+      limit,
+      offset,
+      search,
+    });
+  }
 }

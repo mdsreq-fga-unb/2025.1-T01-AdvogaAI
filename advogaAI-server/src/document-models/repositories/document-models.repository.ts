@@ -92,12 +92,10 @@ export class DocumentModelsRepository {
         error instanceof Prisma.PrismaClientKnownRequestError &&
         error.code === 'P2002' // Violação de constraint 'unique'
       ) {
-        // Assume que a constraint é no campo 'nome'
         throw new ConflictException(
-          `Um modelo com o nome '${data.nome}' já existe.`,
+          `Aconteceu um conflito ao criar o modelo de documento. Por favor verifique as informações e envie novamente.`,
         );
       }
-      // Re-lança outros erros inesperados
       throw error;
     }
   }
@@ -138,5 +136,72 @@ export class DocumentModelsRepository {
       }
       throw error;
     }
+  }
+
+  /**
+   * Encontra e pagina todos os modelos de documento de um usuário, com busca opcional.
+   * @param userId - O ID do usuário proprietário dos modelos.
+   * @param options - Opções de paginação (limit, offset) e busca (search).
+   * @returns Um objeto com os dados paginados e informações de paginação.
+   */
+  async findAllByUserId(
+    userId: string,
+    options: { limit: number; offset: number; search?: string },
+  ): Promise<PaginatedResult<ModeloDocumento>> {
+    const { limit, offset, search } = options;
+
+    const whereClause: Prisma.ModeloDocumentoWhereInput = {
+      userId,
+    };
+
+    if (search) {
+      whereClause.OR = [
+        {
+          nome: {
+            contains: search,
+            mode: 'insensitive',
+          },
+        },
+        {
+          tipo_documento: {
+            contains: search,
+            mode: 'insensitive',
+          },
+        },
+      ];
+    }
+
+    const [totalItems, data] = await this.prisma.$transaction([
+      this.prisma.modeloDocumento.count({
+        where: whereClause,
+      }),
+      this.prisma.modeloDocumento.findMany({
+        where: whereClause,
+        include: {
+          tagsDoSistema: {
+            include: {
+              tagSistema: true,
+            },
+          },
+          user: true,
+        },
+        skip: offset,
+        take: limit,
+        orderBy: {
+          nome: 'asc',
+        },
+      }),
+    ]);
+
+    const totalPages = Math.ceil(totalItems / limit);
+    const currentPage = Math.floor(offset / limit) + 1;
+
+    return {
+      data,
+      totalItems,
+      totalPages,
+      currentPage,
+      itemsPerPage: limit,
+    };
   }
 }
