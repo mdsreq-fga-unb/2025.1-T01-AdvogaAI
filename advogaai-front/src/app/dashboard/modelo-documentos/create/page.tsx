@@ -15,6 +15,7 @@ export default function CreateDocModelPage() {
   const router = useRouter();
   const [nome, setNome] = useState<string>('');
   const [tipo, setTipo] = useState<string>('');
+  const [descricao, setDescricao] = useState<string>('');
   const [arquivo, setArquivo] = useState<File | null>(null);
   const [parametros, setParametros] = useState<Parameter[]>([]);
 
@@ -77,7 +78,7 @@ export default function CreateDocModelPage() {
   return (
     <div className="w-full h-full grid md:grid-cols-2 grid-cols-1 items-center place-items-center justify-center text-white">
       <div className="flex h-full max-w-[600px] max-h-[900px] w-full flex-col items-center justify-center gap-4 md:pb-0 pb-4 md:px-4">
-        <div className="flex w-full flex-col gap-12">
+        <div className="flex w-full flex-col gap-8">
           <div className="grid w-full items-center gap-2">
             <Label htmlFor="nome" className="font-bold">
               Nome do Modelo de Documento
@@ -102,6 +103,19 @@ export default function CreateDocModelPage() {
               placeholder="Tipo"
               value={tipo}
               onChange={(e) => setTipo(e.target.value)}
+              className="bg-white text-white"
+            />
+          </div>
+          <div className="grid w-full items-center gap-2">
+            <Label htmlFor="tipo" className="font-bold">
+              Descrição do Modelo de Documento
+            </Label>
+            <Input
+              type="text"
+              id="descricao"
+              placeholder="Descrição"
+              value={descricao}
+              onChange={(e) => setDescricao(e.target.value)}
               className="bg-white text-white"
             />
           </div>
@@ -132,7 +146,9 @@ export default function CreateDocModelPage() {
             Cancelar
           </Button>
           <Button
-            onClick={() => console.log('Criar')}
+            onClick={() =>
+              console.log({ nome: nome, descricao: descricao, tipo: tipo })
+            }
             className="w-full cursor-pointer !py-6 font-satoshi text-md md:flex-1"
           >
             <Plus className=" h-4 w-4" />

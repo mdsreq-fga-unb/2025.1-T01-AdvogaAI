@@ -35,9 +35,11 @@ import { Search, Edit, Trash2, UserPlus, Download, Plus } from 'lucide-react';
 import CompletePagination from '@/components/completePagination';
 import { useRouter } from 'next/navigation';
 import toast from 'react-hot-toast';
+import { Label } from '@/components/ui/label';
 
 export interface docModelsType {
   id: number;
+  descricao: string;
   name: string;
   tipo: string;
 }
@@ -45,9 +47,14 @@ export interface docModelsType {
 export default function DocModelPage() {
   const router = useRouter();
   const [searchTerm, setSearchTerm] = useState<string>('');
+  const [nomeEdit, setNomeEdit] = useState<string>('');
+  const [tipoEdit, setTipoEdit] = useState<string>('');
+  const [descEdit, setDescEdit] = useState<string>('');
   const [docModels, setDocModels] = useState<docModelsType[]>([]);
+  const [modelToEdit, setModelToEdit] = useState<docModelsType | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isDeleting, setIsDeleting] = useState<boolean>(false);
+  const [isEditing, setIsEditing] = useState<boolean>(false);
   const [page, setPage] = useState<number>(1);
   const [totalPages, setTotalPages] = useState<number>(1);
 
@@ -59,19 +66,30 @@ export default function DocModelPage() {
     setIsLoading(true);
     setTotalPages(1);
     setDocModels([
-      { name: 'Modelo 1', id: 1, tipo: 'Procuração' },
-      { name: 'Modelo 2', id: 2, tipo: 'Procuração' },
-      { name: 'Modelo 3', id: 3, tipo: 'Procuração' },
-      { name: 'Modelo 4', id: 4, tipo: 'Procuração' },
-      { name: 'Modelo 5', id: 5, tipo: 'Procuração' },
-      { name: 'Modelo 6', id: 6, tipo: 'Procuração' },
-      { name: 'Modelo 7', id: 7, tipo: 'Procuração' },
-      { name: 'Modelo 8', id: 8, tipo: 'Procuração' },
-      { name: 'Modelo 9', id: 9, tipo: 'Procuração' },
-      { name: 'Modelo 10', id: 10, tipo: 'Procuração' },
+      { name: 'Modelo 1', id: 1, tipo: 'Procuração', descricao: 'Descrição' },
+      { name: 'Modelo 2', id: 2, tipo: 'Procuração', descricao: 'Descrição' },
+      { name: 'Modelo 3', id: 3, tipo: 'Procuração', descricao: 'Descrição' },
+      { name: 'Modelo 4', id: 4, tipo: 'Procuração', descricao: 'Descrição' },
+      { name: 'Modelo 5', id: 5, tipo: 'Procuração', descricao: 'Descrição' },
+      { name: 'Modelo 6', id: 6, tipo: 'Procuração', descricao: 'Descrição' },
+      { name: 'Modelo 7', id: 7, tipo: 'Procuração', descricao: 'Descrição' },
+      { name: 'Modelo 8', id: 8, tipo: 'Procuração', descricao: 'Descrição' },
+      { name: 'Modelo 9', id: 9, tipo: 'Procuração', descricao: 'Descrição' },
+      { name: 'Modelo 10', id: 10, tipo: 'Procuração', descricao: 'Descrição' },
     ]);
     setIsLoading(false);
   }, []);
+
+  function handleEdit() {
+    try {
+      setIsEditing(true);
+    } catch (error) {
+      console.error(error);
+      toast.error('Um erro desconhecido ocorreu!');
+    } finally {
+      setIsEditing(false);
+    }
+  }
 
   function handleDelete() {
     try {
@@ -123,6 +141,7 @@ export default function DocModelPage() {
                 <TableRow className="border-slate-700 hover:bg-slate-700/50">
                   <TableHead className="text-slate-300">ID</TableHead>
                   <TableHead className="text-slate-300">Nome</TableHead>
+                  <TableHead className="text-slate-300">Descrição</TableHead>
                   <TableHead className="text-slate-300">Tipo</TableHead>
                   <TableHead className="text-right text-slate-300">
                     Ações
@@ -151,6 +170,9 @@ export default function DocModelPage() {
                       <TableCell className="font-medium  text-white">
                         {model.name}
                       </TableCell>
+                      <TableCell className="font-medium  text-white">
+                        {model.descricao}
+                      </TableCell>
                       <TableCell className="text-slate-300">
                         {model.tipo}
                       </TableCell>
@@ -176,16 +198,93 @@ export default function DocModelPage() {
                           >
                             <Download className="w-4 h-4" />
                           </Button>
-                          <Button
-                            variant="ghost"
-                            size="icon"
-                            onClick={() => {
-                              console.log('Editar');
-                            }}
-                            className="text-slate-400 cursor-pointer hover:text-white"
-                          >
-                            <Edit className="w-4 h-4" />
-                          </Button>
+                          <AlertDialog>
+                            <AlertDialogTrigger asChild>
+                              <Button
+                                variant="ghost"
+                                size="icon"
+                                onClick={() => {
+                                  setModelToEdit(model);
+                                }}
+                                className="text-slate-400 cursor-pointer hover:text-white"
+                              >
+                                <Edit className="w-4 h-4" />
+                              </Button>
+                            </AlertDialogTrigger>
+                            <AlertDialogContent className="bg-slate-800 border-slate-700">
+                              <AlertDialogHeader>
+                                <AlertDialogTitle className="text-white">
+                                  Editar dados do documento
+                                </AlertDialogTitle>
+                                <div className="text-white flex flex-col gap-4">
+                                  <div className="grid w-full items-center gap-2">
+                                    <Label htmlFor="tipo" className="font-bold">
+                                      Nome do documento
+                                    </Label>
+                                    <Input
+                                      type="text"
+                                      id="nome"
+                                      placeholder={
+                                        modelToEdit ? modelToEdit.name : `Nome`
+                                      }
+                                      value={nomeEdit}
+                                      onChange={(e) =>
+                                        setNomeEdit(e.target.value)
+                                      }
+                                      className="bg-black border-0 text-white"
+                                    />
+                                  </div>
+                                  <div className="grid w-full items-center gap-2">
+                                    <Label htmlFor="tipo" className="font-bold">
+                                      Tipo do documento
+                                    </Label>
+                                    <Input
+                                      type="text"
+                                      id="tipo"
+                                      placeholder={
+                                        modelToEdit ? modelToEdit.tipo : `Tipo`
+                                      }
+                                      value={tipoEdit}
+                                      onChange={(e) =>
+                                        setTipoEdit(e.target.value)
+                                      }
+                                      className="bg-black border-0 text-white"
+                                    />
+                                  </div>
+                                  <div className="grid w-full items-center gap-2">
+                                    <Label htmlFor="tipo" className="font-bold">
+                                      Descrição do documento
+                                    </Label>
+                                    <Input
+                                      type="text"
+                                      id="desc"
+                                      placeholder={
+                                        modelToEdit
+                                          ? modelToEdit.descricao
+                                          : `Descrição`
+                                      }
+                                      value={descEdit}
+                                      onChange={(e) =>
+                                        setDescEdit(e.target.value)
+                                      }
+                                      className="bg-black border-0 text-white"
+                                    />
+                                  </div>
+                                </div>
+                              </AlertDialogHeader>
+                              <AlertDialogFooter>
+                                <AlertDialogCancel className="bg-slate-700 cursor-pointer text-slate-300 hover:bg-slate-600 hover:text-slate-300 border-slate-600">
+                                  Cancelar
+                                </AlertDialogCancel>
+                                <AlertDialogAction
+                                  onClick={() => handleEdit()}
+                                  className="bg-alabaster-100 hover:bg-alabaster-300 cursor-pointer text-black"
+                                >
+                                  {isEditing ? 'Salvando...' : 'Salvar'}
+                                </AlertDialogAction>
+                              </AlertDialogFooter>
+                            </AlertDialogContent>
+                          </AlertDialog>
                           <AlertDialog>
                             <AlertDialogTrigger asChild>
                               <Button
