@@ -22,6 +22,11 @@ import { PessoaFisicaService } from './client/services/pessoa-fisica.service';
 import { PessoaFisicaRepository } from './client/repositories/pessoa-fisica.repository';
 import { PessoaJuridicaService } from './client/services/pessoa-juridica.service';
 import { PessoaJuridicaRepository } from './client/repositories/pessoa-juridica.repository';
+import { DocumentModelsService } from './document-models/services/document-models.service';
+import { DocumentModelsRepository } from './document-models/repositories/document-models.repository';
+import { DocumentModelsController } from './document-models/document-models.controller';
+import { DocumentModelsModule } from './document-models/document-models.module';
+import { StorageModule } from './storage/storage.module';
 import { GetUserService } from './user/services/get-user.service';
 import { UpdateUserService } from './user/services/update-user.service';
 
@@ -30,6 +35,7 @@ import { UpdateUserService } from './user/services/update-user.service';
     JwtModule,
     ClientsModule,
     UsersModule,
+    DocumentModelsModule,
     ConfigModule.forRoot({
       isGlobal: true,
     }),
@@ -51,12 +57,15 @@ import { UpdateUserService } from './user/services/update-user.service';
       }),
       inject: [ConfigService],
     }),
+    DocumentModelsModule,
+    StorageModule,
   ],
   controllers: [
     AppController,
     UsersController,
     ClientsController,
     EmailController,
+    DocumentModelsController,
   ],
   providers: [
     ClientsRepository,
@@ -76,6 +85,8 @@ import { UpdateUserService } from './user/services/update-user.service';
     GetUserService,
     UpdateUserService,
     UserLoginService,
+    DocumentModelsService,
+    DocumentModelsRepository,
   ],
 })
 export class AppModule {}
