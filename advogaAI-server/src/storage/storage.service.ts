@@ -1,13 +1,19 @@
 import {
   GetObjectCommand,
-  HeadObjectCommand,
   PutObjectCommand,
   S3Client,
 } from '@aws-sdk/client-s3';
-import { Inject, Injectable, Logger, NotFoundException } from '@nestjs/common';
+import {
+  Inject,
+  Injectable,
+  InternalServerErrorException,
+  Logger,
+  NotFoundException,
+} from '@nestjs/common';
 import storageConfig from './storage.config';
 import { ConfigType } from '@nestjs/config';
 import 'multer';
+import { Readable } from 'stream';
 
 @Injectable()
 export class StorageService {
@@ -47,26 +53,29 @@ export class StorageService {
       throw new Error('Falha no upload do arquivo.');
     }
   }
-  async getFileStream(bucket: string, fileKey: string) {
+  async downloadFile(path: string): Promise<{
+    stream: Readable;
+    contentType: string;
+  }> {
     try {
-      const metaCommand = new HeadObjectCommand({
-        Bucket: bucket,
-        Key: fileKey,
+      const command = new GetObjectCommand({
+        Bucket: this.config.bucket,
+        Key: path,
       });
-      const { ContentType, ContentLength } =
-        await this.s3Client.send(metaCommand);
 
-      const getCommand = new GetObjectCommand({ Bucket: bucket, Key: fileKey });
-      const response = await this.s3Client.send(getCommand);
-
-      return {
-        stream: response.Body,
-        contentType: ContentType,
-        contentLength: ContentLength,
-      };
+      const response = await this.s3Client.send(command);
+      if (response.Body instanceof Readable) {
+        return {
+          stream: response.Body,
+          contentType: response.ContentType || 'application/octet-stream',
+        };
+      }
+      throw new InternalServerErrorException(
+        'O corpo do objeto retornado não é um stream legível.',
+      );
     } catch (error) {
-      if (error instanceof Error && error.name === 'NotFound') {
-        throw new NotFoundException('File not found.');
+      if (error instanceof Error) {
+        throw new NotFoundException(error.message);
       }
       throw error;
     }

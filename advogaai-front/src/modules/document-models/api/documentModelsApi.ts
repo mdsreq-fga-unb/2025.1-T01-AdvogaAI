@@ -24,7 +24,7 @@ export async function createModeloDocumento(
   const formData = new FormData();
   formData.append('nome', data.nome);
   formData.append('tipo_documento', data.tipo_documento);
-  formData.append('documento', data.documento);
+  formData.append('documento', data.documento ?? '');
   if (data.descricao) {
     formData.append('descricao', data.descricao);
   }

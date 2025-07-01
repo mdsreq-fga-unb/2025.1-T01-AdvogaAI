@@ -82,13 +82,29 @@ export const createModeloDocumentoSchema = z.object({
   tipo_documento: z.string().min(1, 'O tipo do documento é obrigatório.'),
   descricao: z.string().optional(),
   documento: z
-    .instanceof(FileList, { message: 'É necessário selecionar um arquivo.' })
-    .refine((files) => files.length === 1, 'Selecione apenas um arquivo.')
-    .transform((files) => files[0])
-    .refine(
-      (file) => file.size <= 5 * 1024 * 1024, // 5MB
-      `O arquivo não pode ter mais de 5MB.`,
-    ),
+    .any() // Change from z.instanceof(FileList) to z.any()
+    .refine((files) => {
+      // Only run FileList specific checks on the client (in the browser)
+      if (typeof window !== 'undefined' && files instanceof FileList) {
+        return files.length === 1;
+      }
+      // For server-side or if not a FileList (e.g., undefined/null), allow to pass initial validation
+      return true;
+    }, 'Selecione apenas um arquivo.')
+    .transform((files) => {
+      // Only perform transform if it's a FileList on the client
+      if (typeof window !== 'undefined' && files instanceof FileList) {
+        return files[0];
+      }
+      return undefined; // Or null, depending on your desired outcome when no file is present or on server
+    })
+    .refine((file) => {
+      // Only run File specific checks on the client
+      if (typeof window !== 'undefined' && file instanceof File) {
+        return file.size <= 5 * 1024 * 1024; // 5MB
+      }
+      return true; // Allow to pass on server or if not a File
+    }, `O arquivo não pode ter mais de 5MB.`),
   tagsSistemaIds: z
     .array(z.string())
     .optional()

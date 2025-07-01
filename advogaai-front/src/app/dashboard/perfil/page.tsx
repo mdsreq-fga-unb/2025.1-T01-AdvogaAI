@@ -122,7 +122,7 @@ export default function Perfil() {
       <form
         // eslint-disable-next-line @typescript-eslint/no-misused-promises
         onSubmit={form.handleSubmit(onSubmit)}
-        className="w-2/3 self-center space-y-6"
+        className="md:w-2/3 w-full self-center space-y-6"
       >
         <Separator />
         <div>

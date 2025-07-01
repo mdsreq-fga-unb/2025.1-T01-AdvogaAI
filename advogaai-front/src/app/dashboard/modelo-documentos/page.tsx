@@ -31,75 +31,95 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from '@/components/ui/alert-dialog';
-import { Search, Edit, Trash2, UserPlus, Download, Plus } from 'lucide-react';
+import { Search, Edit, Trash2, UserPlus, Download } from 'lucide-react';
 import CompletePagination from '@/components/completePagination';
 import { useRouter } from 'next/navigation';
-import toast from 'react-hot-toast';
 import { Label } from '@/components/ui/label';
-
-export interface docModelsType {
-  id: number;
-  descricao: string;
-  name: string;
-  tipo: string;
-}
+import { useGetModelosDocumento } from '@/modules/document-models/hooks/useGetModelosDocumento';
+import { ModeloDocumento } from '@/modules/document-models/api/documentModelsSchema';
+import { useDebounce } from '../../../../hooks/use-debounce';
+import { useDeleteModeloDocumento } from '@/modules/document-models/hooks/useDeleteModeloDocumento';
+import { useUpdateModeloDocumento } from '@/modules/document-models/hooks/useUpdateModeloDocumento';
+import toast from 'react-hot-toast';
+import { downloadFile } from '@/services/documents/downloadFile.service';
 
 export default function DocModelPage() {
   const router = useRouter();
-  const [searchTerm, setSearchTerm] = useState<string>('');
+  const [page, setPage] = useState(1);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [debouncedSearchTerm] = useDebounce(searchTerm, 500);
   const [nomeEdit, setNomeEdit] = useState<string>('');
   const [tipoEdit, setTipoEdit] = useState<string>('');
   const [descEdit, setDescEdit] = useState<string>('');
-  const [docModels, setDocModels] = useState<docModelsType[]>([]);
-  const [modelToEdit, setModelToEdit] = useState<docModelsType | null>(null);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [isDeleting, setIsDeleting] = useState<boolean>(false);
-  const [isEditing, setIsEditing] = useState<boolean>(false);
-  const [page, setPage] = useState<number>(1);
-  const [totalPages, setTotalPages] = useState<number>(1);
-
+  const [modelToEdit, setModelToEdit] = useState<ModeloDocumento | null>(null);
+  const [downloadingId, setDownloadingId] = useState<string | null>(null);
   function handleNewModel() {
     router.push('modelo-documentos/create');
   }
+  const itemsPerPage = 10;
+  const {
+    data: response,
+    isLoading,
+    error,
+    isError,
+  } = useGetModelosDocumento(
+    itemsPerPage,
+    (page - 1) * itemsPerPage,
+    debouncedSearchTerm,
+  );
+
+  const { mutate: deleteModel, isPending: isDeleting } =
+    useDeleteModeloDocumento();
+
+  const { mutate: updateModel, isPending: isEditing } =
+    useUpdateModeloDocumento();
+
+  const docModels = response?.data ?? [];
+  const totalPages = response?.totalPages ?? 1;
+  const currentPage = response?.currentPage ?? 1;
 
   useEffect(() => {
-    setIsLoading(true);
-    setTotalPages(1);
-    setDocModels([
-      { name: 'Modelo 1', id: 1, tipo: 'Procuração', descricao: 'Descrição' },
-      { name: 'Modelo 2', id: 2, tipo: 'Procuração', descricao: 'Descrição' },
-      { name: 'Modelo 3', id: 3, tipo: 'Procuração', descricao: 'Descrição' },
-      { name: 'Modelo 4', id: 4, tipo: 'Procuração', descricao: 'Descrição' },
-      { name: 'Modelo 5', id: 5, tipo: 'Procuração', descricao: 'Descrição' },
-      { name: 'Modelo 6', id: 6, tipo: 'Procuração', descricao: 'Descrição' },
-      { name: 'Modelo 7', id: 7, tipo: 'Procuração', descricao: 'Descrição' },
-      { name: 'Modelo 8', id: 8, tipo: 'Procuração', descricao: 'Descrição' },
-      { name: 'Modelo 9', id: 9, tipo: 'Procuração', descricao: 'Descrição' },
-      { name: 'Modelo 10', id: 10, tipo: 'Procuração', descricao: 'Descrição' },
-    ]);
-    setIsLoading(false);
-  }, []);
-
-  function handleEdit() {
-    try {
-      setIsEditing(true);
-    } catch (error) {
-      console.error(error);
-      toast.error('Um erro desconhecido ocorreu!');
-    } finally {
-      setIsEditing(false);
+    if (modelToEdit) {
+      setNomeEdit(modelToEdit.nome);
+      setTipoEdit(modelToEdit.tipo_documento);
+      setDescEdit(modelToEdit.descricao ?? '');
     }
+  }, [modelToEdit]);
+
+  if (isError) {
+    return (
+      <div className="text-red-500">
+        Falha ao carregar os dados: {error?.message}
+      </div>
+    );
   }
 
-  function handleDelete() {
-    try {
-      setIsDeleting(true);
-    } catch (error) {
-      console.error(error);
-      toast.error('Um erro desconhecido ocorreu!');
-    } finally {
-      setIsDeleting(false);
-    }
+  async function handleDownload(model: ModeloDocumento) {
+    setDownloadingId(model.id);
+    const promise = downloadFile(model.url);
+
+    await toast
+      .promise(promise, {
+        loading: 'Preparando download...',
+        success: (data) => {
+          const url = window.URL.createObjectURL(data.blob);
+          const link = document.createElement('a');
+          link.href = url;
+          link.setAttribute('download', `${model.nome}`);
+
+          document.body.appendChild(link);
+          link.click();
+
+          link.parentNode?.removeChild(link);
+          window.URL.revokeObjectURL(url);
+
+          return 'Download feito com sucesso!';
+        },
+        error: () => 'Ocorreu um erro ao fazer o download.',
+      })
+      .finally(() => {
+        setDownloadingId(null);
+      });
   }
 
   return (
@@ -139,7 +159,7 @@ export default function DocModelPage() {
             <Table>
               <TableHeader>
                 <TableRow className="border-slate-700 hover:bg-slate-700/50">
-                  <TableHead className="text-slate-300">ID</TableHead>
+                  <TableHead className="text-slate-300">#</TableHead>
                   <TableHead className="text-slate-300">Nome</TableHead>
                   <TableHead className="text-slate-300">Descrição</TableHead>
                   <TableHead className="text-slate-300">Tipo</TableHead>
@@ -159,41 +179,30 @@ export default function DocModelPage() {
                     </TableCell>
                   </TableRow>
                 ) : (
-                  docModels.map((model) => (
+                  docModels.map((model, index) => (
                     <TableRow
                       key={model.id}
                       className="border-slate-700 w-full"
                     >
                       <TableCell className="font-medium text-white">
-                        {model.id}
+                        {index + 1 + itemsPerPage * (page - 1)}
                       </TableCell>
                       <TableCell className="font-medium  text-white">
-                        {model.name}
+                        {model.nome}
                       </TableCell>
                       <TableCell className="font-medium  text-white">
                         {model.descricao}
                       </TableCell>
                       <TableCell className="text-slate-300">
-                        {model.tipo}
+                        {model.tipo_documento}
                       </TableCell>
                       <TableCell className="text-right">
                         <div className="flex items-center justify-end gap-1">
                           <Button
                             variant="ghost"
                             size="icon"
-                            onClick={() => {
-                              console.log('Sla oq é isso');
-                            }}
-                            className="text-slate-400 cursor-pointer hover:text-white"
-                          >
-                            <Plus className="w-4 h-4" />
-                          </Button>
-                          <Button
-                            variant="ghost"
-                            size="icon"
-                            onClick={() => {
-                              console.log('Baixar');
-                            }}
+                            disabled={downloadingId === model.id}
+                            onClick={() => void handleDownload(model)}
                             className="text-slate-400 cursor-pointer hover:text-white"
                           >
                             <Download className="w-4 h-4" />
@@ -225,7 +234,7 @@ export default function DocModelPage() {
                                       type="text"
                                       id="nome"
                                       placeholder={
-                                        modelToEdit ? modelToEdit.name : `Nome`
+                                        modelToEdit ? modelToEdit.nome : `Nome`
                                       }
                                       value={nomeEdit}
                                       onChange={(e) =>
@@ -242,7 +251,9 @@ export default function DocModelPage() {
                                       type="text"
                                       id="tipo"
                                       placeholder={
-                                        modelToEdit ? modelToEdit.tipo : `Tipo`
+                                        modelToEdit
+                                          ? modelToEdit.tipo_documento
+                                          : `Tipo`
                                       }
                                       value={tipoEdit}
                                       onChange={(e) =>
@@ -277,7 +288,16 @@ export default function DocModelPage() {
                                   Cancelar
                                 </AlertDialogCancel>
                                 <AlertDialogAction
-                                  onClick={() => handleEdit()}
+                                  onClick={() =>
+                                    updateModel({
+                                      id: modelToEdit?.id ?? '',
+                                      data: {
+                                        descricao: descEdit,
+                                        nome: nomeEdit,
+                                        tipo_documento: tipoEdit,
+                                      },
+                                    })
+                                  }
                                   className="bg-alabaster-100 hover:bg-alabaster-300 cursor-pointer text-black"
                                 >
                                   {isEditing ? 'Salvando...' : 'Salvar'}
@@ -303,7 +323,7 @@ export default function DocModelPage() {
                                 </AlertDialogTitle>
                                 <AlertDialogDescription className="text-slate-400">
                                   Tem certeza que deseja excluir o modelo de
-                                  documento {model.name}? Esta ação não pode ser
+                                  documento {model.nome}? Esta ação não pode ser
                                   desfeita.
                                 </AlertDialogDescription>
                               </AlertDialogHeader>
@@ -312,7 +332,7 @@ export default function DocModelPage() {
                                   Cancelar
                                 </AlertDialogCancel>
                                 <AlertDialogAction
-                                  onClick={() => handleDelete()}
+                                  onClick={() => deleteModel(model.id)}
                                   className="bg-red-600 cursor-pointer hover:bg-red-700 text-white"
                                 >
                                   {isDeleting ? 'Excluindo...' : 'Excluir'}
@@ -332,7 +352,7 @@ export default function DocModelPage() {
         {!isLoading && totalPages > 1 && (
           <CardFooter className="flex justify-end pt-6">
             <CompletePagination
-              currentPage={page}
+              currentPage={currentPage}
               totalPages={totalPages}
               onPageChange={setPage}
             />

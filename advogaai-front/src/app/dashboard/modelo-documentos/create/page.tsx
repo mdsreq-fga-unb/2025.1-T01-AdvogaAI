@@ -5,11 +5,15 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Download, Plus, X } from 'lucide-react';
 import { useRouter } from 'next/navigation';
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import { useDropzone } from 'react-dropzone';
 import { Parameter, ParameterInput } from './componentes/parameterInput';
 import { DocxPreviewer } from './componentes/docxPreviewer';
 import * as mammoth from 'mammoth';
+import { useCreateModeloDocumento } from '@/modules/document-models/hooks/useCreateModeloDocumento';
+import toast from 'react-hot-toast';
+import { useGetSystemTags } from '@/modules/document-models/hooks/useGetSystemTags';
+import { extractTagsFromText } from '@/app/utils/extractTagsFromText';
 
 export default function CreateDocModelPage() {
   const router = useRouter();
@@ -17,23 +21,87 @@ export default function CreateDocModelPage() {
   const [tipo, setTipo] = useState<string>('');
   const [descricao, setDescricao] = useState<string>('');
   const [arquivo, setArquivo] = useState<File | null>(null);
-  const [parametros, setParametros] = useState<Parameter[]>([]);
+  const [tags, setTags] = useState<Parameter[]>([]);
+  const [detectedTags, setDetectedTags] = useState<Parameter[]>([]);
 
-  function extractTagsFromText(text: string): string[] {
-    const regex = /{{\s*([^}]+?)\s*}}/g;
-    const matches = text.match(regex) || [];
+  const { mutate: createModel, isPending } = useCreateModeloDocumento({
+    onSuccess: () => {
+      router.push('/dashboard/modelo-documentos');
+    },
+  });
 
-    const uniqueKeys = new Set(
-      matches.map((tag) => tag.replace(/{{|}}/g, '').trim()),
-    );
+  const { data: systemTags = [], isLoading: isLoadingTags } =
+    useGetSystemTags();
 
-    return Array.from(uniqueKeys);
+  function handleSubmit() {
+    if (!nome) {
+      toast.error('O nome do modelo é obrigatório.');
+      return;
+    }
+    if (!tipo) {
+      toast.error('O tipo do modelo é obrigatório.');
+      return;
+    }
+    if (!arquivo) {
+      toast.error('É necessário fazer o upload de um arquivo .docx.');
+      return;
+    }
+
+    if (!tags || tags.length < 1) {
+      toast.error(
+        'É necessário fazer o upload de um arquivo .docx com parâmetros válidos.',
+      );
+      return;
+    }
+
+    const validSystemTagIds = tags
+      .filter((tag) => tag.id !== -1)
+      .map((tag) => tag.id);
+
+    const formData = {
+      nome,
+      tipo_documento: tipo,
+      descricao,
+      documento: arquivo,
+      tagsSistemaIds: validSystemTagIds,
+    };
+    createModel(formData);
   }
 
-  const onDrop = useCallback((acceptedFiles: File[]) => {
-    if (acceptedFiles?.length) {
-      const file = acceptedFiles[0];
-      setArquivo(file);
+  useEffect(() => {
+    if (detectedTags.length === 0) {
+      setTags([]);
+      return;
+    }
+
+    const unifiedTags: Parameter[] = detectedTags.map((detectedTag) => {
+      const detectedKey = detectedTag.chave.replace(/{{|}}/g, '').trim();
+
+      const systemTagMatch = systemTags.find(
+        (systemTag) => systemTag.chave === detectedKey,
+      );
+
+      if (systemTagMatch) {
+        return {
+          id: systemTagMatch.id,
+          chave: `{{${systemTagMatch.chave}}}`,
+          nome: systemTagMatch.descricao,
+          color: 'green',
+        };
+      } else {
+        return {
+          ...detectedTag,
+          id: -1,
+          color: 'red',
+        };
+      }
+    });
+
+    setTags(unifiedTags);
+  }, [detectedTags, systemTags]);
+
+  useEffect(() => {
+    if (arquivo) {
       const reader = new FileReader();
       reader.onload = async (event) => {
         const arrayBuffer = event.target?.result as ArrayBuffer;
@@ -54,26 +122,31 @@ export default function CreateDocModelPage() {
                 color: 'blue',
               }),
             );
-
-            setParametros(autoDetectedParams);
+            setDetectedTags(autoDetectedParams);
           } catch (error) {
             console.error('Erro ao processar o arquivo .docx:', error);
           }
         }
       };
-      reader.readAsArrayBuffer(file);
+      reader.readAsArrayBuffer(arquivo);
+    }
+  }, [arquivo]);
+
+  const onDrop = useCallback((acceptedFiles: File[]) => {
+    if (acceptedFiles?.length) {
+      const file = acceptedFiles[0];
+      setArquivo(file);
     }
   }, []);
 
-  const { getRootProps, getInputProps, isDragActive, fileRejections } =
-    useDropzone({
-      onDrop,
-      accept: {
-        'application/vnd.openxmlformats-officedocument.wordprocessingml.document':
-          ['.docx'],
-      },
-      maxFiles: 1,
-    });
+  const { getRootProps, getInputProps, fileRejections } = useDropzone({
+    onDrop,
+    accept: {
+      'application/vnd.openxmlformats-officedocument.wordprocessingml.document':
+        ['.docx'],
+    },
+    maxFiles: 1,
+  });
 
   return (
     <div className="w-full h-full grid md:grid-cols-2 grid-cols-1 items-center place-items-center justify-center text-white">
@@ -120,7 +193,7 @@ export default function CreateDocModelPage() {
             />
           </div>
 
-          <ParameterInput parametros={parametros} />
+          <ParameterInput parametros={tags} isLoading={isLoadingTags} />
         </div>
 
         <h1 className="text-alabaster-50 text-4xl font-bold">
@@ -146,17 +219,23 @@ export default function CreateDocModelPage() {
             Cancelar
           </Button>
           <Button
-            onClick={() =>
-              console.log({ nome: nome, descricao: descricao, tipo: tipo })
-            }
+            onClick={handleSubmit}
+            disabled={isPending}
             className="w-full cursor-pointer !py-6 font-satoshi text-md md:flex-1"
           >
-            <Plus className=" h-4 w-4" />
-            Criar modelo
+            {isPending ? (
+              <div className="w-5 h-5 border-2 rounded-full border-white border-t-transparent animate-spin"></div>
+            ) : (
+              <>
+                <Plus className="h-4 w-4 mr-2" />
+                Criar modelo
+              </>
+            )}
           </Button>
         </div>
       </div>
       <div className="flex w-full max-w-[600px] max-h-[900px] flex-col justify-center bg-[#525252] h-full rounded-2xl p-6">
+        {!arquivo && <input {...getInputProps()} />}
         {arquivo && (
           <div className="flex items-center justify-between">
             <p className="font-inter text-lg font-bold ml-0 mt-0">
@@ -165,7 +244,7 @@ export default function CreateDocModelPage() {
             <button
               onClick={() => {
                 setArquivo(null);
-                setParametros([]);
+                setTags([]);
               }}
               className="cursor-pointer"
             >
@@ -183,12 +262,9 @@ export default function CreateDocModelPage() {
               <DocxPreviewer file={arquivo} />
             ) : (
               <div className="flex flex-col items-center gap-4 text-center">
-                <input {...getInputProps()} />
-                <p className="font-bold text-xl">
-                  {isDragActive
-                    ? 'Solte o arquivo aqui!'
-                    : 'Faça upload de um docx'}
-                </p>
+                <h1 className="text-lg font-bold">
+                  Faça upload do seu documento em .docx
+                </h1>
                 <p className="text-md">
                   Arraste e solte ou clique para selecionar
                 </p>

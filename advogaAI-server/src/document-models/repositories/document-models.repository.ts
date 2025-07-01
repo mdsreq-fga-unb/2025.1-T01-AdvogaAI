@@ -79,6 +79,11 @@ export class DocumentModelsRepository {
           },
         },
         include: {
+          user: {
+            omit: {
+              password: true,
+            },
+          },
           tagsDoSistema: {
             include: {
               tagSistema: true,
@@ -90,7 +95,7 @@ export class DocumentModelsRepository {
     } catch (error) {
       if (
         error instanceof Prisma.PrismaClientKnownRequestError &&
-        error.code === 'P2002' // Violação de constraint 'unique'
+        error.code === 'P2002'
       ) {
         throw new ConflictException(
           `Aconteceu um conflito ao criar o modelo de documento. Por favor verifique as informações e envie novamente.`,
@@ -109,6 +114,11 @@ export class DocumentModelsRepository {
         where: { id },
         data: data, // Passa o objeto de dados diretamente, que só contém os campos permitidos.
         include: {
+          user: {
+            omit: {
+              password: true,
+            },
+          },
           tagsDoSistema: {
             include: {
               tagSistema: true,

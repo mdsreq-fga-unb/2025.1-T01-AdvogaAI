@@ -29,6 +29,7 @@ import { DocumentModelsModule } from './document-models/document-models.module';
 import { StorageModule } from './storage/storage.module';
 import { GetUserService } from './user/services/get-user.service';
 import { UpdateUserService } from './user/services/update-user.service';
+import { StorageController } from './storage/storage.controller';
 
 @Module({
   imports: [
@@ -66,6 +67,7 @@ import { UpdateUserService } from './user/services/update-user.service';
     ClientsController,
     EmailController,
     DocumentModelsController,
+    StorageController,
   ],
   providers: [
     ClientsRepository,

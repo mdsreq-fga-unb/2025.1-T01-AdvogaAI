@@ -9,6 +9,7 @@ export type Parameter = {
 
 interface ParameterInputProps {
   parametros: Parameter[];
+  isLoading: boolean;
 }
 
 function ParameterPill({ parameter }: { parameter: Parameter }) {
@@ -29,19 +30,23 @@ function ParameterPill({ parameter }: { parameter: Parameter }) {
   );
 }
 
-export function ParameterInput({ parametros }: ParameterInputProps) {
+export function ParameterInput({ parametros, isLoading }: ParameterInputProps) {
   return (
     <div className="grid w-full items-center gap-2">
       <Label className="font-bold">Parâmetros de Preenchimento</Label>
-      <div className="relative w-full rounded-lg border border-input bg-[#ebebeb]">
-        <div className="flex min-h-[100px] flex-wrap items-start gap-2 p-3 pr-12">
-          {parametros.map((param) => (
-            <ParameterPill key={param.id} parameter={param} />
-          ))}
-          {parametros.length < 1 && (
+      <div className="relative w-full rounded-lg border border-input overflow-y-scroll overflow-x-hidden bg-[#ebebeb]">
+        <div className="flex min-h-[130px] max-h-[130px] flex-wrap items-start justify-center gap-2 p-3">
+          {!isLoading &&
+            parametros.map((param) => (
+              <ParameterPill key={param.id} parameter={param} />
+            ))}
+          {!isLoading && parametros.length < 1 && (
             <Label className="text-black opacity-60">
               Faça upload de um docx com tags para lista-las aqui
             </Label>
+          )}
+          {isLoading && (
+            <div className="self-center border-4 h-5 w-5 border-t-transparent border-blue-600 rounded-full animate-spin" />
           )}
         </div>
       </div>
