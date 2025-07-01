@@ -153,7 +153,7 @@ export default function ClientesPage() {
                         {maskCPF(client.cpf)}
                       </TableCell>
                       <TableCell className="text-right">
-                        <div className="flex items-center justify-end gap-2">
+                        <div className="flex items-center justify-end gap-1">
                           <Button
                             variant="ghost"
                             size="icon"
@@ -188,12 +188,12 @@ export default function ClientesPage() {
                                 </AlertDialogDescription>
                               </AlertDialogHeader>
                               <AlertDialogFooter>
-                                <AlertDialogCancel className="bg-slate-700 text-slate-300 hover:bg-slate-600 border-slate-600">
+                                <AlertDialogCancel className="bg-slate-700 cursor-pointer text-slate-300 hover:bg-slate-600 border-slate-600">
                                   Cancelar
                                 </AlertDialogCancel>
                                 <AlertDialogAction
                                   onClick={() => deleteClient(client.id)}
-                                  className="bg-red-600 hover:bg-red-700 text-white"
+                                  className="bg-red-600 cursor-pointer hover:bg-red-700 text-white"
                                 >
                                   {isDeleting ? 'Excluindo...' : 'Excluir'}
                                 </AlertDialogAction>

@@ -9,6 +9,8 @@ import { UserCreationService } from './services/user-creation.service';
 import { UserLoginService } from './services/user-login.service';
 import { GenerateConfirmEmailTokenService } from './services/generate-confirm-email-token.service';
 import { SendEmailService } from 'src/email/services/send-email.service';
+import { GetUserService } from './services/get-user.service';
+import { UpdateUserService } from './services/update-user.service';
 @Module({
   imports: [
     PrismaModule,
@@ -21,6 +23,8 @@ import { SendEmailService } from 'src/email/services/send-email.service';
     UsersService,
     UsersRepository,
     UserCreationService,
+    GetUserService,
+    UpdateUserService,
     UserLoginService,
     GenerateConfirmEmailTokenService,
     SendEmailService,

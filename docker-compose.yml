@@ -10,5 +10,27 @@ services:
     ports:
       - "5432:5432"
 
+  minio:
+    image: quay.io/minio/minio
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    environment:
+      MINIO_ROOT_USER: minioadmin
+      MINIO_ROOT_PASSWORD: minioadmin
+    volumes:
+      - minio-data:/data
+    command: server /data --console-address ":9001"
+
+  create-buckets:
+    image: quay.io/minio/mc
+    depends_on:
+      - minio
+    volumes:
+      - ./init-buckets.sh:/init-buckets.sh
+    entrypoint: /bin/sh
+    command: /init-buckets.sh
+
 volumes:
   postgres-data:
+  minio-data:

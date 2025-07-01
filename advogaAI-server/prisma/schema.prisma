@@ -11,7 +11,9 @@ model User {
   id          String   @id @default(uuid())
   name        String
   email       String   @unique
-  password    String
+  password    String   
+  phone       String?
+  oab         String?  @unique
   role        String   @default("USER")
   isConfirmed Boolean  @default(false)
   isActive    Boolean  @default(true)
@@ -19,6 +21,7 @@ model User {
   updatedAt   DateTime @updatedAt
   clientesPessoaFisica  PessoaFisica[]
   clientesPessoaJuridica PessoaJuridica[]
+  modelosDocumento ModeloDocumento[]
 
   @@map("users")
 }
@@ -73,8 +76,8 @@ model PessoaJuridica {
 
   representanteLegalId String
   representanteLegal   PessoaFisica @relation("RepresentanteLegalEmpresa", fields: [representanteLegalId], references: [id])
-  userId         String
-  user           User     @relation(fields: [userId], references: [id])
+  userId         String?
+  user           User?     @relation(fields: [userId], references: [id])
 
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
@@ -99,4 +102,62 @@ model Endereco {
   updatedAt DateTime @updatedAt
 
   @@map("enderecos")
+}
+
+model ModeloDocumento {
+  id        String   @id @default(uuid())
+  nome      String   
+  tipo_documento String   @default("OUTRO")
+  descricao String?
+  url String   
+
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  tagsDoSistema CampoModeloDocumento[]
+
+  camposPersonalizados CampoPersonalizado[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("modelos_documentos")
+}
+
+model TagSistema {
+  id            Int      @id @default(autoincrement())
+  chave         String   @unique 
+  descricao     String   
+  origemDados   String   
+
+  modelosQueUsam CampoModeloDocumento[]
+
+  @@map("tags_sistema")
+}
+
+model CampoModeloDocumento {
+  modeloDocumentoId String
+  tagSistemaId      Int
+
+  modeloDocumento ModeloDocumento @relation(fields: [modeloDocumentoId], references: [id], onDelete: Cascade)
+  tagSistema      TagSistema      @relation(fields: [tagSistemaId], references: [id], onDelete: Cascade)
+
+
+  @@id([modeloDocumentoId, tagSistemaId])
+  @@map("campos_modelo_documento")
+}
+
+model CampoPersonalizado {
+  id        String   @id @default(uuid())
+  chave     String   
+  descricao String  
+  tipoDado  String   @default("STRING") 
+
+  modeloDocumentoId String
+  modeloDocumento   ModeloDocumento @relation(fields: [modeloDocumentoId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("campos_personalizados")
 }

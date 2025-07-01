@@ -22,12 +22,21 @@ import { PessoaFisicaService } from './client/services/pessoa-fisica.service';
 import { PessoaFisicaRepository } from './client/repositories/pessoa-fisica.repository';
 import { PessoaJuridicaService } from './client/services/pessoa-juridica.service';
 import { PessoaJuridicaRepository } from './client/repositories/pessoa-juridica.repository';
+import { DocumentModelsService } from './document-models/services/document-models.service';
+import { DocumentModelsRepository } from './document-models/repositories/document-models.repository';
+import { DocumentModelsController } from './document-models/document-models.controller';
+import { DocumentModelsModule } from './document-models/document-models.module';
+import { StorageModule } from './storage/storage.module';
+import { GetUserService } from './user/services/get-user.service';
+import { UpdateUserService } from './user/services/update-user.service';
+import { StorageController } from './storage/storage.controller';
 
 @Module({
   imports: [
     JwtModule,
     ClientsModule,
     UsersModule,
+    DocumentModelsModule,
     ConfigModule.forRoot({
       isGlobal: true,
     }),
@@ -49,12 +58,16 @@ import { PessoaJuridicaRepository } from './client/repositories/pessoa-juridica.
       }),
       inject: [ConfigService],
     }),
+    DocumentModelsModule,
+    StorageModule,
   ],
   controllers: [
     AppController,
     UsersController,
     ClientsController,
     EmailController,
+    DocumentModelsController,
+    StorageController,
   ],
   providers: [
     ClientsRepository,
@@ -71,7 +84,11 @@ import { PessoaJuridicaRepository } from './client/repositories/pessoa-juridica.
     GenerateConfirmEmailTokenService,
     ClientsService,
     PrismaService,
+    GetUserService,
+    UpdateUserService,
     UserLoginService,
+    DocumentModelsService,
+    DocumentModelsRepository,
   ],
 })
 export class AppModule {}
