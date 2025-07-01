@@ -1,33 +1,31 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsBoolean, IsEnum, IsOptional, IsUUID } from 'class-validator';
-
-export enum UserRole {
-  ADMIN = 'ADMIN',
-  USER = 'USER',
-}
+import { IsOptional, IsPhoneNumber, IsString } from 'class-validator';
+import { IsOAB } from 'src/shared/validators/is-oab-validator';
 
 export class UpdateUserDto {
   @ApiProperty({
-    example: 'f18ff546-c008-439b-8879-e11c2aab33b0',
-    description: 'UUID do usuário que será atualizado',
+    example: 'zezinha cabrero',
+    description: 'Nome do usuário que será atualizado',
   })
-  @IsUUID('4')
-  userId: string;
+  @IsString()
+  @IsOptional()
+  name?: string;
 
   @ApiProperty({
-    example: true,
-    description: 'Define se o usuário está ativo ou não',
+    example: '123456',
+    description: 'OAB do usuário que será atualizado',
   })
+  @IsString()
   @IsOptional()
-  @IsBoolean()
-  isActive?: boolean;
+  @IsOAB()
+  oab?: string;
 
   @ApiProperty({
-    example: 'ADMIN',
-    description: 'Define a role (permissão) do usuário',
-    enum: UserRole,
+    example: '(00) 00000-0000',
+    description: 'Telefone do usuário que será atualizado',
   })
+  @IsString()
   @IsOptional()
-  @IsEnum(UserRole)
-  role?: UserRole;
+  @IsPhoneNumber('BR')
+  phone?: string;
 }

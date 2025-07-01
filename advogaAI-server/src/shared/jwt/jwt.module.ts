@@ -1,14 +1,17 @@
 import { Module } from '@nestjs/common';
 import { JwtModule as NestJwtModule, JwtModuleOptions } from '@nestjs/jwt';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { PassportModule } from '@nestjs/passport';
 import { readFileSync } from 'fs';
 import { JwtService } from './jwt.service';
 import { getKeyPath } from 'src/utils/getPathKey';
 import { PrismaService } from 'prisma/prisma.service';
+import { JwtStrategy } from './jwt.strategy';
 
 @Module({
   imports: [
     ConfigModule,
+    PassportModule.register({ defaultStrategy: 'jwt' }),
     NestJwtModule.registerAsync({
       imports: [ConfigModule],
       inject: [ConfigService],
@@ -27,7 +30,7 @@ import { PrismaService } from 'prisma/prisma.service';
       },
     }),
   ],
-  providers: [JwtService, PrismaService],
-  exports: [JwtService, NestJwtModule],
+  providers: [JwtService, PrismaService, JwtStrategy],
+  exports: [JwtService],
 })
 export class JwtModule {}

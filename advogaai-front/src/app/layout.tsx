@@ -1,10 +1,15 @@
 import type { Metadata } from 'next';
 import './globals.css';
+import { Providers } from './providers';
+import { Toaster } from 'react-hot-toast';
 
 export const metadata: Metadata = {
   title: 'AdvogaAI',
   description:
     'Sistema de gerenciamento de prazos e pagamentos para Sociedades Unipessoal de Advocacia',
+  icons: {
+    icon: '/advogaai-logo.png',
+  },
 };
 
 export default function RootLayout({
@@ -14,7 +19,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-BR">
-      <body>{children}</body>
+      <body>
+        {' '}
+        <Providers>
+          {children}
+          <Toaster />
+        </Providers>
+      </body>
     </html>
   );
 }
