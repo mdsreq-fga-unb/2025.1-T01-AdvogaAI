@@ -45,6 +45,7 @@ jobs:
             npx prisma migrate deploy
             npx prisma generate
             npm run gen:keys
+            npm run seed
             npm run build
             echo "Deploy concluído em $(date)"
             # Reiniciar o PM2
