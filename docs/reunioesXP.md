@@ -119,3 +119,63 @@ Foi solicitado que o botão "Salvar" ficasse desabilitado até que todos os camp
 
 **Encaminhamentos:**
 A observação da cliente sobre o botão "Salvar" foi adicionada aos critérios de aceitação da User Story correspondente.
+
+# 🗓️ 24/06/2025 (Terça-feira) – Reunião com a equipe
+
+**Objetivo:**
+Sprint review e sprint planning
+
+**Participantes:**
+Equipe
+
+**Pontos discutidos:**
+
+Demonstração das funcionalidades feitas na sprint passada
+Delegação de issues para cada membro do grupo
+
+**Decisões:**
+
+A equipe foi dividida em 2 grupos, backend e frontend, assim para desenvolver as funcionalidades de cada lado
+
+**Encaminhamentos:**
+Desenvolver as funcionalidades
+
+# 🗓️ 26/06/2025 (Quinta-feira) – Reunião com a equipe
+
+**Objetivo:**
+Acompanhamento do desenvolvimento feito pela equipe
+
+**Participantes:**
+Equipe
+
+**Pontos discutidos:**
+
+Demonstração do que ja foi feito em quesito das funcionalidades
+Retirada de duvidas restantes e validações de regra de negócio
+
+**Decisões:**
+
+Continuar o desenvolvimento
+
+**Encaminhamentos:**
+Todos vão continuar o desenvolvimento
+
+# 🗓️ 01/07/2025 (Terça-feira) – Reunião com a Cliente
+
+**Objetivo:**
+Apresentar e validar as funcionalidades desenvolvidas na sprint e realizar a planning da proxima
+
+**Participantes:**
+Equipe + Cliente
+
+**Pontos discutidos:**
+
+Demonstração completa das funcionalidades ao vivo
+Delegação de issues para cada grupo (front e back)
+
+**Decisões:**
+
+A cliente aprovou as funcionalidades e iremos seguir com o cronograma para a proxima sprint
+
+**Encaminhamentos:**
+Mesmos grupos feito anteriormente irão desenvolver o backend e o frontend das issues definidas no cronograma
