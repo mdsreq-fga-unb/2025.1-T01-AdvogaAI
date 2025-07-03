@@ -179,3 +179,23 @@ A cliente aprovou as funcionalidades e iremos seguir com o cronograma para a pro
 
 **Encaminhamentos:**
 Mesmos grupos feito anteriormente irão desenvolver o backend e o frontend das issues definidas no cronograma
+
+# 🗓️ 03/07/2025 (Quinta-feira) – Reunião com a equipe
+
+**Objetivo:**
+Discutir sobre o acesso a API do PJe
+
+**Participantes:**
+Equipe
+
+**Pontos discutidos:**
+
+Possibilidade de não ter acesso a api do PJe
+Mockar dados de processos para exemplo ou retirar do backlog?
+
+**Decisões:**
+
+Vamos conversar com o cliente e com o professor para entender o melhor caminho
+
+**Encaminhamentos:**
+Todos conversarem com o professor e cliente
