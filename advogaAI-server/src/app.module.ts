@@ -30,6 +30,7 @@ import { StorageModule } from './storage/storage.module';
 import { GetUserService } from './user/services/get-user.service';
 import { UpdateUserService } from './user/services/update-user.service';
 import { StorageController } from './storage/storage.controller';
+import { DocumentoService } from './document-models/services/document.service';
 
 @Module({
   imports: [
@@ -89,6 +90,7 @@ import { StorageController } from './storage/storage.controller';
     UserLoginService,
     DocumentModelsService,
     DocumentModelsRepository,
+    DocumentoService,
   ],
 })
 export class AppModule {}

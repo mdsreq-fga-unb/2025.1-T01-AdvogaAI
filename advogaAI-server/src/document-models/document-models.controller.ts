@@ -15,6 +15,8 @@ import {
   HttpStatus,
   Param,
   UseGuards,
+  ParseUUIDPipe,
+  NotFoundException,
 } from '@nestjs/common';
 import { UserId } from 'src/shared/decorators/user-id.decorator';
 import { DocumentModelsService } from './services/document-models.service';
@@ -32,6 +34,7 @@ import {
 import { UpdateModeloDocumentoDto } from './dto/update-document-model.dto';
 import { TagSistemaService } from './services/system-tags.service';
 import { JwtAuthGuard } from 'src/shared/jwt/jwt-auth.guard';
+import { DocumentoService } from './services/document.service';
 
 @ApiTags('Modelos de Documentos') // Agrupa as rotas na UI do Swagger
 @ApiBearerAuth() // Indica que todas as rotas neste controller exigem um token JWT
@@ -40,6 +43,7 @@ export class DocumentModelsController {
   constructor(
     private readonly documentModelsService: DocumentModelsService,
     private readonly tagSistemaService: TagSistemaService,
+    private readonly documentoService: DocumentoService,
   ) {}
 
   @UseGuards(JwtAuthGuard)
@@ -152,5 +156,57 @@ export class DocumentModelsController {
   @HttpCode(HttpStatus.OK)
   deleteDocumentModel(@Param('id') id: string, @UserId() userId: string) {
     return this.documentModelsService.delete(id, userId);
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @HttpCode(HttpStatus.OK)
+  @ApiOperation({
+    summary: 'Gerar valores de tags para um preview de documento',
+    description:
+      'Esta rota busca um modelo de documento e um cliente (Pessoa Física) pelos seus IDs. Em seguida, resolve as "tags de sistema" associadas ao modelo com os dados reais do cliente, retornando um objeto chave-valor pronto para ser usado em um preview de documento.',
+  })
+  @ApiParam({
+    name: 'modeloId',
+    description: 'ID (UUID) do modelo de documento a ser usado.',
+    type: 'string',
+    format: 'uuid',
+  })
+  @ApiParam({
+    name: 'clienteId',
+    description:
+      'ID (UUID) do cliente (Pessoa Física) cujos dados serão usados.',
+    type: 'string',
+    format: 'uuid',
+  })
+  @ApiResponse({
+    status: 200,
+    description: 'Valores das tags resolvidos com sucesso.',
+    schema: {
+      example: {
+        pf_nome_completo: 'João da Silva',
+        pf_cpf: '123.456.789-00',
+        pf_end_cidade: 'São Paulo',
+      },
+    },
+  })
+  @ApiResponse({
+    status: 404,
+    description: 'Modelo de documento ou cliente não encontrado.',
+  })
+  @ApiResponse({ status: 401, description: 'Não autorizado.' })
+  @Get(':modeloId/gerar/:clienteId')
+  async gerarDocumento(
+    @Param('modeloId', ParseUUIDPipe) modeloId: string,
+    @Param('clienteId', ParseUUIDPipe) clienteId: string,
+    @UserId() userId: string,
+  ) {
+    if (!userId) {
+      throw new NotFoundException('Usuário não encontrado.');
+    }
+    return await this.documentoService.gerarValoresDocumento(
+      modeloId,
+      clienteId,
+      userId,
+    );
   }
 }

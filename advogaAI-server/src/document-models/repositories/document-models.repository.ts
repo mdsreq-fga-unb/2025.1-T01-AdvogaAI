@@ -214,4 +214,20 @@ export class DocumentModelsRepository {
       itemsPerPage: limit,
     };
   }
+
+  async findModeloComTags(modeloId: string, userId: string) {
+    return this.prisma.modeloDocumento.findFirst({
+      where: {
+        id: modeloId,
+        userId: userId,
+      },
+      include: {
+        tagsDoSistema: {
+          include: {
+            tagSistema: true,
+          },
+        },
+      },
+    });
+  }
 }
