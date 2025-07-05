@@ -31,6 +31,7 @@ export class DocumentModelsService {
         userId,
       );
       this.logger.log(`Modelo de documento deletada com sucesso`);
+      await this.storageService.deleteFile(deletedDocument.url);
       return { deletedDocument };
     } catch (error) {
       if (error instanceof NotFoundException) {

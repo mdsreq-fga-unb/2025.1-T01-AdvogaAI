@@ -40,7 +40,12 @@ export class UsersService {
           userId,
         },
       });
-      return { clientes: pfs + pjs, docsGerados };
+      const docsModels = await this.prisma.modeloDocumento.count({
+        where: {
+          userId,
+        },
+      });
+      return { clientes: pfs + pjs, docsGerados, docsModels };
     } catch {
       throw new InternalServerErrorException('Um erro inesperado ocorreu');
     }

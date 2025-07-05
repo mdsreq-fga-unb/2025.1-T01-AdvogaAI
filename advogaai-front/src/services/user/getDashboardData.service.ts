@@ -1,6 +1,7 @@
 interface UserDashboardDataResponse {
   clientes: number;
   docsGerados: number;
+  docsModels: number;
 }
 
 export async function getUserDashboardData(): Promise<UserDashboardDataResponse> {
