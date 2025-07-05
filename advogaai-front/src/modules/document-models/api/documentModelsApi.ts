@@ -9,6 +9,8 @@ import {
   TagSistema,
   tagSistemaSchema,
   UpdateModeloDocumentoForm,
+  GetDocumentosGeradosResponse,
+  getDocumentosGeradosSchema,
 } from './documentModelsSchema';
 
 /**
@@ -73,18 +75,15 @@ export async function createModeloDocumento(
 export async function getModelosDocumento(
   limit: number = 10,
   offset: number = 0,
-  search?: string,
+  search: string = '',
 ): Promise<GetModelosDocumentoResponse> {
   const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
   const params = new URLSearchParams({
     limit: String(limit),
     offset: String(offset),
   });
-  if (search) {
-    params.append('search', search);
-  }
 
-  const apiUrl = `${API_BASE_URL}/document-models?${params.toString()}`;
+  const apiUrl = `${API_BASE_URL}/document-models?search=${search}&${params.toString()}`;
 
   try {
     const response = await fetch(apiUrl, {
@@ -115,6 +114,54 @@ export async function getModelosDocumento(
       throw error;
     }
     throw new Error('Ocorreu um erro desconhecido ao buscar os modelos.');
+  }
+}
+
+export async function getDocumentosGerados(
+  limit: number = 10,
+  offset: number = 0,
+  search: string = '',
+): Promise<GetDocumentosGeradosResponse> {
+  const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
+  const params = new URLSearchParams({
+    limit: String(limit),
+    offset: String(offset),
+  });
+  if (search) {
+    params.append('search', search);
+  }
+
+  const apiUrl = `${API_BASE_URL}/document-models/generated-document-models?${params.toString()}`;
+
+  try {
+    const response = await fetch(apiUrl, {
+      method: 'GET',
+      credentials: 'include',
+    });
+
+    if (!response.ok) {
+      const errorData: unknown = await response.json();
+      const message =
+        typeof errorData === 'object' &&
+        errorData !== null &&
+        'message' in errorData &&
+        typeof (errorData as { message?: unknown }).message === 'string'
+          ? (errorData as { message: string }).message
+          : 'Falha ao listar os modelos de documento.';
+      throw new Error(message);
+    }
+    return getDocumentosGeradosSchema.parse(await response.json());
+  } catch (error: unknown) {
+    if (error instanceof z.ZodError) {
+      console.error('Erro de validação Zod:', error.issues);
+      throw new Error(
+        'Os dados recebidos da API estão em um formato inesperado.',
+      );
+    }
+    if (error instanceof Error) {
+      throw error;
+    }
+    throw new Error('Ocorreu um erro desconhecido ao buscar os documentos.');
   }
 }
 
@@ -231,6 +278,35 @@ export async function deleteModeloDocumento(id: string): Promise<void> {
       throw error;
     }
     throw new Error('Ocorreu um erro desconhecido ao excluir o modelo.');
+  }
+}
+
+export async function deleteDocumentoGerado(id: string): Promise<void> {
+  const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
+  const apiUrl = `${API_BASE_URL}/document-models/generated-document-models/${id}`;
+
+  try {
+    const response = await fetch(apiUrl, {
+      method: 'DELETE',
+      credentials: 'include',
+    });
+
+    if (!response.ok) {
+      const errorData: unknown = await response.json();
+      const message =
+        typeof errorData === 'object' &&
+        errorData !== null &&
+        'message' in errorData &&
+        typeof (errorData as { message?: unknown }).message === 'string'
+          ? (errorData as { message: string }).message
+          : 'Falha ao excluir o documento.';
+      throw new Error(message);
+    }
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      throw error;
+    }
+    throw new Error('Ocorreu um erro desconhecido ao excluir o documento.');
   }
 }
 

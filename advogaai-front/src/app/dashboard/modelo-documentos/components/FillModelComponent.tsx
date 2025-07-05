@@ -170,7 +170,7 @@ export function FillModelComponent({
       });
 
       const fileName = `${modelToFill?.tipo_documento}_${clientToFillModel?.nomeCompleto.replace(/ /g, '_') ?? 'doc_preenchido'}.docx`;
-      await uploadGeneratedFile(outputBlob, fileName);
+      await uploadGeneratedFile(outputBlob, fileName, modelToFill?.id ?? '');
       saveFile(outputBlob, fileName);
       toast.success('Documento gerado e baixado com sucesso!');
     } catch (error) {

@@ -44,6 +44,33 @@ export class DocumentModelsService {
       );
     }
   }
+
+  async deleteGeneratedDocument(
+    id: string,
+    userId: string,
+  ): Promise<{ deletedDocument: ModeloDocumento }> {
+    try {
+      this.logger.log(
+        `Deletando modelo de documento com id:${id} e user ${userId}`,
+      );
+      const deletedDocument =
+        await this.documentModelsRepository.deleteGeneratedDocument(id, userId);
+      this.logger.log(`Modelo de documento deletada com sucesso`);
+      await this.storageService.deleteFile(deletedDocument.url);
+      return { deletedDocument };
+    } catch (error) {
+      if (error instanceof NotFoundException) {
+        throw error;
+      }
+      this.logger.error(
+        `Não foi possível encontrar o documento de id: ${id} e user ${userId}`,
+      );
+      throw new InternalServerErrorException(
+        'Não foi possível deletar o documento. Por favor, tente novamente mais tarde.',
+      );
+    }
+  }
+
   async create(
     createDocumentModelDto: CreateModeloDocumentoDto,
     file: Express.Multer.File,
@@ -125,5 +152,24 @@ export class DocumentModelsService {
       offset,
       search,
     });
+  }
+
+  async findAllGeneratedByUserId(
+    userId: string,
+    limit: number,
+    offset: number,
+    search: string | undefined,
+  ) {
+    this.logger.log(
+      `Buscando documentos gerados para o usuário ${userId} com o termo: '${search}'`,
+    );
+    return await this.documentModelsRepository.findAllGeneratedByUserId(
+      userId,
+      {
+        limit,
+        offset,
+        search,
+      },
+    );
   }
 }

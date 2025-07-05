@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, InternalServerErrorException } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UserCreationService } from './services/user-creation.service';
 import { LoginUserDto } from './dto/user-login.dto';
@@ -7,6 +7,7 @@ import { Response } from 'express';
 import { GetUserService } from './services/get-user.service';
 import { UpdateUserService } from './services/update-user.service';
 import { UpdateUserDto } from './dto/update-user.dto';
+import { PrismaService } from 'prisma/prisma.service';
 
 @Injectable()
 export class UsersService {
@@ -15,10 +16,34 @@ export class UsersService {
     private readonly UserLoginService: UserLoginService,
     private readonly GetUserService: GetUserService,
     private readonly UpdateUserService: UpdateUserService,
+    private readonly prisma: PrismaService,
   ) {}
 
   async getUserData(userId: string) {
     return await this.GetUserService.getUserData(userId);
+  }
+
+  async getDashboardData(userId: string) {
+    try {
+      const pfs = await this.prisma.pessoaFisica.count({
+        where: {
+          userId,
+        },
+      });
+      const pjs = await this.prisma.pessoaJuridica.count({
+        where: {
+          userId,
+        },
+      });
+      const docsGerados = await this.prisma.documentoGerado.count({
+        where: {
+          userId,
+        },
+      });
+      return { clientes: pfs + pjs, docsGerados };
+    } catch {
+      throw new InternalServerErrorException('Um erro inesperado ocorreu');
+    }
   }
 
   async updateUserData(userId: string, data: UpdateUserDto) {

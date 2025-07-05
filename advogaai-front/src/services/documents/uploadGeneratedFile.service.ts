@@ -6,6 +6,7 @@ interface UploadFileResponse {
 export async function uploadGeneratedFile(
   file: File | Blob,
   fileName: string,
+  modelid: string,
 ): Promise<UploadFileResponse> {
   const formData = new FormData();
 
@@ -13,7 +14,7 @@ export async function uploadGeneratedFile(
 
   try {
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_API_BASE_URL}/storage/upload-generated-model/${fileName}`,
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/storage/upload-generated-model/${fileName}?modelid=${modelid}`,
       {
         method: 'POST',
         credentials: 'include',

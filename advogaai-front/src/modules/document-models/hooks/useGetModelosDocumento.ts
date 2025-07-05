@@ -8,7 +8,7 @@ import { documentModelsQueryKeys } from '../document-model-query-keys';
 export function useGetModelosDocumento(
   limit: number = 10,
   offset: number = 0,
-  search?: string,
+  search: string = '',
 ) {
   return useQuery({
     queryKey: documentModelsQueryKeys.list({ limit, offset, search }),

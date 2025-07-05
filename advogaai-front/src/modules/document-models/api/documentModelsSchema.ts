@@ -57,6 +57,29 @@ export const modeloDocumentoSchema = z.object({
   user: userSchema,
 });
 
+export const documentoGeradoSchema = z.object({
+  id: z.string().uuid({ message: 'ID do modelo inválido.' }),
+  nome: z.string(),
+  tipo_documento: z.string(),
+  descricao: z
+    .string()
+    .nullable()
+    .transform((val) => val ?? undefined),
+  url: z.string().url({ message: 'URL do arquivo inválida.' }),
+  userId: z.string().uuid(),
+  createdAt: z.coerce.date(),
+  updatedAt: z.coerce.date(),
+  user: userSchema,
+});
+
+export const getDocumentosGeradosSchema = z.object({
+  data: z.array(documentoGeradoSchema),
+  totalItems: z.number(),
+  totalPages: z.number(),
+  currentPage: z.number(),
+  itemsPerPage: z.number(),
+});
+
 /**
  * Schema para a resposta paginada da rota de listagem de modelos.
  */
@@ -70,9 +93,21 @@ export const getModelosDocumentoResponseSchema = z.object({
 
 export type TagSistema = z.infer<typeof tagSistemaSchema>;
 export type ModeloDocumento = z.infer<typeof modeloDocumentoSchema>;
+export type DocumentoGerado = z.infer<typeof documentoGeradoSchema>;
 export type GetModelosDocumentoResponse = z.infer<
   typeof getModelosDocumentoResponseSchema
 >;
+export type GetDocumentosGeradosResponse = z.infer<
+  typeof getDocumentosGeradosSchema
+>;
+
+export const GetDocumentosGeradosResponse = z.object({
+  data: z.array(getDocumentosGeradosSchema),
+  totalItems: z.number(),
+  totalPages: z.number(),
+  currentPage: z.number(),
+  itemsPerPage: z.number(),
+});
 
 /**
  * Schema para validação do formulário de criação de Modelo de Documento.

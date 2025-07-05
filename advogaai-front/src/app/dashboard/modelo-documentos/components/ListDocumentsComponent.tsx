@@ -53,7 +53,7 @@ export function ListDocuments({
   const router = useRouter();
   const [page, setPage] = useState(1);
   const [searchTerm, setSearchTerm] = useState('');
-  const [debouncedSearchTerm] = useDebounce(searchTerm, 500);
+  const debouncedSearchTerm = useDebounce(searchTerm, 500);
   const [nomeEdit, setNomeEdit] = useState<string>('');
   const [tipoEdit, setTipoEdit] = useState<string>('');
   const [descEdit, setDescEdit] = useState<string>('');
