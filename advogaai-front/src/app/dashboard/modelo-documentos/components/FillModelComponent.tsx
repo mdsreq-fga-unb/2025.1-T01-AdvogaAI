@@ -15,10 +15,23 @@ import { extractTagsFromText } from '@/app/utils/extractTagsFromText';
 import mammoth from 'mammoth';
 import { useGetSystemTags } from '@/modules/document-models/hooks/useGetSystemTags';
 import { useGerarDocumento } from '@/modules/document-models/hooks/useGerarDocumento';
+import PizZip from 'pizzip';
+import Docxtemplater from 'docxtemplater';
 
 interface FillModelComponentProps {
   modelToFill: ModeloDocumento | null;
   setIsFillingModel: (e: boolean) => void;
+}
+
+function saveFile(blob: Blob, filename: string) {
+  const url = window.URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  window.URL.revokeObjectURL(url);
+  document.body.removeChild(a);
 }
 
 export function FillModelComponent({
@@ -74,18 +87,8 @@ export function FillModelComponent({
 
   async function handleLoadDocumentToFill() {
     if (modelToFill) {
-      const file = downloadFile(modelToFill.url);
-
-      await toast.promise(file, {
-        loading: 'Preparando modelo para preencher...',
-        success: (data) => {
-          setModelToFillBlob(data.blob);
-
-          return 'Modelo carregado com sucesso!';
-        },
-        error: () =>
-          'Ocorreu um erro ao fazer o carregar o modelo de documento.',
-      });
+      const file = await downloadFile(modelToFill.url);
+      setModelToFillBlob(file.blob);
     }
   }
   if (isError) {
@@ -96,7 +99,7 @@ export function FillModelComponent({
     );
   }
 
-  async function handleDocument(client: PessoaFisica) {
+  async function handleChooseClientDocument(client: PessoaFisica) {
     const modelArrayBuffer = await modelToFillBlob?.arrayBuffer();
     const modelContent = await mammoth.extractRawText({
       arrayBuffer: modelArrayBuffer ?? new ArrayBuffer(0),
@@ -121,10 +124,59 @@ export function FillModelComponent({
     );
   }
 
-  function handleFillDocument() {
+  async function handleFillDocument() {
     setIsGenerating(true);
-    console.log(manualTagValues, tags);
-    setIsGenerating(false);
+    try {
+      if (!modelToFillBlob) {
+        toast.error('O modelo de documento não foi carregado.');
+        return;
+      }
+
+      const systemTagsArray = tags
+        ? Object.entries(tags).map(([chave, valor]) => ({
+            chave,
+            valor,
+          }))
+        : [];
+
+      const allTags = [...manualTagValues, ...systemTagsArray];
+      const tagsObject = allTags.reduce(
+        (obj, item) => {
+          obj[item.chave] = item.valor;
+          return obj;
+        },
+        {} as Record<string, string>,
+      );
+      const content = await modelToFillBlob.arrayBuffer();
+
+      const zip = new PizZip(content);
+
+      const doc = new Docxtemplater(zip, {
+        paragraphLoop: true,
+        linebreaks: true,
+        delimiters: {
+          start: '{{',
+          end: '}}',
+        },
+      });
+
+      doc.render(tagsObject);
+
+      const outputBlob = doc.getZip().generate({
+        type: 'blob',
+        mimeType:
+          'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+      });
+
+      const fileName = `${modelToFill?.tipo_documento}_${clientToFillModel?.nomeCompleto.replace(/ /g, '_') ?? 'doc_preenchido'}.docx`;
+      saveFile(outputBlob, fileName);
+      toast.success('Documento gerado e baixado com sucesso!');
+    } catch (error) {
+      console.error('Erro inesperado:', error);
+      toast.error('Ocorreu um erro inesperado.');
+    } finally {
+      setIsGenerating(false);
+    }
   }
 
   return (
@@ -159,7 +211,7 @@ export function FillModelComponent({
               {!isLoadingClients &&
                 responseClients?.data.map((client) => (
                   <div
-                    onClick={() => void handleDocument(client)}
+                    onClick={() => void handleChooseClientDocument(client)}
                     className="flex items-center justify-between w-full outline-1 p-5 rounded-lg cursor-pointer hover:bg-[#1D293D] transition-all duration-300"
                     key={client.cpf}
                   >
@@ -239,7 +291,7 @@ export function FillModelComponent({
           </Button>
           {loadedModelTags && (
             <Button
-              onClick={handleFillDocument}
+              onClick={() => void handleFillDocument()}
               disabled={!canGenerateDoc}
               className="w-full cursor-pointer border-1 text-black bg-[#E5E5E5] py-6 font-satoshi text-md hover:bg-[#525252] hover:text-white md:flex-1"
             >
