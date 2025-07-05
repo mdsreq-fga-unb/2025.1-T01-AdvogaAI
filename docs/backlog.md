@@ -76,6 +76,8 @@ Foi acordado com a cliente que o módulo de Gestão Financeira não será inclu�
 | US27 | Visualizar dados do perfil                   | Sim     | Como usuário, quero visualizar meus dados de perfil, para conferir e acompanhar minhas informações.         | 3     | 2        | 1     | 1       | 2           | 10         |
 | US28 | Alterar senha                                | Sim     | Como usuário, quero alterar minha senha, para garantir maior segurança à minha conta.                       | 3     | 3        | 1     | 1       | 2           | 11         |
 | US29 | Encerrar sessão (logout)                     | Sim     | Como usuário, quero encerrar minha sessão, para manter minha conta segura ao sair do sistema.               | 3     | 2        | 1     | 1       | 2           | 10         |
+| US30 | Landing page                    | Sim     | Como usuário, quero entrar na ladning page do site, para ver informações gerais sobre o sistema e poder me redirecionar para o login.               | 3     | 2        | 1     | 1       | 2           | 10         |
+| US31 | Dashboard                    | Sim     | Como advogado, quero entrar no dashboard, para ver informações gerais sobre meus clientes, documentos, processos e ultimas movimentações.               | 3     | 2        | 1     | 1       | 2           | 10         |
 
 ---
 
