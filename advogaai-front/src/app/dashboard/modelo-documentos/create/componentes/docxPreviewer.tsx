@@ -2,10 +2,10 @@ import { useEffect, useRef } from 'react';
 import * as docx from 'docx-preview';
 
 interface DocxPreviewerProps {
-  file: File | null;
+  file: File | Blob | null;
 }
 
-export function DocxPreviewer({ file }: DocxPreviewerProps) {
+export function DocxPreviewer({ file }: Readonly<DocxPreviewerProps>) {
   const viewerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -25,7 +25,7 @@ export function DocxPreviewer({ file }: DocxPreviewerProps) {
   return (
     <div
       ref={viewerRef}
-      className="docx-preview-container h-full w-full overflow-y-auto rounded-lg bg-white p-8 text-black shadow-inner"
+      className="docx-preview-container h-full w-full overflow-y-scroll rounded-lg bg-white p-8 text-black shadow-inner"
     />
   );
 }

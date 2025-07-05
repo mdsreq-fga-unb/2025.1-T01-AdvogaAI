@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   description:
     'Sistema de gerenciamento de prazos e pagamentos para Sociedades Unipessoal de Advocacia',
   icons: {
-    icon: '/advogaai-logo.png',
+    icon: '/advogaai-logo.jpeg',
   },
 };
 

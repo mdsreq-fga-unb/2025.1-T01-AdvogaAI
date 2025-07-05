@@ -2,6 +2,11 @@
 @import 'tw-animate-css';
 @tailwind utilities;
 
+.fade-edges {
+  -webkit-mask-image: radial-gradient(circle, black 60%, transparent 100%);
+  mask-image: radial-gradient(circle, black 60%, transparent 100%);
+}
+
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {

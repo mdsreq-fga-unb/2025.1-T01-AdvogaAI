@@ -8,6 +8,8 @@ import storageConfig from 'src/storage/storage.config';
 import { TagSistemaRepository } from './repositories/system-tags.repository';
 import { TagSistemaService } from './services/system-tags.service';
 import { DocumentModelsRepository } from './repositories/document-models.repository';
+import { DocumentoService } from './services/document.service';
+import { ClientsRepository } from 'src/client/repositories/clients.repository';
 
 @Module({
   providers: [
@@ -17,6 +19,8 @@ import { DocumentModelsRepository } from './repositories/document-models.reposit
     S3Provider,
     TagSistemaRepository,
     TagSistemaService,
+    DocumentoService,
+    ClientsRepository,
   ],
   controllers: [DocumentModelsController],
   imports: [ConfigModule.forFeature(storageConfig)],

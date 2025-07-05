@@ -33,6 +33,12 @@ export class UsersController {
   }
 
   @UseGuards(JwtAuthGuard)
+  @Get('dashboard-data')
+  async getDashboardData(@UserId() userId: string) {
+    return await this.UserService.getDashboardData(userId);
+  }
+
+  @UseGuards(JwtAuthGuard)
   @Patch('data')
   async updateUserData(@UserId() userId: string, @Body() data: UpdateUserDto) {
     return await this.UserService.updateUserData(userId, data);
