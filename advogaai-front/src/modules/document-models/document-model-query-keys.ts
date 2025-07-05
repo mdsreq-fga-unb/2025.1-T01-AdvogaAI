@@ -8,4 +8,6 @@ export const documentModelsQueryKeys = {
   list: (filters: { limit: number; offset: number; search?: string }) =>
     [...documentModelsQueryKeys.lists(), filters] as const,
   systemTags: () => [...documentModelsQueryKeys.all, 'system-tags'] as const,
+  gerar: (modeloId: string, clienteId: string) =>
+    [...documentModelsQueryKeys.all, 'gerar', modeloId, clienteId] as const,
 };

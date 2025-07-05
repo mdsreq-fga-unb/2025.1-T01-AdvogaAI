@@ -256,7 +256,7 @@ export default function CreateDocModelPage() {
         <div className="flex-1 flex self-center h-full w-full items-center justify-center">
           <div
             {...getRootProps()}
-            className={`w-full ${arquivo ? 'max-h-[550px] h-full' : 'max-w-[500px] cursor-pointer h-auto'} p-6 rounded-2xl flex flex-col gap-4 justify-center items-center bg-white text-[#2A2A2A] transition-all duration-300 `}
+            className={`w-full ${arquivo ? 'max-h-[750px] h-full' : 'max-w-[500px] cursor-pointer h-auto'} p-6 rounded-2xl flex flex-col gap-4 justify-center items-center bg-white text-[#2A2A2A] transition-all duration-300 `}
           >
             {arquivo ? (
               <DocxPreviewer file={arquivo} />

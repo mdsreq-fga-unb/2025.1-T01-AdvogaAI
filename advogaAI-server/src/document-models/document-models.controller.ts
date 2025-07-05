@@ -73,7 +73,7 @@ export class DocumentModelsController {
         'O campo do arquivo [documento] é obrigatório.',
       );
     }
-    return await this.documentModelsService.create(
+    return this.documentModelsService.create(
       createDocumentModelDto,
       file,
       userId,

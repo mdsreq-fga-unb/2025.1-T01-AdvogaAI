@@ -130,3 +130,9 @@ export type CreateModeloDocumentoForm = z.infer<
 export type UpdateModeloDocumentoForm = z.infer<
   typeof updateModeloDocumentoSchema
 >;
+
+export const gerarDocumentoResponseSchema = z.record(z.string(), z.string());
+
+export type GerarDocumentoResponse = z.infer<
+  typeof gerarDocumentoResponseSchema
+>;

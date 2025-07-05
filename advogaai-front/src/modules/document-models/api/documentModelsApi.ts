@@ -5,6 +5,7 @@ import {
   getModelosDocumentoResponseSchema,
   ModeloDocumento,
   modeloDocumentoSchema,
+  gerarDocumentoResponseSchema,
   TagSistema,
   tagSistemaSchema,
   UpdateModeloDocumentoForm,
@@ -230,5 +231,38 @@ export async function deleteModeloDocumento(id: string): Promise<void> {
       throw error;
     }
     throw new Error('Ocorreu um erro desconhecido ao excluir o modelo.');
+  }
+}
+
+export async function gerarDocumento(modeloId: string, clienteId: string) {
+  const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
+  const apiUrl = `${API_BASE_URL}/document-models/${modeloId}/gerar/${clienteId}`;
+
+  try {
+    const response = await fetch(apiUrl, {
+      method: 'GET',
+      credentials: 'include',
+    });
+
+    if (!response.ok) {
+      const errorData: unknown = await response.json();
+      const message =
+        typeof errorData === 'object' &&
+        errorData !== null &&
+        'message' in errorData &&
+        typeof (errorData as { message?: unknown }).message === 'string'
+          ? (errorData as { message: string }).message
+          : 'Falha ao gerar os dados do documento.';
+      throw new Error(message);
+    }
+
+    return gerarDocumentoResponseSchema.parse(await response.json());
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      throw error;
+    }
+    throw new Error(
+      'Ocorreu um erro desconhecido ao gerar os dados do documento.',
+    );
   }
 }

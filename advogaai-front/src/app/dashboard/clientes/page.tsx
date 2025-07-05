@@ -2,7 +2,6 @@
 
 import { useState } from 'react';
 
-import { PessoaFisica } from '@/modules/clients';
 import { maskCPF, maskTelefone } from '@/lib/masks';
 
 import { Button } from '@/components/ui/button';
@@ -44,6 +43,7 @@ import {
   useDeleteClient,
   useGetClients,
   useUpdateClient,
+  PessoaFisica,
 } from '@/modules/clients';
 
 export default function ClientesPage() {
