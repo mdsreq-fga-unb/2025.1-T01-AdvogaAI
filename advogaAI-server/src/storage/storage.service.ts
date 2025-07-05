@@ -22,7 +22,7 @@ export class StorageService {
   constructor(
     @Inject('S3_CLIENT') private readonly s3Client: S3Client,
     @Inject(storageConfig.KEY)
-    private config: ConfigType<typeof storageConfig>,
+    private readonly config: ConfigType<typeof storageConfig>,
   ) {}
 
   /**
@@ -67,7 +67,7 @@ export class StorageService {
       if (response.Body instanceof Readable) {
         return {
           stream: response.Body,
-          contentType: response.ContentType || 'application/octet-stream',
+          contentType: response.ContentType ?? 'application/octet-stream',
         };
       }
       throw new InternalServerErrorException(

@@ -17,6 +17,7 @@ import { useGetSystemTags } from '@/modules/document-models/hooks/useGetSystemTa
 import { useGerarDocumento } from '@/modules/document-models/hooks/useGerarDocumento';
 import PizZip from 'pizzip';
 import Docxtemplater from 'docxtemplater';
+import { uploadGeneratedFile } from '@/services/documents/uploadGeneratedFile.service';
 
 interface FillModelComponentProps {
   modelToFill: ModeloDocumento | null;
@@ -169,6 +170,7 @@ export function FillModelComponent({
       });
 
       const fileName = `${modelToFill?.tipo_documento}_${clientToFillModel?.nomeCompleto.replace(/ /g, '_') ?? 'doc_preenchido'}.docx`;
+      await uploadGeneratedFile(outputBlob, fileName);
       saveFile(outputBlob, fileName);
       toast.success('Documento gerado e baixado com sucesso!');
     } catch (error) {
@@ -292,7 +294,7 @@ export function FillModelComponent({
           {loadedModelTags && (
             <Button
               onClick={() => void handleFillDocument()}
-              disabled={!canGenerateDoc}
+              disabled={!canGenerateDoc || isGenerating}
               className="w-full cursor-pointer border-1 text-black bg-[#E5E5E5] py-6 font-satoshi text-md hover:bg-[#525252] hover:text-white md:flex-1"
             >
               {isGenerating ? (
