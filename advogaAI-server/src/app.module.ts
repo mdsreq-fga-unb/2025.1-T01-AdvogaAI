@@ -31,6 +31,7 @@ import { GetUserService } from './user/services/get-user.service';
 import { UpdateUserService } from './user/services/update-user.service';
 import { StorageController } from './storage/storage.controller';
 import { DocumentoService } from './document-models/services/document.service';
+import { RabbitMQModule } from './rabbitmq/rabbitmq.module';
 
 @Module({
   imports: [
@@ -58,6 +59,10 @@ import { DocumentoService } from './document-models/services/document.service';
         },
       }),
       inject: [ConfigService],
+    }),
+    RabbitMQModule.register({
+      name: 'RABBITMQ_SERVICE',
+      queue: 'email_queue',
     }),
     DocumentModelsModule,
     StorageModule,
