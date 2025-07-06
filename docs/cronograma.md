@@ -6,7 +6,7 @@
 | -------- | ------- | ----------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Ciclo 1  | RAD     | 05 a 11 de Maio   | Levantamento e prototipação do fluxo de triagem e cadastro de clientes. Base para as US06, US07, US08, US09, US10.                                          |
 | Ciclo 2  | RAD     | 12 a 18 de Maio   | Prototipação da criação automática de documentos jurídicos. Base para as US01, US02, US03.                                                                  |
-| Ciclo 3  | RAD     | 19 a 25 de Maio   | Prototipação do painel de notificações processuais e visualização de dados do usuário. Base para US11, US12, US14, US31 a US34 e organização e atualização e das US's 24, 23, 28, 04, 05, 29, 27, 26, 10, 13. |
+| Ciclo 3  | RAD     | 19 a 25 de Maio   | Prototipação do painel de notificações processuais e visualização de dados do usuário. Base para US11, US12, US14, US31 a US34 e organização e atualização e das US's 24, 23, 28, 04, 05, 29, 27, 26, 10, 13, 31, 30. |
 | Sprint 1 | ScrumXP | 26 Mai a 01 Jun   | Setup técnico do projeto: monorepo, autenticação (US24, US23, US28), deploy inicial, primeiros testes automatizados e CI/CD.                                      |
 | Sprint 2 | ScrumXP | 02 a 08 de Junho  | Validação do MVP e backlog selecionado.                                                      |
 | Sprint 3 | ScrumXP | 09 a 15 de Junho  | Planejamento do CRUD: Planejamento técnico, prototipação final e preparação para o desenvolvimento do módulo de clientes.
