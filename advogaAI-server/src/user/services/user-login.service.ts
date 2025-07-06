@@ -56,6 +56,7 @@ export class UserLoginService {
         if (frontendUrl.hostname !== 'localhost') {
           const domainParts = frontendUrl.hostname.split('.');
           cookieDomain = '.' + domainParts.slice(-2).join('.');
+          console.log(cookieDomain);
         }
       } catch (e) {
         console.error('Invalid FRONTEND_URL:', e);
@@ -66,7 +67,7 @@ export class UserLoginService {
       httpOnly: true,
       secure: isProduction,
       sameSite: isProduction ? 'none' : 'lax',
-      domain: cookieDomain,
+      domain: undefined,
       path: '/',
       maxAge: 60 * 60 * 24 * 7,
     });
