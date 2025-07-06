@@ -11,7 +11,7 @@
 | Sprint 2 | ScrumXP | 02 a 08 de Junho  | Validação do MVP e backlog selecionado.                                                      |
 | Sprint 3 | ScrumXP | 09 a 15 de Junho  | Planejamento do CRUD: Planejamento técnico, prototipação final e preparação para o desenvolvimento do módulo de clientes.
 | Sprint 4 | ScrumXP | 16 a 22 de Junho  | Gestão de Clientes (CRUD): Desenvolvimento completo do fluxo de cadastro, visualização, atualização e exclusão de clientes (US06, US07, US08, US09).|
-| Sprint 5 | ScrumXP | 23 a 29 de Junho  | Implementação da geração dinâmica de documentos com templates (US02, US03, US04, US05) e (US29, US27, US26). **Release 1** planejada ao final da sprint.|
+| Sprint 5 | ScrumXP | 23 a 29 de Junho  | Implementação da geração dinâmica de documentos com templates (US02, US03, US04, US05) e (US29, US27, US26, US31, US30). **Release 1** planejada ao final da sprint.|
 | Sprint 6 | ScrumXP | 30 Jun a 06 Julho | Implementação do preenchimento automático e exportação de documentos em PDF (US01, US10), Integração da OAB e notificações (US12, US13, US14).|
 | Sprint 7 | ScrumXP | 07 a 13 de Julho  | Melhorias, fix de possiveis bugs e estabilização para a **Release 2**.                                                        |
 
