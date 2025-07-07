@@ -14,7 +14,7 @@ export interface PaginatedResult<T> {
   itemsPerPage: number;
 }
 
-import { ModeloDocumento, Prisma } from '@prisma/client';
+import { DocumentoGerado, ModeloDocumento, Prisma } from '@prisma/client';
 import { CreateModeloDocumentoDto } from '../dto/create-document-model.dto';
 
 type UpdateDocumentModelData = Partial<{
@@ -46,6 +46,25 @@ export class DocumentModelsRepository {
     }
 
     return this.prisma.modeloDocumento.delete({
+      where: { id, userId },
+    });
+  }
+
+  async deleteGeneratedDocument(
+    id: string,
+    userId: string,
+  ): Promise<DocumentoGerado> {
+    const documentModelToDelete = await this.prisma.documentoGerado.findFirst({
+      where: { id, userId },
+    });
+
+    if (!documentModelToDelete) {
+      throw new NotFoundException(
+        `Documento com o ID ${id} e user ${userId} não encontrado`,
+      );
+    }
+
+    return this.prisma.documentoGerado.delete({
       where: { id, userId },
     });
   }
@@ -193,7 +212,11 @@ export class DocumentModelsRepository {
               tagSistema: true,
             },
           },
-          user: true,
+          user: {
+            omit: {
+              password: true,
+            },
+          },
         },
         skip: offset,
         take: limit,
@@ -213,5 +236,81 @@ export class DocumentModelsRepository {
       currentPage,
       itemsPerPage: limit,
     };
+  }
+
+  async findAllGeneratedByUserId(
+    userId: string,
+    options: { limit: number; offset: number; search?: string },
+  ): Promise<PaginatedResult<DocumentoGerado>> {
+    const { limit, offset, search } = options;
+
+    const whereClause: Prisma.DocumentoGeradoWhereInput = {
+      userId,
+    };
+
+    if (search) {
+      whereClause.OR = [
+        {
+          nome: {
+            contains: search,
+            mode: 'insensitive',
+          },
+        },
+        {
+          tipo_documento: {
+            contains: search,
+            mode: 'insensitive',
+          },
+        },
+      ];
+    }
+
+    const [totalItems, data] = await this.prisma.$transaction([
+      this.prisma.documentoGerado.count({
+        where: whereClause,
+      }),
+      this.prisma.documentoGerado.findMany({
+        where: whereClause,
+        include: {
+          user: {
+            omit: {
+              password: true,
+            },
+          },
+        },
+        skip: offset,
+        take: limit,
+        orderBy: {
+          nome: 'asc',
+        },
+      }),
+    ]);
+
+    const totalPages = Math.ceil(totalItems / limit);
+    const currentPage = Math.floor(offset / limit) + 1;
+
+    return {
+      data,
+      totalItems,
+      totalPages,
+      currentPage,
+      itemsPerPage: limit,
+    };
+  }
+
+  async findModeloComTags(modeloId: string, userId: string) {
+    return this.prisma.modeloDocumento.findFirst({
+      where: {
+        id: modeloId,
+        userId: userId,
+      },
+      include: {
+        tagsDoSistema: {
+          include: {
+            tagSistema: true,
+          },
+        },
+      },
+    });
   }
 }

@@ -1,4 +1,5 @@
 import {
+  DeleteObjectCommand,
   GetObjectCommand,
   PutObjectCommand,
   S3Client,
@@ -22,7 +23,7 @@ export class StorageService {
   constructor(
     @Inject('S3_CLIENT') private readonly s3Client: S3Client,
     @Inject(storageConfig.KEY)
-    private config: ConfigType<typeof storageConfig>,
+    private readonly config: ConfigType<typeof storageConfig>,
   ) {}
 
   /**
@@ -53,6 +54,22 @@ export class StorageService {
       throw new Error('Falha no upload do arquivo.');
     }
   }
+
+  async deleteFile(urlString: string) {
+    const url = new URL(urlString);
+
+    const pathname = url.pathname;
+
+    const pathParts = pathname.split('/').filter((part) => part);
+
+    const objectKey = pathParts.slice(1).join('/');
+    const command = new DeleteObjectCommand({
+      Bucket: this.config.bucket,
+      Key: objectKey,
+    });
+    await this.s3Client.send(command);
+  }
+
   async downloadFile(path: string): Promise<{
     stream: Readable;
     contentType: string;
@@ -67,7 +84,7 @@ export class StorageService {
       if (response.Body instanceof Readable) {
         return {
           stream: response.Body,
-          contentType: response.ContentType || 'application/octet-stream',
+          contentType: response.ContentType ?? 'application/octet-stream',
         };
       }
       throw new InternalServerErrorException(

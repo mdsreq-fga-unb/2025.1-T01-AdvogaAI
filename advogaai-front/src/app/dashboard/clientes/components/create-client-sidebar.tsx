@@ -12,7 +12,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { X, Link } from 'lucide-react';
+import { X } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 import { useForm, Controller } from 'react-hook-form';
@@ -82,9 +82,6 @@ export function CreateClientSidebar({
     } catch (error) {
       console.error('Falha ao criar cliente:', error);
     }
-  };
-  const handleGenerateLink = () => {
-    console.log('Gerar link de cadastro');
   };
   useEffect(() => {
     if (Object.keys(errors).length > 0) {
@@ -472,33 +469,6 @@ export function CreateClientSidebar({
                     {isPending ? 'Salvando...' : 'Adicionar Cliente'}
                   </Button>
                 </Button>
-              </div>
-
-              <div className="pt-6 border-t border-slate-700">
-                <div className="space-y-3">
-                  <h3 className="text-white font-medium">
-                    Gerar link do cadastro
-                  </h3>
-                  <p className="text-sm text-slate-400">
-                    Gere um link para ser preenchido pelo cliente.
-                  </p>
-                  <Input
-                    max={80}
-                    maxLength={80}
-                    readOnly
-                    value="Clique no botão para gerar um link"
-                    className="bg-slate-700 border-slate-600 text-slate-400"
-                  />
-                  <Button
-                    type="button"
-                    onClick={handleGenerateLink}
-                    variant="outline"
-                    className="w-full bg-slate-700 cursor-pointer border-slate-600 text-white hover:bg-slate-600"
-                  >
-                    <Link className="h-4 w-4 mr-2" />
-                    Gerar Link
-                  </Button>
-                </div>
               </div>
             </form>
           </div>

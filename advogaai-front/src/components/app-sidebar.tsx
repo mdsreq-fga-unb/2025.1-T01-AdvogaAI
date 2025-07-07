@@ -11,6 +11,7 @@ import {
   HelpCircle,
   ChevronUp,
   User2,
+  File,
 } from 'lucide-react';
 
 import {
@@ -52,6 +53,11 @@ export const pathsData = {
     {
       title: 'Modelos de Documentos',
       url: '/dashboard/modelo-documentos',
+      icon: File,
+    },
+    {
+      title: 'Documentos Gerados',
+      url: '/dashboard/documentos-gerados',
       icon: FileText,
     },
     {
@@ -128,7 +134,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton size="lg" asChild>
-              <a href="#">
+              <a href="/dashboard">
                 <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-cyan-500 text-slate-900">
                   <Briefcase className="size-4" />
                 </div>
@@ -199,7 +205,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                 sideOffset={4}
               >
                 <DropdownMenuItem
-                  onClick={() => router.push('perfil')}
+                  onClick={() => router.push('/dashboard/perfil')}
                   className="text-slate-300 cursor-pointer hover:bg-slate-700 hover:text-white"
                 >
                   <User2 className="mr-2 h-4 w-4" />

@@ -48,25 +48,10 @@ export class UserLoginService {
 
     const isProduction = process.env.MODE === 'cloud';
 
-    let cookieDomain: string | undefined;
-
-    if (isProduction && process.env.FRONTEND_URL) {
-      try {
-        const frontendUrl = new URL(process.env.FRONTEND_URL);
-        if (frontendUrl.hostname !== 'localhost') {
-          const domainParts = frontendUrl.hostname.split('.');
-          cookieDomain = '.' + domainParts.slice(-2).join('.');
-        }
-      } catch (e) {
-        console.error('Invalid FRONTEND_URL:', e);
-      }
-    }
-
     res.cookie('authToken', token, {
       httpOnly: true,
       secure: isProduction,
       sameSite: isProduction ? 'none' : 'lax',
-      domain: cookieDomain,
       path: '/',
       maxAge: 60 * 60 * 24 * 7,
     });

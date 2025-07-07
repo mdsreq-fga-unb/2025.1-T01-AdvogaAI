@@ -36,9 +36,9 @@ breadcrumbNameMap['create'] = 'Criar Modelo de Documento';
 
 export default function DashboardLayout({
   children,
-}: {
+}: Readonly<{
   children: React.ReactNode;
-}) {
+}>) {
   const pathname = usePathname();
   const pathSegments = pathname.split('/').filter((segment) => segment);
 
@@ -60,7 +60,7 @@ export default function DashboardLayout({
             )}
           >
             <header className="flex h-16 shrink-0 items-center gap-2 border-b border-slate-700 bg-slate-800 px-4">
-              <SidebarTrigger className="-ml-1 text-slate-300 hover:text-white" />
+              <SidebarTrigger className="-ml-1 text-slate-300 cursor-pointer hover:text-white" />
               <Separator
                 orientation="vertical"
                 className="mr-2 h-4 bg-slate-600"
