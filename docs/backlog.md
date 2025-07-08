@@ -59,8 +59,8 @@ Foi acordado com a cliente que o módulo de Gestão Financeira não será inclu�
 | US10 | Gerar docx de documentos                      | Sim     | Como advogado, quero exportar os documentos preenchidos em docx, para compartilhamento e arquivamento.       | 4     | 3        | 1     | 2       | 3           | 13         |
 | US11 | Visualizar documentos gerados                | Não     | Como advogado, quero visualizar a lista de documentos gerados, para localizar e gerenciar meus arquivos.    | 4     | 3        | 1     | 2       | 3           | 13         |
 | US12 | Vincular OAB à conta                         | Sim     | Como advogado, quero vincular meu número da OAB à conta, para integrar processos e evitar atrasos.          | 5     | 5        | 2     | 3       | 5           | 19         |
-| US13 | Visualizar documentos vinculados ao processo | Sim     | Como advogado, quero visualizar os documentos de um processo, para acompanhar os anexos de forma eficiente. | 4     | 3        | 2     | 2       | 3           | 14         |
-| US14 | Notificar movimentações de processos         | Sim     | Como advogado, quero ser notificado sobre movimentações processuais, para não perder prazos importantes.    | 5     | 5        | 3     | 3       | 5           | 20         |
+| US13 | Visualizar documentos vinculados ao processo | Não     | Como advogado, quero visualizar os documentos de um processo, para acompanhar os anexos de forma eficiente. | 4     | 3        | 2     | 2       | 3           | 14         |
+| US14 | Notificar movimentações de processos         | Não     | Como advogado, quero ser notificado sobre movimentações processuais, para não perder prazos importantes.    | 5     | 5        | 3     | 3       | 5           | 20         |
 | US15 | Registrar honorários contratuais             | Não     | Como advogado, quero registrar os honorários contratuais, para facilitar o controle financeiro do processo. | 4     | 3        | 3     | 3       | 3           | 17         |
 | US16 | Registrar honorários de êxito                | Não     | Como advogado, quero registrar honorários de êxito, para automatizar o cálculo de recebíveis por resultado. | 4     | 3        | 3     | 3       | 3           | 17         |
 | US17 | Visualizar status de parcelas pendentes      | Não     | Como advogado, quero visualizar o status das parcelas pendentes, para acompanhar pagamentos a receber.      | 4     | 3        | 2     | 2       | 3           | 17         |
@@ -77,7 +77,7 @@ Foi acordado com a cliente que o módulo de Gestão Financeira não será inclu�
 | US28 | Alterar senha                                | Sim     | Como usuário, quero alterar minha senha, para garantir maior segurança à minha conta.                       | 3     | 3        | 1     | 1       | 2           | 11         |
 | US29 | Encerrar sessão (logout)                     | Sim     | Como usuário, quero encerrar minha sessão, para manter minha conta segura ao sair do sistema.               | 3     | 2        | 1     | 1       | 2           | 10         |
 | US30 | Landing page                    | Sim     | Como usuário, quero entrar na ladning page do site, para ver informações gerais sobre o sistema e poder me redirecionar para o login.               | 3     | 2        | 1     | 1       | 2           | 10         |
-| US31 | Dashboard                    | Sim     | Como advogado, quero entrar no dashboard, para ver informações gerais sobre meus clientes, documentos, processos e ultimas movimentações.               | 3     | 2        | 1     | 1       | 2           | 10         |
+| US31 | Dashboard                    | Não     | Como advogado, quero entrar no dashboard, para ver informações gerais sobre meus clientes, documentos, processos e ultimas movimentações.               | 3     | 2        | 1     | 1       | 2           | 10         |
 
 ---
 
@@ -109,7 +109,7 @@ Foi acordado com a cliente que o módulo de Gestão Financeira não será inclu�
 | Épico                                                    | ID   | Nome do Requisito                        | No MVP? | Declaração da User Story                                                                                 | Prioridade |
 | -------------------------------------------------------- | ---- | ---------------------------------------- | ------- | -------------------------------------------------------------------------------------------------------- | ---------- |
 | **Épico 3.1: Vinculação e Notificação de Movimentações** | US12 | Vincular OAB à conta do advogado         | Sim     | Como advogado, quero vincular meu número da OAB à conta, para integrar processos e evitar atrasos.       | 19         |
-|                                                          | US14 | Notificar movimentações de processos     | Sim     | Como advogado, quero ser notificado sobre movimentações processuais, para não perder prazos importantes. | 20         |
+|                                                          | US14 | Notificar movimentações de processos     | Não     | Como advogado, quero ser notificado sobre movimentações processuais, para não perder prazos importantes. | 20         |
 |                                                          | US13 | Listar documentos vinculados ao processo | Não     | Como advogado, quero listar os documentos de um processo, para acompanhar os anexos de forma eficiente.  | 14         |
 
 ## Tema 4: Gestão de Honorários e Pagamentos
