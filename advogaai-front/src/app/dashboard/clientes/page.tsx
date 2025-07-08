@@ -121,7 +121,7 @@ export default function ClientesPage() {
                   <TableHead className="text-slate-300">Nome</TableHead>
                   <TableHead className="text-slate-300">Email</TableHead>
                   <TableHead className="text-slate-300">Telefone</TableHead>
-                  <TableHead className="text-slate-300">CPF</TableHead>
+                  <TableHead className="text-slate-300">CPF/CNPJ</TableHead>
                   <TableHead className="text-right text-slate-300">
                     Ações
                   </TableHead>
