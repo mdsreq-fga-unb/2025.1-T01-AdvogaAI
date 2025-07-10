@@ -56,7 +56,7 @@ Foi acordado com a cliente que o módulo de Gestão Financeira não será inclu�
 | US07 | Atualizar dados de clientes                  | Sim     | Como advogado, quero atualizar os dados dos meus clientes, para manter as informações sempre corretas.      | 4     | 4        | 2     | 2       | 4           | 16         |
 | US08 | Excluir registros de clientes                | Sim     | Como advogado, quero excluir registros de clientes, para remover dados obsoletos do sistema.                | 3     | 3        | 2     | 2       | 3           | 12         |
 | US09 | Visualizar clientes                          | Sim     | Como advogado, quero visualizar todos os clientes cadastrados, para facilitar a visualização e busca.       | 4     | 3        | 1     | 1       | 3           | 14         |
-| US10 | Gerar docx de documentos                      | Sim     | Como advogado, quero exportar os documentos preenchidos em docx, para compartilhamento e arquivamento.       | 4     | 3        | 1     | 2       | 3           | 13         |
+| US10 | Gerar docx de documentos                     | Sim     | Como advogado, quero exportar os documentos preenchidos em docx, para compartilhamento e arquivamento.       | 4     | 3        | 1     | 2       | 3           | 13         |
 | US11 | Visualizar documentos gerados                | Não     | Como advogado, quero visualizar a lista de documentos gerados, para localizar e gerenciar meus arquivos.    | 4     | 3        | 1     | 2       | 3           | 13         |
 | US12 | Vincular OAB à conta                         | Sim     | Como advogado, quero vincular meu número da OAB à conta, para integrar processos e evitar atrasos.          | 5     | 5        | 2     | 3       | 5           | 19         |
 | US13 | Visualizar documentos vinculados ao processo | Não     | Como advogado, quero visualizar os documentos de um processo, para acompanhar os anexos de forma eficiente. | 4     | 3        | 2     | 2       | 3           | 14         |
@@ -76,8 +76,9 @@ Foi acordado com a cliente que o módulo de Gestão Financeira não será inclu�
 | US27 | Visualizar dados do perfil                   | Sim     | Como usuário, quero visualizar meus dados de perfil, para conferir e acompanhar minhas informações.         | 3     | 2        | 1     | 1       | 2           | 10         |
 | US28 | Alterar senha                                | Sim     | Como usuário, quero alterar minha senha, para garantir maior segurança à minha conta.                       | 3     | 3        | 1     | 1       | 2           | 11         |
 | US29 | Encerrar sessão (logout)                     | Sim     | Como usuário, quero encerrar minha sessão, para manter minha conta segura ao sair do sistema.               | 3     | 2        | 1     | 1       | 2           | 10         |
-| US30 | Landing page                    | Sim     | Como usuário, quero entrar na ladning page do site, para ver informações gerais sobre o sistema e poder me redirecionar para o login.               | 3     | 2        | 1     | 1       | 2           | 10         |
-| US31 | Dashboard                    | Não     | Como advogado, quero entrar no dashboard, para ver informações gerais sobre meus clientes, documentos, processos e ultimas movimentações.               | 3     | 2        | 1     | 1       | 2           | 10         |
+| US30 | Landing page                                 | Sim     | Como usuário, quero entrar na ladning page do site, para ver informações gerais sobre o sistema e poder me redirecionar para o login.               | 3     | 2        | 1     | 1       | 2           | 10         |
+| US31 | Dashboard                                    | Não     | Como advogado, quero entrar no dashboard, para ver informações gerais sobre meus clientes, documentos, processos e ultimas movimentações.               | 3     | 2        | 1     | 1       | 2           | 10         |
+| US32 | Importar CSV com dados dos processos         | Sim     | Como advogado, quero importar um CSV contendo informações sobre meus processos e salvar no sistema.               | 3     | 2        | 1     | 1       | 2           | 10         |
 
 ---
 
@@ -111,6 +112,7 @@ Foi acordado com a cliente que o módulo de Gestão Financeira não será inclu�
 | **Épico 3.1: Vinculação e Notificação de Movimentações** | US12 | Vincular OAB à conta do advogado         | Sim     | Como advogado, quero vincular meu número da OAB à conta, para integrar processos e evitar atrasos.       | 19         |
 |                                                          | US14 | Notificar movimentações de processos     | Não     | Como advogado, quero ser notificado sobre movimentações processuais, para não perder prazos importantes. | 20         |
 |                                                          | US13 | Listar documentos vinculados ao processo | Não     | Como advogado, quero listar os documentos de um processo, para acompanhar os anexos de forma eficiente.  | 14         |
+|                                                          | US32 | Importar CSV com dados dos processos | Sim     | Como advogado, quero importar um CSV contendo informações sobre meus processos e salvar no sistema.   | 14         |
 
 ## Tema 4: Gestão de Honorários e Pagamentos
 
