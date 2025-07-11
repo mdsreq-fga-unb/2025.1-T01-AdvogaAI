@@ -53,7 +53,7 @@ export class UserLoginService {
       secure: isProduction,
       sameSite: isProduction ? 'none' : 'lax',
       path: '/',
-      maxAge: 60 * 60 * 24 * 7,
+      maxAge: 60 * 60 * 24 * 30 * 1000,
     });
 
     return {

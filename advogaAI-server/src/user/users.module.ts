@@ -8,9 +8,10 @@ import { ConfigModule } from '@nestjs/config';
 import { UserCreationService } from './services/user-creation.service';
 import { UserLoginService } from './services/user-login.service';
 import { GenerateConfirmEmailTokenService } from './services/generate-confirm-email-token.service';
-import { SendEmailService } from 'src/email/services/send-email.service';
 import { GetUserService } from './services/get-user.service';
 import { UpdateUserService } from './services/update-user.service';
+import { RabbitMQModule } from 'src/rabbitmq/rabbitmq.module';
+import { EmailModule } from 'src/email/email.module';
 @Module({
   imports: [
     PrismaModule,
@@ -18,6 +19,8 @@ import { UpdateUserService } from './services/update-user.service';
     ConfigModule.forRoot({
       isGlobal: true,
     }),
+    RabbitMQModule.register({ name: 'RABBITMQ_SERVICE', queue: 'send_email' }),
+    EmailModule,
   ],
   providers: [
     UsersService,
@@ -27,7 +30,6 @@ import { UpdateUserService } from './services/update-user.service';
     UpdateUserService,
     UserLoginService,
     GenerateConfirmEmailTokenService,
-    SendEmailService,
   ],
   controllers: [UsersController],
   exports: [],

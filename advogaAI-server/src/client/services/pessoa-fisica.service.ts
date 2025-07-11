@@ -41,16 +41,6 @@ export class PessoaFisicaService {
     const { pessoaFisica: pessoaFisicaDto } = registerClientDto;
 
     try {
-      // 1. Check if a client with this CPF already exists
-      const existingPessoa = await this.pessoaFisicaRepository.findByCpf(
-        pessoaFisicaDto.cpf,
-      );
-
-      if (existingPessoa) {
-        throw new ConflictException('Já existe um cliente com este CPF.');
-      }
-
-      // 2. If not, proceed to create the new client
       this.logger.log(`Creating a new Pessoa Fisica for user ${userId}`);
       const newPessoaFisica = await this.pessoaFisicaRepository.create(
         pessoaFisicaDto,

@@ -78,7 +78,6 @@ export function CreateClientSidebar({
   const onSubmit = (data: CreatePessoaFisicaDto) => {
     try {
       createClient(data);
-      reset();
     } catch (error) {
       console.error('Falha ao criar cliente:', error);
     }
@@ -181,7 +180,7 @@ export function CreateClientSidebar({
                       <Input
                         id="cpf"
                         placeholder="000.000.000-00"
-                        value={maskCPF(field.value)}
+                        value={maskCPF(field.value ?? '')}
                         onChange={(e) => {
                           const unmaskedValue = e.target.value.replace(
                             /\D/g,

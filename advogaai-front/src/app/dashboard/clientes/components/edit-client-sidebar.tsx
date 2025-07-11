@@ -49,7 +49,40 @@ export function EditClientSidebar({
 
   useEffect(() => {
     if (clientToEdit && isOpen) {
-      reset(clientToEdit);
+      // Map clientToEdit to UpdatePessoaFisicaDto shape and handle nulls
+      const {
+        nomeCompleto,
+        cpf,
+        rg,
+        ctps,
+        nacionalidade,
+        email,
+        telefone,
+        estadoCivil,
+        profissao,
+        endereco,
+      } = clientToEdit;
+
+      reset({
+        nomeCompleto,
+        cpf: cpf ?? '',
+        rg: rg ?? '',
+        ctps: ctps ?? '',
+        nacionalidade,
+        email,
+        telefone,
+        estadoCivil,
+        profissao,
+        endereco: endereco
+          ? {
+              ...endereco,
+              complemento:
+                endereco.complemento === null
+                  ? undefined
+                  : endereco.complemento,
+            }
+          : undefined,
+      });
     }
   }, [clientToEdit, isOpen, reset]);
 

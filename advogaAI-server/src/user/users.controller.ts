@@ -50,27 +50,13 @@ export class UsersController {
   }
   @Post('logout')
   logout(@Res({ passthrough: true }) res: Response) {
-    let cookieDomain: string | undefined;
     const isProduction = process.env.MODE === 'cloud';
-
-    if (isProduction && process.env.FRONTEND_URL) {
-      try {
-        const frontendUrl = new URL(process.env.FRONTEND_URL);
-        if (frontendUrl.hostname !== 'localhost') {
-          const domainParts = frontendUrl.hostname.split('.');
-          cookieDomain = '.' + domainParts.slice(-2).join('.');
-        }
-      } catch (e) {
-        console.error('Invalid FRONTEND_URL:', e);
-      }
-    }
     res.clearCookie('authToken', {
       httpOnly: true,
-      domain: cookieDomain,
-      path: '/',
-      maxAge: 60 * 60 * 24 * 7,
       secure: isProduction,
       sameSite: isProduction ? 'none' : 'lax',
+      path: '/',
+      maxAge: 60 * 60 * 24 * 30 * 1000,
     });
 
     return {

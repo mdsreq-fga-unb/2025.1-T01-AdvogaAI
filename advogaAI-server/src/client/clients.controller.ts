@@ -24,7 +24,7 @@ import {
 } from '@nestjs/swagger';
 import { PessoaFisicaService } from './services/pessoa-fisica.service';
 import { RegisterClientDto } from './dto/register-client.dto';
-import { RegisterJuridicalClientDto } from './dto/register-juridical-client.dto';
+
 import { PessoaJuridicaService } from './services/pessoa-juridica.service';
 import { JwtAuthGuard } from 'src/shared/jwt/jwt-auth.guard';
 import { UserId } from 'src/shared/decorators/user-id.decorator';
@@ -66,34 +66,34 @@ export class ClientsController {
     return this.pessoaFisicaService.create(registerClientDto, userId);
   }
 
-  @UseGuards(JwtAuthGuard)
-  @Post('pessoa-juridica')
-  @HttpCode(HttpStatus.CREATED)
-  @ApiOperation({
-    summary: 'Registrar um novo cliente (Pessoa Jurídica) e seu representante',
-  })
-  @ApiBody({ type: RegisterJuridicalClientDto })
-  @ApiResponse({
-    status: 201,
-    description: 'Cliente pessoa jurídica criado com sucesso.',
-  })
-  @ApiResponse({
-    status: 409,
-    description: 'Conflito. Já existe uma empresa com o CNPJ informado.',
-  })
-  @ApiResponse({
-    status: 400,
-    description: 'Requisição inválida. Verifique os dados enviados.',
-  })
-  createPessoaJuridica(
-    @Body() registerJuridicalClientDto: RegisterJuridicalClientDto,
-    @UserId() userId: string,
-  ) {
-    return this.pessoaJuridicaService.create(
-      registerJuridicalClientDto,
-      userId,
-    );
-  }
+  // @UseGuards(JwtAuthGuard)
+  // @Post('pessoa-juridica')
+  // @HttpCode(HttpStatus.CREATED)
+  // @ApiOperation({
+  //   summary: 'Registrar um novo cliente (Pessoa Jurídica) e seu representante',
+  // })
+  // @ApiBody({ type: RegisterJuridicalClientDto })
+  // @ApiResponse({
+  //   status: 201,
+  //   description: 'Cliente pessoa jurídica criado com sucesso.',
+  // })
+  // @ApiResponse({
+  //   status: 409,
+  //   description: 'Conflito. Já existe uma empresa com o CNPJ informado.',
+  // })
+  // @ApiResponse({
+  //   status: 400,
+  //   description: 'Requisição inválida. Verifique os dados enviados.',
+  // })
+  // createPessoaJuridica(
+  //   @Body() registerJuridicalClientDto: RegisterJuridicalClientDto,
+  //   @UserId() userId: string,
+  // ) {
+  //   return this.pessoaJuridicaService.create(
+  //     registerJuridicalClientDto,
+  //     userId,
+  //   );
+  // }
 
   @UseGuards(JwtAuthGuard)
   @Get('pessoa-fisica')

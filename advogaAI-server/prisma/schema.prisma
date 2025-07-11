@@ -23,6 +23,7 @@ model User {
   clientesPessoaJuridica PessoaJuridica[]
   modelosDocumento ModeloDocumento[]
   DocumentoGerado DocumentoGerado[]
+  processos Processo[]
 
   @@map("users")
 }
@@ -38,11 +39,11 @@ enum EstadoCivil {
 model PessoaFisica {
   id              String   @id @default(uuid())
   nomeCompleto    String
-  cpf             String   @unique @db.VarChar(14)
-  rg              String   @unique
-  ctps            String   @unique
+  cpf             String?   @db.VarChar(14)
+  rg              String   
+  ctps            String?  
   nacionalidade   String
-  email           String   @unique
+  email           String   
   telefone        String
   estadoCivil     EstadoCivil
   profissao       String
@@ -177,4 +178,39 @@ model CampoPersonalizado {
   updatedAt DateTime @updatedAt
 
   @@map("campos_personalizados")
+}
+
+model Processo {
+  id                  String   @id @default(uuid())
+  siglaTribunal       String   // Sigla do tribunal (ex: "TRT10")
+  numeroProcesso      String   @unique // Número do processo (ex: "00009753020245100017")
+  nomeClasse          String   // Nome da classe (ex: "Ação Trabalhista - Rito Ordinário")
+
+  userId              String   // Relacionamento com o advogado (usuário)
+  user                User     @relation(fields: [userId], references: [id])
+
+  movimentacoes       Movimentacao[]
+
+  createdAt            DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+}
+
+model Movimentacao {
+  id                    String   @id @default(uuid())
+  dataDisponibilizacao  DateTime // Data de disponibilização da comunicação
+  tipoComunicacao       String   // Tipo de comunicação (ex: "Intimação")
+  nomeOrgao             String   // Nome do órgão (ex: "17ª Vara do Trabalho de Brasília - DF")
+  texto                 String   // Texto da comunicação
+  tipoDocumento         String   // Tipo do documento (ex: "Notificação")
+  meiocompleto          String   // Meio completo (ex: "Diário de Justiça Eletrônico Nacional")
+
+  prazoResposta         DateTime // Prazo de resposta (data de disponibilização + 5 dias)
+
+  numeroComunicacao    String   @unique
+
+  processoId            String   // Relacionamento com o processo
+  processo              Processo @relation(fields: [processoId], references: [id])
+
+  createdAt              DateTime @default(now())
+  updatedAt          DateTime @updatedAt
 }
