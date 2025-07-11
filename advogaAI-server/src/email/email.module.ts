@@ -5,6 +5,10 @@ import { ConfigModule } from '@nestjs/config';
 import { EmailService } from './email.service';
 import { EmailRepository } from './repositories/email.repository';
 import { EmailController } from './email.controller';
+import { EmailQueueService } from './services/email-queue.service';
+import { RabbitMQModule } from 'src/rabbitmq/rabbitmq.module';
+import { SendEmailService } from './services/send-email.service';
+import { GenerateConfirmEmailTokenService } from 'src/user/services/generate-confirm-email-token.service';
 
 @Module({
   imports: [
@@ -13,9 +17,16 @@ import { EmailController } from './email.controller';
     ConfigModule.forRoot({
       isGlobal: true,
     }),
+    RabbitMQModule.register({ name: 'RABBITMQ_SERVICE', queue: 'send_email' }),
   ],
-  providers: [EmailService, EmailRepository],
+  providers: [
+    EmailService,
+    EmailRepository,
+    EmailQueueService,
+    SendEmailService,
+    GenerateConfirmEmailTokenService,
+  ],
   controllers: [EmailController],
-  exports: [],
+  exports: [EmailQueueService, SendEmailService],
 })
-export class UsersModule {}
+export class EmailModule {}

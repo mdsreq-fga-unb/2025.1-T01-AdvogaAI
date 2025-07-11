@@ -2,7 +2,6 @@ import {
   IsString,
   IsNotEmpty,
   IsEmail,
-  Length,
   IsDefined,
   ValidateNested,
 } from 'class-validator';
@@ -15,16 +14,12 @@ export class CreatePessoaFisicaDto {
   @IsString()
   nomeCompleto: string;
 
-  @IsNotEmpty()
   @IsString()
-  @Length(11, 11)
   cpf: string;
 
-  @IsNotEmpty()
   @IsString()
   rg: string;
 
-  @IsNotEmpty()
   @IsString()
   ctps: string;
 

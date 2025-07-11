@@ -4,7 +4,6 @@ import {
   IsNotEmpty,
   IsString,
   MinLength,
-  Length,
   IsEnum,
   IsOptional,
   IsArray,
@@ -41,9 +40,7 @@ export class UpdatePessoaFisicaDto {
     minLength: 11,
     required: false,
   })
-  @IsOptional()
   @IsString()
-  @Length(11, 11, { message: 'O CPF deve ter exatamente 11 caracteres' })
   cpf?: string;
 
   @ApiProperty({
@@ -53,7 +50,6 @@ export class UpdatePessoaFisicaDto {
   })
   @IsOptional()
   @IsString()
-  @IsNotEmpty()
   rg?: string;
 
   @ApiProperty({
@@ -63,7 +59,6 @@ export class UpdatePessoaFisicaDto {
   })
   @IsOptional()
   @IsString()
-  @IsNotEmpty()
   ctps?: string;
 
   @ApiProperty({

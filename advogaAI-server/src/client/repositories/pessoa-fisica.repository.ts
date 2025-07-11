@@ -67,17 +67,6 @@ export class PessoaFisicaRepository {
     }
   }
 
-  async findByCpf(cpf: string): Promise<PessoaFisica | null> {
-    return await this.prisma.pessoaFisica.findUnique({
-      where: { cpf },
-      include: {
-        endereco: true,
-        user: true,
-        empresasRepresentadas: true,
-      },
-    });
-  }
-
   async findById(id: string): Promise<PessoaFisica | null> {
     return this.prisma.pessoaFisica.findUnique({
       where: { id },

@@ -11,7 +11,7 @@ export const enderecoSchema = z.object({
   complemento: z
     .string()
     .nullable()
-    .transform((val) => val ?? undefined),
+    .transform((val) => val ?? null),
   bairro: z.string(),
   cidade: z.string(),
   estado: z.string().length(2, { message: 'Estado deve ter 2 caracteres.' }),
@@ -27,7 +27,7 @@ export const createAddressSchema = z.object({
   cep: z.string().min(8, 'CEP é obrigatório'),
   logradouro: z.string().min(1, 'Logradouro é obrigatório'),
   numero: z.string().min(1, 'Número é obrigatório'),
-  complemento: z.string().optional(), // Complemento é opcional
+  complemento: z.string().optional(),
   bairro: z.string().min(1, 'Bairro é obrigatório'),
   cidade: z.string().min(1, 'Cidade é obrigatória'),
   estado: z.string().min(2, 'Estado é obrigatório').max(2),
@@ -52,23 +52,27 @@ export const updateAddressSchema = createAddressSchema.partial().extend({
 export const pessoaFisicaSchema = z.object({
   id: z.string().uuid({ message: 'ID de cliente inválido.' }),
   nomeCompleto: z.string(),
-  cpf: z.string().regex(/^\d{11}$/, { message: 'CPF deve conter 11 dígitos.' }),
-  rg: z.string(),
-  ctps: z.string(),
+  cpf: z
+    .string()
+    .optional() // TORNAR CPF OPICIONAL (NÃO ACEITAR NULO)
+    .refine((val) => !val || val.length === 11, {
+      message: 'CPF deve ter 11 dígitos ou ser nulo/vazio.',
+    }),
+  rg: z.string().optional(), // Tornando o RG opcional
+  ctps: z.string().optional(), // Tornando CTPS opcional
   nacionalidade: z.string(),
   email: z.string().email({ message: 'Email em formato inválido.' }),
   telefone: z.string(),
   estadoCivil: z.nativeEnum(EstadoCivil, {
-    message: 'Estado civil inválido vindo da API.',
+    message: 'Estado civil inválido.',
   }),
   profissao: z.string(),
   enderecoId: z.string().uuid(),
   userId: z.string().uuid(),
   createdAt: z.coerce.date(),
   updatedAt: z.coerce.date(),
-  endereco: enderecoSchema,
+  endereco: enderecoSchema, // Referenciando o esquema de endereço
 });
-
 export const getPessoasFisicasResponseSchema = z.object({
   data: z.array(pessoaFisicaSchema),
   totalPages: z.number(),
@@ -85,17 +89,25 @@ export type GetPessoasFisicasResponse = z.infer<
  * Schema para validação do formulário de criação de Pessoa Física.
  */
 export const createPessoaFisicaSchema = z.object({
-  nomeCompleto: z.string().min(3, 'Nome completo é obrigatório.'),
-  cpf: z.string().length(11, 'O CPF deve conter 11 dígitos.'),
-  rg: z.string().min(1, 'RG é obrigatório.'),
-  ctps: z.string().min(1, 'CTPS é obrigatória.'),
-  nacionalidade: z.string().min(1, 'Nacionalidade é obrigatória.'),
-  email: z.string().email('Formato de email inválido.'),
-  telefone: z.string().min(10, 'Telefone é obrigatório.'),
-  estadoCivil: z.nativeEnum(EstadoCivil, {
-    errorMap: () => ({ message: 'Selecione um estado civil.' }),
-  }),
-  profissao: z.string().min(1, 'Profissão é obrigatória.'),
+  nomeCompleto: z.string().min(1, 'Nome completo é obrigatório'),
+  cpf: z
+    .string()
+    .optional()
+    .nullable()
+    .refine((val) => !val || val.length === 11, {
+      message: 'CPF deve ter 11 dígitos ou ser vazio',
+    }), // ALTERADO para optional()
+  rg: z.string().optional().nullable(), // Tornado opcional
+  ctps: z.string().optional().nullable(), // Tornado opcional
+  nacionalidade: z.string().min(1, 'Nacionalidade é obrigatória'),
+  email: z.string().email('Email inválido').min(1, 'Email é obrigatório'),
+  telefone: z.string().min(1, 'Telefone é obrigatório'),
+  estadoCivil: z
+    .nativeEnum(EstadoCivil, {
+      message: 'Estado civil inválido.',
+    })
+    .optional(),
+  profissao: z.string().min(1, 'Profissão é obrigatória'),
   endereco: createAddressSchema,
 });
 
