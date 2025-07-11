@@ -55,6 +55,10 @@ export function FillModelComponent({
   const limit = 10;
 
   useEffect(() => {
+    if (loadedModelTags && manualTagValues.length === 0) {
+      setCanGenerateDoc(true);
+      return;
+    }
     if (manualTagValues.length > 0) {
       const allValuesAreFilled = manualTagValues.every(
         (item) => item.valor && item.valor.trim() !== '',
@@ -62,7 +66,7 @@ export function FillModelComponent({
 
       setCanGenerateDoc(allValuesAreFilled);
     }
-  }, [manualTagValues]);
+  }, [manualTagValues, loadedModelTags]);
 
   const { data: systemTags = [] } = useGetSystemTags();
 
@@ -256,7 +260,7 @@ export function FillModelComponent({
             </div>
           </div>
         )}
-        {!isLoadingTags && !manualTagValues && (
+        {!isLoadingTags && loadedModelTags && manualTagValues.length === 0 && (
           <div className="flex flex-col gap-4">
             <p className="text-center text-alabaster-50 text-xl font-satoshi font-bold">
               Seu documento está pronto para ser gerado! <br></br> Ao clicar no
