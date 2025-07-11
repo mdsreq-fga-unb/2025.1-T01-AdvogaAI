@@ -4,6 +4,7 @@ import { AppModule } from './app.module';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { readFileSync } from 'fs';
 import * as cookieParser from 'cookie-parser';
+import { Transport } from '@nestjs/microservices';
 
 async function bootstrap() {
   let app: INestApplication;
@@ -36,6 +37,18 @@ async function bootstrap() {
       stopAtFirstError: true,
     }),
   );
+  app.connectMicroservice({
+    transport: Transport.RMQ,
+    options: {
+      urls: [process.env.RABBITMQ_URL ?? 'amqp://admin:admin@localhost:5672'],
+      queue: 'send_email',
+      queueOptions: {
+        durable: true,
+      },
+    },
+  });
+
+  await app.startAllMicroservices();
 
   const config = new DocumentBuilder()
     .setTitle('AdvogaAI API')

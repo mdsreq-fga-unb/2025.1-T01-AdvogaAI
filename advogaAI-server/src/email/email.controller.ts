@@ -13,6 +13,9 @@ import { PrismaService } from 'prisma/prisma.service';
 import { GenerateConfirmEmailTokenService } from 'src/user/services/generate-confirm-email-token.service';
 import { JwtService } from 'src/shared/jwt/jwt.service';
 import { hash } from 'src/utils/hash.util';
+import { MessagePattern, Payload } from '@nestjs/microservices';
+import { SendEmailService } from './services/send-email.service';
+import { EmailQueueService } from './services/email-queue.service';
 
 @ApiTags('Email')
 @Controller('email')
@@ -22,6 +25,8 @@ export class EmailController {
     private readonly prisma: PrismaService,
     private readonly jwtservice: JwtService,
     private readonly GenerateConfirmEmailTokenService: GenerateConfirmEmailTokenService,
+    private readonly sendEmailService: SendEmailService,
+    private readonly emailQueueService: EmailQueueService,
   ) {}
 
   @Post('recover-password-request')
@@ -37,7 +42,7 @@ export class EmailController {
     }
     const confirmEmailToken =
       this.GenerateConfirmEmailTokenService.generateConfirmEmailToken(user);
-    const response = await this.emailService.sendEmail({
+    const response = await this.emailQueueService.publishEmail({
       emailDestino: user.email,
       nomeUsuario: user.name,
       titulo: 'Recupere a senha da sua conta',
@@ -55,7 +60,7 @@ export class EmailController {
   @Post('send-email-service')
   @HttpCode(HttpStatus.OK)
   async sendEmail(@Body() body: SendEmailDto) {
-    return await this.emailService.sendEmail(body);
+    return await this.emailQueueService.publishEmail(body);
   }
 
   @Post('confirm-email')
@@ -86,7 +91,7 @@ export class EmailController {
         password: hashedPassword,
       },
     });
-    await this.emailService.sendEmail({
+    await this.emailQueueService.publishEmail({
       assunto: 'Senha alterada',
       corpo:
         'Sua senha do AdvogaAI foi alterada, se você não reconhece está ação, entre em contato conosco!',
@@ -110,7 +115,7 @@ export class EmailController {
     }
     const confirmEmailToken =
       this.GenerateConfirmEmailTokenService.generateConfirmEmailToken(user);
-    return await this.emailService.sendEmail({
+    return await this.emailQueueService.publishEmail({
       assunto: 'E-mail de confirmação',
       emailDestino: user.email,
       nomeUsuario: user.name,
@@ -119,5 +124,18 @@ export class EmailController {
       textoBotao: 'Confirmar e-mail',
       linkBotao: `${process.env.FRONTEND_URL}/confirm-email?token=${confirmEmailToken}`,
     });
+  }
+
+  @MessagePattern('send_email')
+  async handleSendEmail(@Payload() data: SendEmailDto) {
+    console.log('--- MENSAGEM RECEBIDA PELO CONSUMER ---');
+    console.log('Dados recebidos da fila:', data);
+
+    try {
+      await this.sendEmailService.sendEmail(data);
+      console.log('E-mail processado e enviado com sucesso.');
+    } catch (error) {
+      console.error('Erro ao processar a mensagem da fila:', error);
+    }
   }
 }

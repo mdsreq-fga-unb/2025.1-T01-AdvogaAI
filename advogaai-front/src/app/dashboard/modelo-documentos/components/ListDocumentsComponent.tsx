@@ -29,7 +29,15 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from '@/components/ui/alert-dialog';
-import { Search, Edit, Trash2, UserPlus, Download, Plus } from 'lucide-react';
+import {
+  Search,
+  Edit,
+  Trash2,
+  UserPlus,
+  Download,
+  Plus,
+  Eye,
+} from 'lucide-react';
 import CompletePagination from '@/components/completePagination';
 import { Label } from '@/components/ui/label';
 import { ModeloDocumento } from '@/modules/document-models/api/documentModelsSchema';
@@ -41,6 +49,15 @@ import { useUpdateModeloDocumento } from '@/modules/document-models/hooks/useUpd
 import { useGetModelosDocumento } from '@/modules/document-models/hooks/useGetModelosDocumento';
 import { useDebounce } from '../../../../../hooks/use-debounce';
 import { useRouter } from 'next/navigation';
+import { useGetSystemTags } from '@/modules/document-models/hooks/useGetSystemTags';
+import {
+  Sheet,
+  SheetContent,
+  SheetFooter,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from '@/components/ui/sheet';
 interface ListDocumentsProps {
   setModelToFill: (model: ModeloDocumento) => void;
   setIsFillingModel: (e: boolean) => void;
@@ -59,10 +76,13 @@ export function ListDocuments({
   const [descEdit, setDescEdit] = useState<string>('');
   const [modelToEdit, setModelToEdit] = useState<ModeloDocumento | null>(null);
   const [downloadingId, setDownloadingId] = useState<string | null>(null);
+  const [tagsSheetOpen, setTagsSheetOpen] = useState(false);
+  const { data: tags } = useGetSystemTags();
 
   function handleNewModel() {
     router.push('modelo-documentos/create');
   }
+
   const itemsPerPage = 10;
   const {
     data: response,
@@ -141,13 +161,48 @@ export function ListDocuments({
             className="pl-8 w-full bg-slate-700 border-slate-600 text-white"
           />
         </div>
-        <Button
-          onClick={() => handleNewModel()}
-          className="gap-2 bg-cyan-500 cursor-pointer hover:bg-cyan-600 text-slate-900 font-medium"
-        >
-          <UserPlus className="h-4 w-4" />
-          Novo Modelo
-        </Button>
+        <div className="flex gap-2">
+          <Button
+            onClick={() => handleNewModel()}
+            className="gap-2 bg-cyan-500 cursor-pointer hover:bg-cyan-600 text-slate-900 font-medium"
+          >
+            <UserPlus className="h-4 w-4" />
+            Novo Modelo
+          </Button>
+          <Sheet open={tagsSheetOpen} onOpenChange={setTagsSheetOpen}>
+            <SheetTrigger asChild>
+              <Button className="gap-2 bg-slate-500 cursor-pointer hover:bg-slate-600 text-white font-medium">
+                <Eye className="h-4 w-4" />
+              </Button>
+            </SheetTrigger>
+            <SheetContent className="fixed top-0 right-0 h-full w-96 bg-slate-800 border-l border-slate-700 z-50 transform transition-transform duration-300 ease-in-out flex flex-col">
+              <SheetHeader>
+                <SheetTitle>Tags de Sistema</SheetTitle>
+              </SheetHeader>
+
+              {isLoading ? (
+                <div className="flex justify-center p-16">
+                  <div className="w-10 h-10 border-4 rounded-full border-slate-300 border-t-cyan-500 animate-spin"></div>
+                </div>
+              ) : (
+                <ul className="space-y-4 p-4">
+                  {tags?.map((tag) => (
+                    <li key={tag.id} className="text-white">
+                      <div className="flex flex-col justify-between">
+                        <span className="text-slate-300">{tag.descricao}</span>
+                        <span className="text-slate-500">
+                          {`{{ ${tag.chave} }}`}
+                        </span>
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+              )}
+
+              <SheetFooter></SheetFooter>
+            </SheetContent>
+          </Sheet>
+        </div>
       </div>
 
       <Card className="bg-slate-800 border-slate-700">

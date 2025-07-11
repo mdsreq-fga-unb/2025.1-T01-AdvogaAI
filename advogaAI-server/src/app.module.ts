@@ -32,6 +32,9 @@ import { UpdateUserService } from './user/services/update-user.service';
 import { StorageController } from './storage/storage.controller';
 import { DocumentoService } from './document-models/services/document.service';
 import { RabbitMQModule } from './rabbitmq/rabbitmq.module';
+import { EmailQueueService } from './email/services/email-queue.service';
+import { NotificationModule } from './notification/notification.module';
+import { ProcessosModule } from './process/process.module';
 
 @Module({
   imports: [
@@ -39,6 +42,8 @@ import { RabbitMQModule } from './rabbitmq/rabbitmq.module';
     ClientsModule,
     UsersModule,
     DocumentModelsModule,
+    ProcessosModule,
+    NotificationModule,
     ConfigModule.forRoot({
       isGlobal: true,
     }),
@@ -62,7 +67,7 @@ import { RabbitMQModule } from './rabbitmq/rabbitmq.module';
     }),
     RabbitMQModule.register({
       name: 'RABBITMQ_SERVICE',
-      queue: 'email_queue',
+      queue: 'send_email',
     }),
     DocumentModelsModule,
     StorageModule,
@@ -96,6 +101,7 @@ import { RabbitMQModule } from './rabbitmq/rabbitmq.module';
     DocumentModelsService,
     DocumentModelsRepository,
     DocumentoService,
+    EmailQueueService,
   ],
 })
 export class AppModule {}

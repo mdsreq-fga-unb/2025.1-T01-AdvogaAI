@@ -5,14 +5,14 @@ import { PrismaService } from 'prisma/prisma.service';
 import { hash } from 'src/utils/hash.util';
 import { GenerateConfirmEmailTokenService } from './generate-confirm-email-token.service';
 import { User } from '@prisma/client';
-import { SendEmailService } from 'src/email/services/send-email.service';
+import { EmailQueueService } from 'src/email/services/email-queue.service';
 
 @Injectable()
 export class UserCreationService {
   constructor(
     private readonly prisma: PrismaService,
     private readonly GenerateConfirmEmailTokenService: GenerateConfirmEmailTokenService,
-    private readonly sendEmailService: SendEmailService,
+    private readonly emailQueueService: EmailQueueService,
   ) {}
 
   async createUser(useCreation: CreateUserDto) {
@@ -34,7 +34,7 @@ export class UserCreationService {
       });
       const confirmEmailToken =
         this.GenerateConfirmEmailTokenService.generateConfirmEmailToken(user);
-      await this.sendEmailService.sendEmail({
+      await this.emailQueueService.publishEmail({
         assunto: 'E-mail de confirmação',
         emailDestino: user.email,
         nomeUsuario: user.name,

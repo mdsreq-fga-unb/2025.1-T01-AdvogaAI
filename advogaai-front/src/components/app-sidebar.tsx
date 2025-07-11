@@ -205,7 +205,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                 sideOffset={4}
               >
                 <DropdownMenuItem
-                  onClick={() => router.push('perfil')}
+                  onClick={() => router.push('/dashboard/perfil')}
                   className="text-slate-300 cursor-pointer hover:bg-slate-700 hover:text-white"
                 >
                   <User2 className="mr-2 h-4 w-4" />

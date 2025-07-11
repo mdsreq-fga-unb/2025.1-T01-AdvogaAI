@@ -1,5 +1,3 @@
-// src/email.service.ts
-
 import { Injectable } from '@nestjs/common';
 import { MailerService } from '@nestjs-modules/mailer';
 import { SendEmailDto } from '../dto/send-email.dto';

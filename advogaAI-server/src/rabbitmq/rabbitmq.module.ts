@@ -1,4 +1,4 @@
-import { DynamicModule, Module } from '@nestjs/common';
+import { Module, DynamicModule } from '@nestjs/common';
 import { ClientsModule, Transport } from '@nestjs/microservices';
 import { RabbitMQService } from './rabbitmq.service';
 
@@ -18,7 +18,9 @@ export class RabbitMQModule {
             name: name,
             transport: Transport.RMQ,
             options: {
-              urls: [`amqp://vitor:Vitorbbs1.@192.168.15.81:5672`],
+              urls: [
+                process.env.RABBITMQ_URL ?? 'amqp://admin:admin@localhost:5672',
+              ],
               queue: queue,
               queueOptions: {
                 durable: true,
