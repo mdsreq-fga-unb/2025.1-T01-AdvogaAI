@@ -13,6 +13,6 @@
 | Sprint 4 | ScrumXP | 16 a 22 de Junho  | Gestão de Clientes (CRUD): Desenvolvimento completo do fluxo de cadastro, visualização, atualização e exclusão de clientes (US06, US07, US08, US09).|
 | Sprint 5 | ScrumXP | 23 a 29 de Junho  | Implementação da geração dinâmica de documentos com templates (US02, US03, US04, US05) e (US29, US27, US26, US30). **Release 1** planejada ao final da sprint.|
 | Sprint 6 | ScrumXP | 30 Jun a 06 Julho | Implementação do preenchimento automático e exportação de documentos em PDF (US01, US10), Vincular OAB a conta do usuario (US12).|
-| Sprint 7 | ScrumXP | 07 a 13 de Julho  | Melhorias, fix de possiveis bugs, implementação da US32 e estabilização para a **Release 2**.                                                        |
+| Sprint 7 | ScrumXP | 07 a 13 de Julho  | Melhorias, fix de possiveis bugs, implementação da US31, 14, 13 e estabilização para a **Release 2**.                                                        |
 
 **Observação:** O cronograma está sujeito a ajustes conforme prioridades da cliente e descobertas técnicas. Funcionalidades do módulo financeiro e suporte a múltiplos escritórios foram excluídos do MVP.
