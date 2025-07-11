@@ -8,7 +8,7 @@ import { ProcessoRepository } from './process.repository';
 export class ProcessosController {
   constructor(
     private readonly processosService: ProcessosService,
-    private processoRepository: ProcessoRepository,
+    private readonly processoRepository: ProcessoRepository,
   ) {}
 
   @UseGuards(JwtAuthGuard)

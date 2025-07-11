@@ -1,3 +1,8 @@
+/* eslint-disable @typescript-eslint/no-redundant-type-constituents */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-unsafe-return */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-call */
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'prisma/prisma.service';
 import { Movimentacao } from '@prisma/client';
@@ -7,7 +12,7 @@ export class ProcessoRepository {
   constructor(private readonly prisma: PrismaService) {}
 
   async getProcessosPaginated(userId: string, page: number, pageSize: number) {
-    return this.prisma.processo.findMany({
+    return await this.prisma.processo.findMany({
       where: { userId },
       skip: (page - 1) * pageSize,
       take: pageSize,
@@ -32,13 +37,13 @@ export class ProcessoRepository {
   }
 
   async countProcessos(userId: string) {
-    return this.prisma.processo.count({
+    return await this.prisma.processo.count({
       where: { userId },
     });
   }
 
   async getLastMovimentacao(processoId: string): Promise<Movimentacao | null> {
-    return this.prisma.movimentacao.findFirst({
+    return await this.prisma.movimentacao.findFirst({
       where: { processoId },
       orderBy: {
         dataDisponibilizacao: 'desc',
@@ -81,8 +86,6 @@ export class ProcessoRepository {
         },
       },
     });
-
-    console.log('Processos encontrados:', processos);
 
     type ProcessoWithMovimentacoes = (typeof processos)[number];
     const urgenteList: ProcessoWithMovimentacoes[] = [];

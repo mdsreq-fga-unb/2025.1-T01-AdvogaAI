@@ -1,3 +1,7 @@
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-call */
 import { Injectable } from '@nestjs/common';
 import * as cron from 'node-cron';
 import axios from 'axios';
@@ -82,7 +86,7 @@ interface Advogado {
 function separarOAB(oab: string): { uf: string; numero: string } | null {
   const regex = /^([A-Z]{2})(\d+)$/; // Regex para separar UF (2 letras) e número (sequência numérica)
 
-  const match = oab.match(regex); // Aplica a regex na OAB
+  const match = RegExp(regex).exec(oab); // Aplica a regex na OAB
 
   if (match) {
     const uf = match[1]; // Captura a UF (2 primeiras letras)
@@ -96,7 +100,7 @@ function separarOAB(oab: string): { uf: string; numero: string } | null {
 @Injectable()
 export class NotificacaoService {
   constructor(
-    private prisma: PrismaService,
+    private readonly prisma: PrismaService,
     private readonly emailQueueService: EmailQueueService,
     private readonly processRepository: ProcessoRepository,
   ) {}
@@ -148,13 +152,12 @@ export class NotificacaoService {
   }
 
   async buscarMovimentacoes(userId: string, uf: string, numero: string) {
-    const url = `https://comunicaapi.pje.jus.br/api/v1/comunicacao?ufOab=${uf}&numeroOab=${numero}`;
+    const url = `${process.env.PJE_URL}/comunicacao?ufOab=${uf}&numeroOab=${numero}`;
     console.log(url);
     try {
       const response = await axios.get(url, {
         timeout: 10000, // 10 segundos de timeout
       });
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
       const movimentacoes: Movimentacao[] = response.data.items;
       console.log(`Movimentações encontradas: ${movimentacoes.length}`);
 
