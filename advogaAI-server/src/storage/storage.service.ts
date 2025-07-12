@@ -35,9 +35,10 @@ export class StorageService {
     file: Express.Multer.File,
     destinationPath: string,
   ): Promise<string> {
+    const sanitizedPath = destinationPath.replaceAll(' ', '_');
     const command = new PutObjectCommand({
       Bucket: this.config.bucket,
-      Key: destinationPath,
+      Key: sanitizedPath,
       Body: file.buffer,
       ContentType: file.mimetype,
       ACL: 'public-read',
@@ -45,12 +46,12 @@ export class StorageService {
 
     try {
       await this.s3Client.send(command);
-      this.logger.log(`Arquivo enviado com sucesso para: ${destinationPath}`);
+      this.logger.log(`Arquivo enviado com sucesso para: ${sanitizedPath}`);
       const protocol = this.config.useSSL ? 'https' : 'http';
-      const fileUrl = `${protocol}://${this.config.endpoint}:${this.config.port}/${this.config.bucket}/${destinationPath}`;
+      const fileUrl = `${protocol}://${this.config.endpoint}:${this.config.port}/${this.config.bucket}/${sanitizedPath}`;
       return fileUrl;
     } catch (error) {
-      this.logger.error(`Falha ao fazer upload para ${destinationPath}`, error);
+      this.logger.error(`Falha ao fazer upload para ${sanitizedPath}`, error);
       throw new Error('Falha no upload do arquivo.');
     }
   }

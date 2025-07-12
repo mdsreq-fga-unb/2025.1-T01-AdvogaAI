@@ -96,6 +96,25 @@ export function FillModelComponent({
       setModelToFillBlob(file.blob);
     }
   }
+  useEffect(() => {
+    if (loadedModelTags && !isLoadingTags && tags) {
+      const missingSystemKeys = Object.entries(tags)
+        .filter(([, valor]) => !valor || !valor.trim())
+        .map(([chave]) => chave);
+
+      if (missingSystemKeys.length) {
+        setManualTagValues((current) => {
+          const updated = [...current];
+          for (const chave of missingSystemKeys) {
+            if (!updated.some((item) => item.chave === chave)) {
+              updated.push({ chave, valor: '' });
+            }
+          }
+          return updated;
+        });
+      }
+    }
+  }, [tags, isLoadingTags, loadedModelTags]);
   if (isError) {
     return (
       <div className="flex items-center justify-center h-full text-red-500">
@@ -138,13 +157,15 @@ export function FillModelComponent({
       }
 
       const systemTagsArray = tags
-        ? Object.entries(tags).map(([chave, valor]) => ({
-            chave,
-            valor,
-          }))
+        ? Object.entries(tags)
+            .filter(([, valor]) => valor && valor.trim() !== '')
+            .map(([chave, valor]) => ({
+              chave,
+              valor: valor.trim(),
+            }))
         : [];
 
-      const allTags = [...manualTagValues, ...systemTagsArray];
+      const allTags = [...systemTagsArray, ...manualTagValues];
       const tagsObject = allTags.reduce(
         (obj, item) => {
           obj[item.chave] = item.valor;
