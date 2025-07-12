@@ -1,6 +1,6 @@
 # Product Backlog Building
 
---
+---
 
 ## HealthNet
 
@@ -13,7 +13,7 @@ o PBB para a criação de um sistema unificado, facilitando o acesso a informç�
 
 Aborda os principais desafios enfrentados pela HealthNet, juntamente com os resultados desejados e as melhorias esperadas da nova solução.
 
-<img width="1109" height="753" alt="Problemas e Expectativas" src="https://github.com/user-attachments/assets/7f4260a7-47bd-4e5f-be20-e3b7ac47d498" />
+<img width="2218" height="1506" alt="image" src="https://github.com/user-attachments/assets/3fe56acd-9c86-4851-93ad-6c27a2f00542" />
 
 ### Personas
 
@@ -28,40 +28,46 @@ Identifica os usuários do sistema proposto, detalhando seus papéis, atividades
 | Paciente   |  Usuária regular do sistema de saúde              | Espera visualizar seu histórico médico, agendar consultas e receber notificações claras e pontuais.                    |
 | Diretor de Tecnologia  |  Supervisiona a infraestrutura do sistema        | Quer relatórios de desempenho do sistema e busca soluções para aumentar a eficiência.                     |
 
-<img width="720" height="756" alt="Captura de Tela 2025-07-11 às 20 33 17" src="https://github.com/user-attachments/assets/56b1e882-7713-4356-9d04-139d22843c55" />
+<img width="1440" height="1512" alt="image" src="https://github.com/user-attachments/assets/52f7df2f-6393-4fa6-83a2-3c3302e70153" />
 
 
-### Feautures e Product Backlog Item (PBI)
+
+
+## Feautures e Product Backlog Item (PBI)
 
 Cada Feauture é ligada a um problema que ela resolve e ao benefício que ela proporciona. Já o PBI
 Detalha os itens específicos que precisam ser desenvolvidos, priorizados e entregues como parte do produto. Esses itens são derivados dos problemas identificados, expectativas e funcionalidades.
 
-- Persona Recepcionista
+### Persona Recepcionista
 
-<img width="498" height="682" alt="Captura de Tela 2025-07-11 às 21 01 50" src="https://github.com/user-attachments/assets/eb77c194-d651-4f7f-8494-de2ea64a51fd" />
-
-- Persona Médico cliníco geral
-
-<img width="412" height="596" alt="Captura de Tela 2025-07-11 às 20 58 57" src="https://github.com/user-attachments/assets/453537cb-dfde-4587-869b-de8dbb583a8d" />
-
-- Persona Farmacêutica
-
-<img width="461" height="546" alt="Captura de Tela 2025-07-11 às 21 10 34" src="https://github.com/user-attachments/assets/5d1050f5-3e86-4f22-b7dd-eddf6644f43e" />
-
-- Persona Coordenador de Agendamento 
-
-<img width="464" height="539" alt="Captura de Tela 2025-07-11 às 21 11 34" src="https://github.com/user-attachments/assets/167337f6-cd98-4ede-9435-5bb97ec55103" />
-
-- Persona Paciente 
-
-<img width="460" height="611" alt="Captura de Tela 2025-07-11 às 21 12 38" src="https://github.com/user-attachments/assets/dec27df5-090c-4850-b1db-bf0e49856612" />
-
-- Persona Diretor de Tecnologia
-
-<img width="1120" height="747" alt="Captura de Tela 2025-07-11 às 21 18 49" src="https://github.com/user-attachments/assets/180beecd-959c-4272-b67c-d0d788d2241b" />
+<img width="996" height="1364" alt="image" src="https://github.com/user-attachments/assets/7ab736cb-bcff-40a8-a829-c2256efd005a" />
 
 
-<img width="1035" height="617" alt="Captura de Tela 2025-07-11 às 21 16 48" src="https://github.com/user-attachments/assets/a6d60680-3b38-4434-947e-a640b32e4cb2" />
+## Persona Médico cliníco geral
+
+<img width="824" height="1192" alt="image" src="https://github.com/user-attachments/assets/d1b57a40-cb94-4091-905c-e6046a31f515" />
+
+
+## Persona Farmacêutica
+
+<img width="922" height="1092" alt="image" src="https://github.com/user-attachments/assets/13f8d33a-4caa-4426-b9e8-d8d571ca93d6" />
+
+## Persona Coordenador de Agendamento 
+
+<img width="928" height="1078" alt="image" src="https://github.com/user-attachments/assets/151443e8-1f64-4c44-b5f5-fdb3c67416f1" />
+
+## Persona Paciente 
+
+<img width="920" height="1222" alt="image" src="https://github.com/user-attachments/assets/0138713b-cdae-476d-807a-a5f316b16d76" />
+
+## Persona Diretor de Tecnologia
+
+<img width="2240" height="1494" alt="image" src="https://github.com/user-attachments/assets/bc88664e-ccf9-410d-97d2-fc1de9fcea60" />
+
+
+<img width="2070" height="1234" alt="image" src="https://github.com/user-attachments/assets/5881d73d-3b21-494f-ad1a-ba996a24db43" />
+
+---
 
 ### User Stories - HealthNet
 
@@ -112,7 +118,7 @@ Prioridade = (Valor de Negócio × 2) + Urgência + Risco - Esforço + Dependên
 | US37 | Visualizar Histórico de Relatórios entre Unidades| Como administrador, quero visualizar o histórico de relatórios de pacientes gerados entre diferentes unidades da HealthNet, para ter uma visão integrada e acompanhar o fluxo de informações.                            | 4     | 3        | 3     | 3       | 2           | 13         |
 | US38 | Notificar sobre Erros de Conformidade ou Dados   | Como Diretor de Tecnologia, quero que o sistema me notifique automaticamente ao identificar um erro de conformidade ou dados, para que possamos agir rapidamente na correção e manter a integridade do sistema.                 | 5     | 5        | 3     | 3       | 4           | 19         |
 
---
+---
 
 ## PBB no Miro
 <iframe width="768" height="432" src="https://miro.com/app/live-embed/uXjVJeksw1I=/?embedMode=view_only_without_ui&moveToViewport=-20917,-17016,23707,10061&embedId=692678229163" frameborder="0" scrolling="no" allow="fullscreen; clipboard-read; clipboard-write" allowfullscreen></iframe>
