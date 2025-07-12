@@ -28,3 +28,6 @@ nav:
   - Nomeclaturas: naming.md
   - Estudos de Caso:
       - USM: exercicios.md
+      - PBB:
+          - HealthNet PBB: healthnet.md
+          - Especificação de Caso de Uso: healthnet-especifica.md
