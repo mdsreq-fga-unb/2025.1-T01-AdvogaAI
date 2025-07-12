@@ -30,4 +30,4 @@ nav:
       - USM: exercicios.md
       - PBB:
           - HealthNet PBB: healthnet.md
-          - Especificação de Caso de Uso: healthnet-especifica.md
+          - Especificações de Histórias de usuários: healthnet-especifica.md
