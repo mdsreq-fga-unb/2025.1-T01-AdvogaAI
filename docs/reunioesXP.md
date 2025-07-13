@@ -246,7 +246,7 @@ Nenhum
 2025-06-27: Dia cheio de compromissos acadêmicos, sem avançar em tarefas do projeto  
 2025-06-28: Preparação do ambiente de dev interrompida por imprevisto; definição de metas para manhã seguinte  
 
-## Vitor Valerio
+## Valerio
 2025-06-25: Revisão do PR da Ana – correção de conflitos e bugs de merge, deploy para branch dev  
 2025-06-26: Brainstorm sobre estrutura de buckets no MinIO; esboço do schema Prisma e início da tela de edição de perfil  
 2025-06-30: Estudo do código da sprint; integração back/front dos modelos de documentos (REST endpoints + formulários React)  
@@ -279,3 +279,10 @@ Nenhum
 2025-07-02: Atividades acadêmicas – revisão de conteúdos da disciplina  
 2025-07-03: Atividades acadêmicas – preparação para provas  
 2025-07-04: Atividades acadêmicas – trabalhos em grupo  
+
+## Dailys adicionais (equipe)
+2025-07-07: Reunião de alinhamento do sprint e definição das tarefas finais  
+2025-07-08: Implementação de testes unitários para CRUD de documentos e correção de bugs no upload do MinIO  
+2025-07-09: Configuração do pipeline de CI/CD no GitHub Actions para ambiente de staging  
+2025-07-10: Code freeze, revisão de user stories e preparação da demo  
+
