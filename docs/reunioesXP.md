@@ -238,3 +238,44 @@ MVP finalizado
 
 **Encaminhamentos:**
 Nenhum
+
+# Dailys por pessoa
+
+## Magno
+2025-06-25: Planejamento estratégico para orientar as próximas atividades da sprint (definição de prioridades e entregas)  
+2025-06-27: Dia cheio de compromissos acadêmicos, sem avançar em tarefas do projeto  
+2025-06-28: Preparação do ambiente de dev interrompida por imprevisto; definição de metas para manhã seguinte  
+
+## Vitor Valerio
+2025-06-25: Revisão do PR da Ana – correção de conflitos e bugs de merge, deploy para branch dev  
+2025-06-26: Brainstorm sobre estrutura de buckets no MinIO; esboço do schema Prisma e início da tela de edição de perfil  
+2025-06-30: Estudo do código da sprint; integração back/front dos modelos de documentos (REST endpoints + formulários React)  
+2025-07-01: Conclusão da integração completa front/back de modelos de documentos; testes manuais de fluxo CRUD  
+2025-07-05: Preenchimento em lote de documentos; planejamento da persistência em MinIO; levantamento de requisitos para pessoa jurídica  
+2025-07-06: Finalização das issues previstas; ajustes finais para PJ; mock do front de processos; alinhamento com o professor  
+
+## Nathan
+2025-06-25: Tentativa de rodar o projeto – identificação e relatório de erros de ambiente  
+2025-06-26: Feedback na daily sobre ausência de progresso; alinhamento de expectativas com o time  
+2025-06-27: Deploy local bem-sucedido; validação básica das rotas  
+2025-06-28: Pair programming com Ana Luiza e Yan – implementação parcial da funcionalidade de exclusão de documentos  
+
+## Lucas
+2025-06-25: Nenhuma atividade registrada no projeto  
+2025-06-30: Revisão do código da sprint; documentação de pontos de atenção para refatoração  
+
+## Yan
+2025-06-25: Planejamento de divisão de tarefas e definição de responsabilidades entre os membros  
+2025-06-26: Configuração do ambiente de desenvolvimento completo (Node, Docker, banco local)  
+2025-06-27: Sem progresso reportado nesta data  
+
+## Ana Luiza
+2025-06-25: Refatoração da criação de clientes – uso de React Query para cache e otimização de performance; definição do schema de documentos  
+2025-06-26: Configuração do container MinIO no Docker; ajustes no schema Prisma para suportar storage de arquivos  
+2025-06-27: Sem progresso reportado nesta data  
+
+## Dias sem daily (equipe)
+2025-06-29: Foco em resolução de exercícios da matéria; sem daily formal  
+2025-07-02: Atividades acadêmicas – revisão de conteúdos da disciplina  
+2025-07-03: Atividades acadêmicas – preparação para provas  
+2025-07-04: Atividades acadêmicas – trabalhos em grupo  
