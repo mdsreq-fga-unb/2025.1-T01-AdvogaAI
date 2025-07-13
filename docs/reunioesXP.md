@@ -199,3 +199,42 @@ Vamos conversar com o cliente e com o professor para entender o melhor caminho
 
 **Encaminhamentos:**
 Todos conversarem com o professor e cliente
+
+# 🗓️ 08/07/2025 (Terça-feira) – Reunião com a equipe
+
+**Objetivo:**
+Discutir sobre o acesso a API do PJe
+
+**Participantes:**
+Equipe
+
+**Pontos discutidos:**
+
+Conseguimos acesso a api, e agora?
+Quem vai integrar?
+
+**Decisões:**
+
+Vamos fazer a integração com a api do pje
+
+**Encaminhamentos:**
+Ana Luiza e Vitor vão integrar com a api do pje
+
+# 🗓️ 10/07/2025 (Terça-feira) – Reunião com a cliente
+
+**Objetivo:**
+Apresentar as funcionalidades para a cliente
+
+**Participantes:**
+Equipe + Cliente
+
+**Pontos discutidos:**
+
+Feedbacks do cliente sobre a integração com a api do pje
+
+**Decisões:**
+
+MVP finalizado
+
+**Encaminhamentos:**
+Nenhum
