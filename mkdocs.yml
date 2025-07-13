@@ -31,5 +31,5 @@ nav:
       - PBB:
           - HealthNet PBB: healthnet.md
           - Especificações de Histórias de usuários: healthnet-especifica.md
-          - Casos de uso:
-              - ConnectCare: casos-de-uso.md
+      - Casos de uso:
+          - ConnectCare: casos-de-uso.md
