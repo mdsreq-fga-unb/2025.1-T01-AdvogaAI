@@ -33,6 +33,7 @@ nav:
           - Especificações de Histórias de usuários: healthnet-especifica.md
       - Casos de uso:
           - ConnectCare:
+              - ConnectCare: casos-de-uso.md
               - Paciente:
                   - Buscar se serviços de saúde: buscarservicosdesaude.md
                   - Agendar exames e consultas: agendarexameseconsultas.md
