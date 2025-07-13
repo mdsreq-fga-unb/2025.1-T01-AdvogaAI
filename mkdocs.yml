@@ -12,6 +12,7 @@ nav:
       - Atividades de engenharia de requisitos: engenhariaderequisitos.md
       - Interação entre Equipe e Cliente: equipecliente.md
   - Requisitos: requisitor.md
+  - Issues: issues.md
   - DoR e DoD: dordod.md
   - Backlog: backlog.md
   - Atas:
