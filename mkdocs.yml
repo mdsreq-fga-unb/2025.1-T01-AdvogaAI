@@ -33,7 +33,28 @@ nav:
           - Especificações de Histórias de usuários: healthnet-especifica.md
       - Casos de uso:
           - ConnectCare: casos-de-uso.md
-              - Buscar serviços de saúde: buscarservicosdesaude.md
-              - Agendar exames e consultas: agendarexameseconsultas.md
-              - Fornecer feedback: fornecerfeedback.md
-              - Consultar pontos de fidelidade: consultarpontosdefidelidade.md
+              - Paciente:
+                  - Buscar se serviços de saúde: buscarservicosdesaude.md
+                  - Agendar exames e consultas: agendarexameseconsultas.md
+                  - Fornecer feedback: fornecerfeedback.md
+                  - Consultar pontos de fidelidade: consultarpontosdefidelidade.md
+                  - Receber notificações: recebernotificacoes.md
+                  - Gerenciar perfil: gerenciarperfil.md
+              - Administrador do Sistema:
+                  - Corrigir erros técnicos: corrigirerrostecnicos.md
+                  - Integrar novos serviços: integrarnovosservicos.md
+                  - Atualizar informações de parceiros: atualizarinformacoesdeparceiros.md
+                  - Responde duvidas: responderduvidas.md
+                  - Garantir conformidade dos dados: garantirconformidadedosdados.md
+              - Usuário: 
+                	- Realizar Login: realizarlogin.md
+              - Agente Comunitário: 
+                  - Criar Relatório de saúde: criarrelatoriosdesaude.md
+              - Organização Parceira: 
+                  - Monitorar impacto da campanha: monitorarimpactodacampanha.md
+                  - Detalhar campanha: detalharcampanha.md
+                  - Gerenciar Campanha de Saúde: gerenciarcampanhadesaude.md
+              - Profissional de Saúde:
+                  - Atualizar Prontuario Digital: atualizarprontuariodigital.md
+                  
+                  
