@@ -1,7 +1,18 @@
-# Estudo de caso: ConectCare
+# Estudo de caso: ConnectCare
 
+Em regiões como Vila Esperança, onde o acesso à saúde é limitado, surgiu o ConnectCare, fruto da colaboração entre desenvolvedores e agentes sociais. A plataforma visa superar barreiras como transporte insuficiente, falta de infraestrutura e escassez de informação. Seu objetivo é ampliar o acesso a cuidados médicos por meio da tecnologia, promovendo o vínculo entre moradores, agentes comunitários e instituições parceiras por meio de campanhas e ações integradas.
+
+Para facilitar o entendimento dos requisitos funcionais do sistema, foi utilizado um **Diagrama de Casos de Uso**, representando os atores principais e os serviços esperados. Esse diagrama pode ser visualizado na imagem fornecida. Abaixo, apresenta-se a descrição dos atores e seus respectivos casos de uso mapeados com base no modelo UML analisado.
 
 <img width="1670" height="1123" alt="UML" src="https://github.com/user-attachments/assets/9ad9be9f-83f3-4074-b3f5-e61c6dc52463" />
+
+## 1. Atores
+
+- **Administrador do sistema**: responsável pela manutenção técnica, integração com parceiros e conformidade de dados.
+- **Paciente**: usuário principal da aplicação, acessa funcionalidades relacionadas à saúde, agendamentos e localização de serviços.
+- **Profissional da saúde**: médicos e enfermeiros responsáveis pelo registro, atualização e visualização de informações de atendimento.
+- **Agente comunitário**: figura de articulação entre a comunidade e o sistema, com foco em visitas domiciliares e relatórios de saúde.
+- **Organização parceira**: instituições associadas que promovem campanhas de saúde e acompanham seu impacto na comunidade.
 
 
 # Especificação dos Casos de Uso
