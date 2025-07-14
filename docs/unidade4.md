@@ -14,14 +14,23 @@ Dificuldade em lidar com o deploy, devido à liberação tardia da API do PJE, c
 
 **Solução:** Antes de modificarmos o MVP, a API PJE foi liberada, e realizamos a integração, mantendo o MVP original já autorizado pelo professor.
 
+### Desafio:
+A integração com a API externa do PJE foi desafiadora, pois exigiu que lidássemos com uma dependência externa e suas particularidades.
+
+**Solução:** Ganhamos um aprendizado valioso sobre integração de APIs de terceiros, incluindo a importância de entender a documentação e ajustar o desenvolvimento para essa interdependência.
+
+---
+
 ### Vídeo de apresentação
 
 
 [![Entrega Unidade 4- AdvogaAI](https://img.youtube.com/vi/UAokFGjBvRU/0.jpg)](https://www.youtube.com/watch?v=UAokFGjBvRU)
 
 
+--- 
 
 ## 14.3 Deploy do Site
 
 O deploy do site foi realizado com sucesso após a integração da API do PJE.
-- https://advogaai.vitorhoffmann.dev/
+- **Ambiente de Produção:** https://advogaai.vitorhoffmann.dev/
+- **Ambiente de Desenvolvimento/Homologação:** https://advogaai-dev.vitorhoffmann.dev/
