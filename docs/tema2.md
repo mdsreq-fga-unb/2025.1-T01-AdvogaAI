@@ -3,7 +3,7 @@
 
 ## **Épico 2.1: Cadastro e Atualização de Clientes**
 
- ### **US06: Cadastrar clientes**
+### **US06: Cadastrar clientes**
 - Como advogado, quero cadastrar meus clientes no sistema, para agilizar o atendimento e organização.
 
 #### Critérios de aceitação
