@@ -1,4 +1,6 @@
-### US12 - Vincular OAB à conta do advogado
+## US12 - Vincular OAB à conta do advogado
+
+### História de usuário
 
 - Como advogado, quero vincular meu número de OAB à minha conta, para evitar atrasos nos prazos processuais.
 
@@ -24,8 +26,9 @@
 
 - Épico 3.1: Vinculação e Notificação de Movimentações
 
-### US27 - Visualizar dados do perfil
+## US27 - Visualizar dados do perfil
 
+### História de usuário
 - Como usuário, quero visualizar meus dados de perfil, para conferir e acompanhar minhas informações.
 
 ### Critérios de aceitação
@@ -50,7 +53,9 @@
 Épico 5.2: Gestão do Perfil de Usuário
 
 
-### US13 - Listar processos vinculado a OAB
+## US13 - Listar processos vinculado a OAB
+
+### História de usuário
 
 - Como advogado, quero visualizar os processos, para acompanhar os prazos de forma eficiente.
 
@@ -74,8 +79,9 @@ Valor: 4 - Urgência: 3 - Risco: 2 - Esforço: 2 - Dependência: 3 - Prioridade:
 
 - Épico 3.1: Vinculação e Notificação de Movimentações
 
-### US32 - Excluir documento gerado
+## US32 - Excluir documento gerado
 
+### História de usuário
 Como advogado, quero excluir um documento gerado, para remover dados obsoletos do sistema. 
 
 ### Critérios de aceitação
@@ -87,8 +93,9 @@ Como advogado, quero excluir um documento gerado, para remover dados obsoletos d
 <img width="2522" height="1312" alt="Image" src="https://github.com/user-attachments/assets/cee7da70-0709-4cca-82fe-5b4c980e074c" />
 
 
-### US30 - Landing page do sistema
+## US30 - Landing page do sistema
 
+### História de usuário
 - Como usuário, quero entrar na ladning page do site, para ver informações gerais sobre o sistema e poder me redirecionar para o login. 
 
 ### Análise de Risco
@@ -102,7 +109,9 @@ Como advogado, quero excluir um documento gerado, para remover dados obsoletos d
 
 <img width="2367" height="1238" alt="Image" src="https://github.com/user-attachments/assets/d998225d-80c4-433b-9047-7e6551ee0f9e" />
 
-### US23 - Cadastrar usuário
+## US23 - Cadastrar usuário
+
+### História de usuário
 
 - Como novo usuário, quero me cadastrar no sistema, para poder utilizar todas as funcionalidades disponíveis.
 
@@ -130,8 +139,9 @@ Como advogado, quero excluir um documento gerado, para remover dados obsoletos d
 
 Épico 5.1: Cadastro e Acesso ao Sistema
 
-### US07 - Atualizar dados de clientes
+## US07 - Atualizar dados de clientes
 
+### História de usuário
 - Como advogado, quero atualizar os dados dos clientes, para mantê-los atualizados conforme as necessidades.
 
 ### Critérios de aceitação
@@ -206,8 +216,9 @@ Valor: 4 - Urgência: 4 - Risco: 2 - Esforço: 2 - Dependência: 4 - Prioridade:
 - Épico 1.1: Criação e Manipulação de Modelos de Documentos
 
 
-### US31 - Dashboard do sistema
+## US31 - Dashboard do sistema
 
+### História de usuário
 Como advogado, quero entrar no dashboard, para ver informações gerais sobre meus clientes, documentos, processos e ultimas movimentações.
 
 ### Critérios de aceitação
@@ -249,8 +260,9 @@ Valor: 5 - Urgência: 5 - Risco: 3 - Esforço: 3 - Dependência: 5 - Prioridade:
 - Épico 1.1: Criação e Manipulação de Modelos de Documentos
 
 
-### US11 - Visualizar documentos gerados
+## US11 - Visualizar documentos gerados
 
+### História de usuário
 Como advogado, quero visualizar a lista de documentos gerados, para localizar e gerenciar meus arquivos.
 
 
@@ -261,3 +273,251 @@ Como advogado, quero visualizar a lista de documentos gerados, para localizar e 
 ### Protótipo
 
 <img width="2522" height="1312" alt="Image" src="https://github.com/user-attachments/assets/55a324f8-8223-42e0-a066-e34c139ded85" />
+
+## US01 - Preencher documentos jurídicos
+
+### História de usuário
+Como advogado, quero preencher documentos jurídicos com dados dos clientes, para gerar documentos personalizados rapidamente.
+
+### Critérios de aceitação
+- O sistema permite selecionar um modelo e cliente para preenchimento.  
+- Os campos dinâmicos são substituídos por dados reais.  
+- O advogado pode revisar antes de salvar o documento gerado.
+
+### Regras de negócio
+- Todos os campos obrigatórios do modelo devem ser preenchidos.  
+- O sistema deve validar a consistência do documento antes da geração.
+
+### Análise de Risco
+Valor: 5 - Urgência: 5 - Risco: 3 - Esforço: 3 - Dependência: 5 - Prioridade: 21
+
+### Protótipo relacionado a US
+
+<img width="836" height="540" alt="image" src="https://github.com/user-attachments/assets/f9ec91e7-b711-46ee-b7d6-4f84624b7d84" />
+
+### Épico vinculado
+Épico 1.2: Geração de Documentos Jurídicos
+
+## US04 - Deletar modelos de documentos
+
+### História de usuário
+Como advogado, quero excluir modelos de documentos, para remover conteúdos obsoletos do sistema.
+
+### Critérios de aceitação
+- O advogado consegue selecionar e excluir um modelo de documento.  
+- O sistema solicita confirmação da exclusão.  
+- O sistema exibe mensagem de sucesso após exclusão.
+
+### Regras de negócio
+- O modelo só pode ser excluído se não estiver vinculado a documentos gerados.
+
+### Análise de Risco
+Valor: 3 - Urgência: 3 - Risco: 2 - Esforço: 2 - Dependência: 3 - Prioridade: 13
+
+### Protótipo relacionado a US
+
+<img width="653" height="423" alt="image" src="https://github.com/user-attachments/assets/f86d724b-5121-47d3-b280-3696e4d6e2df" />
+
+### Épico vinculado
+Épico 1.1: Criação e Manipulação de Modelos de Documentos
+
+## US05 - Visualizar modelos de documentos
+
+### História de usuário
+Como advogado, quero visualizar os modelos de documentos cadastrados, para escolher qual utilizar ou editar.
+
+### Critérios de aceitação
+- O advogado consegue acessar a tela com a listagem de modelos.  
+- Os modelos são exibidos com nome, data de criação e opções de ação.  
+- A lista é paginada e permite busca por nome.
+
+### Análise de Risco
+Valor: 4 - Urgência: 3 - Risco: 1 - Esforço: 1 - Dependência: 3 - Prioridade: 12
+
+### Protótipo relacionado a US
+
+<img width="838" height="539" alt="image" src="https://github.com/user-attachments/assets/778d8118-4372-44b7-825d-923dc3bf0369" />
+
+### Épico vinculado
+Épico 1.1: Criação e Manipulação de Modelos de Documentos
+
+## US06 - Cadastrar clientes
+
+### História de usuário
+Como advogado, quero cadastrar novos clientes, para gerenciar suas informações jurídicas no sistema.
+
+### Critérios de aceitação
+- O advogado consegue acessar a tela de cadastro de cliente.  
+- Os campos obrigatórios são validados antes do envio (nome, e-mail, CPF).  
+- O sistema confirma o cadastro com mensagem de sucesso.
+
+### Regras de negócio
+- O CPF e e-mail devem ser únicos e validados com formatos corretos.  
+- O cadastro é vinculado ao advogado autenticado.
+
+### Análise de Risco
+Valor: 4 - Urgência: 4 - Risco: 2 - Esforço: 2 - Dependência: 4 - Prioridade: 16
+
+### Épico vinculado
+Épico 2.1: Cadastro e Atualização de Clientes
+
+## US08 - Excluir registros de clientes
+
+### História de usuário
+Como advogado, quero excluir registros de clientes, para manter meu cadastro limpo e atualizado.
+
+### Critérios de aceitação
+- O advogado consegue acessar a lista de clientes e selecionar um para exclusão.  
+- O sistema solicita confirmação da ação.  
+- O cliente é removido da base de dados e o sistema exibe uma mensagem de sucesso.
+
+### Regras de negócio
+- O sistema deve impedir a exclusão de clientes vinculados a processos ou documentos, salvo se previamente desvinculados.
+
+### Análise de Risco
+Valor: 3 - Urgência: 3 - Risco: 2 - Esforço: 2 - Dependência: 3 - Prioridade: 13
+
+### Protótipo relacionado a US
+
+<img width="894" height="576" alt="image" src="https://github.com/user-attachments/assets/017894c0-f3cc-485e-990d-37316e927cf6" />
+
+### Épico vinculado
+Épico 2.1: Cadastro e Atualização de Clientes
+
+## US10 - Gerar docx de documentos
+
+### História de usuário
+Como advogado, quero exportar documentos como arquivos `.docx`, para usá-los fora do sistema.
+
+### Critérios de aceitação
+- O sistema permite gerar um `.docx` tanto a partir de um modelo quanto de um documento gerado.  
+- O conteúdo no arquivo gerado corresponde ao que foi preenchido no sistema.
+
+### Regras de negócio
+- O sistema deve validar se todos os campos foram preenchidos antes da exportação.  
+- O arquivo deve estar disponível para download imediato.
+
+### Análise de Risco
+Valor: 4 - Urgência: 4 - Risco: 2 - Esforço: 2 - Dependência: 4 - Prioridade: 16
+
+### Protótipo relacionado a US
+
+<img width="1001" height="647" alt="image" src="https://github.com/user-attachments/assets/ce432b69-993c-457d-b946-7912d00cfd36" />
+
+### Épico vinculado
+Épico 1.2: Geração de Documentos Jurídicos
+
+## US14 - Notificar movimentações de processos
+
+### História de usuário
+Como advogado, quero ser notificado por e-mail sobre movimentações em meus processos, para acompanhar atualizações em tempo real.
+
+### Critérios de aceitação
+- O sistema envia e-mails ao detectar novas movimentações em processos vinculados à OAB do advogado.  
+- O conteúdo do e-mail inclui resumo da movimentação e link para visualização detalhada.
+
+### Regras de negócio
+- O envio de notificações só ocorre para processos vinculados ao usuário autenticado.  
+- O sistema deve registrar a data e hora da notificação.
+
+### Análise de Risco
+Valor: 5 - Urgência: 5 - Risco: 3 - Esforço: 3 - Dependência: 5 - Prioridade: 21
+
+### Protótipo relacionado a US
+
+<img width="1001" height="1378" alt="image" src="https://github.com/user-attachments/assets/6657a20f-eb94-4a8d-ad9a-58391d54a6ac" />
+
+### Épico vinculado
+Épico 3.1: Vinculação e Notificação de Movimentações
+
+## US24 - Realizar login
+
+### História de usuário
+Como usuário, quero realizar login no sistema, para acessar as funcionalidades disponíveis conforme meu perfil.
+
+### Critérios de aceitação
+- O usuário consegue acessar a tela de login do sistema.  
+- Após fornecer credenciais válidas, o acesso ao sistema é liberado.  
+- Em caso de falha, o sistema exibe mensagens de erro informativas.
+
+### Regras de negócio
+- O login exige e-mail e senha válidos previamente cadastrados.  
+- A senha deve ser verificada com hash seguro.
+
+### Análise de Risco
+Valor: 5 - Urgência: 5 - Risco: 2 - Esforço: 2 - Dependência: 5 - Prioridade: 19
+
+### Protótipo relacionado a US
+
+<img width="595" height="387" alt="image" src="https://github.com/user-attachments/assets/022dbea6-2229-4110-add0-8b2b3729528c" />
+
+### Épico vinculado
+Épico 5.1: Cadastro e Acesso ao Sistema
+
+## US26 - Editar dados do perfil
+
+### História de usuário
+Como usuário, quero editar meus dados de perfil, para manter minhas informações atualizadas.
+
+### Critérios de aceitação
+- O sistema permite editar nome, telefone, e-mail e OAB.  
+- As alterações são validadas e salvas corretamente.  
+- O sistema exibe mensagem de sucesso ou erro após tentativa de edição.
+
+### Regras de negócio
+- Os campos devem ser validados conforme formato (e-mail, OAB).  
+- O e-mail não pode ser duplicado no sistema.
+
+### Análise de Risco
+Valor: 3 - Urgência: 3 - Risco: 1 - Esforço: 1 - Dependência: 3 - Prioridade: 11
+
+### Protótipo relacionado a US
+
+<img width="702" height="449" alt="image" src="https://github.com/user-attachments/assets/ee3136cf-5ddf-41c8-9b92-f57e1177145e" />
+
+### Épico vinculado
+Épico 5.2: Gestão do Perfil de Usuário
+
+## US28 - Alterar senha
+
+### História de usuário
+Como usuário, quero alterar minha senha, para garantir a segurança do meu acesso ao sistema.
+
+### Critérios de aceitação
+- O usuário consegue acessar a opção de alterar senha via perfil ou menu de configurações.  
+- O sistema exige senha atual e confirmação da nova senha.  
+- Em caso de sucesso ou falha, o sistema exibe mensagens adequadas.
+
+### Regras de negócio
+- A nova senha deve atender aos critérios mínimos de segurança (tamanho, caracteres especiais etc.).  
+- A senha atual deve ser validada antes da alteração.
+
+### Análise de Risco
+Valor: 4 - Urgência: 4 - Risco: 2 - Esforço: 2 - Dependência: 4 - Prioridade: 16
+
+### Protótipo relacionado a US
+
+<img width="1905" height="919" alt="image" src="https://github.com/user-attachments/assets/8ce6c1ed-b1cd-4c66-9ec3-4b955ba307e2" />
+
+### Épico vinculado
+Épico 5.2: Gestão do Perfil de Usuário
+
+## US29 - Encerrar sessão (logout)
+
+### História de usuário
+Como usuário, quero encerrar minha sessão com segurança, para proteger meus dados.
+
+### Critérios de aceitação
+- O sistema possui botão de logout visível e funcional.  
+- Após logout, o usuário é redirecionado à tela de login.  
+- O token de autenticação é invalidado.
+
+### Análise de Risco
+Valor: 4 - Urgência: 4 - Risco: 1 - Esforço: 1 - Dependência: 3 - Prioridade: 13
+
+### Protótipo relacionado a US
+
+<img width="1893" height="913" alt="image" src="https://github.com/user-attachments/assets/4560891c-ceb0-4b9d-a8c8-0c9d47044574" />
+
+### Épico vinculado
+Épico 5.1: Cadastro e Acesso ao Sistema
