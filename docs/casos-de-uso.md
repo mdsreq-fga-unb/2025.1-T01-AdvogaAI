@@ -4,7 +4,8 @@ Em regiões como Vila Esperança, onde o acesso à saúde é limitado, surgiu o 
 
 Para facilitar o entendimento dos requisitos funcionais do sistema, foi utilizado um **Diagrama de Casos de Uso**, representando os atores principais e os serviços esperados. Esse diagrama pode ser visualizado na imagem fornecida. Abaixo, apresenta-se a descrição dos atores e seus respectivos casos de uso mapeados com base no modelo UML analisado.
 
-<img width="1670" height="1123" alt="UML" src="https://github.com/user-attachments/assets/9ad9be9f-83f3-4074-b3f5-e61c6dc52463" />
+<img width="1495" height="911" alt="image" src="https://github.com/user-attachments/assets/369bede4-d189-49c0-9d2b-4cb7acd15080" />
+
 
 ## 1. Atores
 
