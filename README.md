@@ -76,6 +76,8 @@ O AdvogaAI é uma plataforma de automação de documentos jurídicos que visa ot
    npm install
    npx prisma migrate deploy
    npx prisma generate
+   npm run gen:keys
+   npm run seed
    npm run start:dev
    ```
 
@@ -95,7 +97,6 @@ O AdvogaAI é uma plataforma de automação de documentos jurídicos que visa ot
    - **Back-end (Swagger):** [http://localhost:3000/api](http://localhost:3000/api)
    - **MinIO Console:** [http://localhost:9001](http://localhost:9001)
    - **RabbitMQ Management:** [http://localhost:15672](http://localhost:15672)
-   - 
 
 ## Apresentação
 
