@@ -35,7 +35,7 @@ function RecoverPasswordForm() {
         .string()
         .min(8, { message: 'A senha deve ter ao menos 8 caracteres' })
         .regex(
-          /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&.~+,;:{}[\]()^<>\-_])[A-Za-z\d@$!%*?&.~+,;:{}[\]()^<>\-_]{8,}$/,
+          /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&.~+,;:{}[\]()^<>\-_])[A-Za-z\d@$!%*?&#.~+,;:{}[\]()^<>\-_]{8,}$/,
           {
             message:
               'A senha deve conter pelo menos uma letra maiúscula, um número e um símbolo',
@@ -44,7 +44,7 @@ function RecoverPasswordForm() {
       confirmPassword: z
         .string()
         .regex(
-          /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&.~+,;:{}[\]()^<>\-_])[A-Za-z\d@$!%*?&.~+,;:{}[\]()^<>\-_]{8,}$/,
+          /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&.~+,;:{}[\]()^<>\-_])[A-Za-z\d@$!%*?&#.~+,;:{}[\]()^<>\-_]{8,}$/,
           {
             message:
               'A senha deve conter pelo menos uma letra maiúscula, um número e um símbolo',

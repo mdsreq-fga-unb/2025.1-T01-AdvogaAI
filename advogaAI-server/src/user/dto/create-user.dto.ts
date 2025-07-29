@@ -27,7 +27,7 @@ export class CreateUserDto {
   @IsNotEmpty()
   @MinLength(8)
   @Matches(
-    /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&.~+,;:{}[\]()^<>\-_])[A-Za-z\d@$!%*?&.~+,;:{}[\]()^<>\-_]{8,}$/,
+    /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&.~+,;:{}[\]()^<>\-_])[A-Za-z\d@$!%*?&#.~+,;:{}[\]()^<>\-_]{8,}$/,
     {
       message:
         'Your password should contain 8 letters, a symbol, a number,  a capitalized letter',
@@ -44,7 +44,7 @@ export class CreateUserDto {
   @IsNotEmpty()
   @MinLength(8)
   @Matches(
-    /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&.~+,;:{}[\]()^<>\-_])[A-Za-z\d@$!%*?&.~+,;:{}[\]()^<>\-_]{8,}$/,
+    /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&.~+,;:{}[\]()^<>\-_])[A-Za-z\d@$!%*?&#.~+,;:{}[\]()^<>\-_]{8,}$/,
     {
       message:
         'Your must confirm your password and it should contain 8 letters, a symbol, a number,  a capitalized letter',
