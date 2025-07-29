@@ -29,10 +29,13 @@ export default function Login() {
     password: z
       .string()
       .min(8, { message: 'A senha deve ter ao menos 8 caracteres' })
-      .regex(/^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).+$/, {
-        message:
-          'A senha deve conter pelo menos uma letra maiúscula, um número e um símbolo',
-      }),
+      .regex(
+        /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&.~+,;:{}[\]()^<>\-_])[A-Za-z\d@$!%*?&#.~+,;:{}[\]()^<>\-_]{8,}$/,
+        {
+          message:
+            'A senha deve conter pelo menos uma letra maiúscula, um número e um símbolo',
+        },
+      ),
   });
 
   const form = useForm<z.infer<typeof FormSchema>>({
